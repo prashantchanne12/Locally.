@@ -1,15 +1,9 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-
-import { useColorScheme } from "@/components/useColorScheme";
 import React from "react";
 
 export {
@@ -19,16 +13,23 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "(pages)/Home",
+  initialRouteName: "(pages)/Signin",
 };
+
+GoogleSignin.configure({
+  scopes: ["https://www.googleapis.com/auth/drive.readonly"],
+  webClientId:
+    "589088321812-4l6c29tvbg9nem4vftm3vdqgm5oqssbt.apps.googleusercontent.com",
+});
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-    ...FontAwesome.font,
+    mukta: require("../assets/fonts/Mukta-Regular.ttf"),
+    "mukta-b": require("../assets/fonts/Mukta-Bold.ttf"),
+    "mukta-sb": require("../assets/fonts/Mukta-SemiBold.ttf"),
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
@@ -37,12 +38,22 @@ export default function RootLayout() {
   }, [error]);
 
   useEffect(() => {
+    const isSignedIn = async () => {
+      const isSignedIn = await GoogleSignin.isSignedIn();
+      console.log(`Log in: ${isSignedIn}`);
+    };
+    isSignedIn();
+  }, []);
+
+  useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
 
   if (!loaded) {
+    console.log("Not Loading....");
+    console.log("Not Loading....");
     return null;
   }
 
@@ -50,14 +61,12 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(pages)/Signin" options={{ headerShown: false }} />
-        {/* <Stack.Screen name="modal" options={{ presentation: "modal" }} /> */}
-      </Stack>
-    </ThemeProvider>
+    <Stack>
+      <Stack.Screen
+        name="(pages)/NameAndLocation"
+        options={{ headerShown: false }}
+      />
+    </Stack>
   );
 }
