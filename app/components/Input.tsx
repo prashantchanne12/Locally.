@@ -4,6 +4,8 @@ import React from "react";
 const Input = (props: any) => {
   return (
     <TextInput
+      maxLength={props.maxLength && props.maxLength}
+      keyboardType={props.type === "number" ? "number-pad" : "default"}
       className="bg-gray-50 p-3 pl-4 border border-gray-200 rounded-sm"
       style={props.style}
       autoCapitalize="none"

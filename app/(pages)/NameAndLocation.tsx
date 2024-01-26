@@ -22,6 +22,7 @@ const NameAndLocation = () => {
   } = useForm({
     defaultValues: {
       storeName: "",
+      contactNumber: null,
       address1: "",
       address2: "",
       address3: "",
@@ -43,7 +44,7 @@ const NameAndLocation = () => {
             <CustomText
               className="uppercase text-lg pt-2"
               text="Service Type*"
-              semibold
+              bold
               primary
             />
             <View className="border border-gray-200 rounded-sm ">
@@ -64,7 +65,7 @@ const NameAndLocation = () => {
               className="uppercase text-lg"
               text="Name*"
               primary
-              semibold
+              bold
             />
             <Controller
               control={control}
@@ -88,9 +89,45 @@ const NameAndLocation = () => {
           <View className="space-y-1">
             <CustomText
               className="uppercase text-lg"
+              text="Contact Number*"
+              primary
+              bold
+            />
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+                minLength: 10,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  placeholder="Contact Number*"
+                  type="number"
+                  maxLength={10}
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                />
+              )}
+              name="contactNumber"
+            />
+            {errors.contactNumber?.type === "minLength" && (
+              <Text className="text-sm text-red-700">
+                Invalid contact number
+              </Text>
+            )}
+            {errors.contactNumber?.type === "required" && (
+              <Text className="text-sm text-red-700">
+                Contact number is required.
+              </Text>
+            )}
+          </View>
+          <View className="space-y-1">
+            <CustomText
+              className="uppercase text-lg"
               text="Address*"
               primary
-              semibold
+              bold
             />
             <View className="space-y-4">
               <View>
@@ -163,8 +200,9 @@ const NameAndLocation = () => {
             <View className="mb-2">
               <CustomText
                 text="Loaction*"
-                semibold
-                className="uppercase text-lg text-green-700 pt-1"
+                bold
+                primary
+                className="uppercase text-lg pt-1"
               />
 
               <Text className="text-xs text-gray-500 -mt-2">
