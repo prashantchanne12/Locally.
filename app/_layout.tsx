@@ -13,7 +13,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "(pages)/Signin",
+  initialRouteName: "(pages)/Operations",
 };
 
 GoogleSignin.configure({
@@ -63,8 +63,13 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     <Stack>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="(pages)/NameAndLocation"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="(pages)/Home" options={{ headerShown: true }} /> */}
+      <Stack.Screen
+        name="(pages)/Operations"
         options={{ headerShown: false }}
       />
     </Stack>

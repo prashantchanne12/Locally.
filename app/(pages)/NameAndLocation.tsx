@@ -31,7 +31,7 @@ const NameAndLocation = () => {
   const onSubmit = (data: any) => {
     // Simulate form submission
     console.log("Submitted Data:", data);
-    //   router.push("/screens/AddStore/AddStore2");
+    router.push("/(pages)/Home");
   };
 
   return (
@@ -171,7 +171,7 @@ const NameAndLocation = () => {
                 Selected automatically based on your location for now
               </Text>
             </View>
-            <View className="h-[200px] w-full mt-2">
+            {/* <View className="h-[200px] w-full mt-2">
               <MapView
                 provider={PROVIDER_GOOGLE}
                 className="w-full h-full"
@@ -191,7 +191,7 @@ const NameAndLocation = () => {
                   description="You are here"
                 />
               </MapView>
-            </View>
+            </View> */}
           </View>
         </View>
         <View className="flex-row space-x-2 mt-5 mb-5 justify-end">
