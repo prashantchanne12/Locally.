@@ -53,7 +53,6 @@ export default function RootLayout() {
 
   if (!loaded) {
     console.log("Not Loading....");
-    console.log("Not Loading....");
     return null;
   }
 

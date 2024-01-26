@@ -6,6 +6,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment-timezone";
 import Button from "../components/Button";
 import { Feather } from "@expo/vector-icons";
+import Checkbox from "expo-checkbox";
 
 const Operations = () => {
   const sourceMoment = moment.unix(1636765200);
@@ -16,7 +17,19 @@ const Operations = () => {
     clicked: false,
     time: "8:00 AM",
   });
-  const [endTime, setEndTime] = useState({ clicked: false, time: "10:00 PM" });
+  const [endTime, setEndTime] = useState({
+    clicked: false,
+    time: "10:00 PM",
+  });
+  const [days, setDays] = useState([
+    { id: 1, text: "Monday", isChecked: false },
+    { id: 2, text: "Tuesday", isChecked: false },
+    { id: 3, text: "Wednesday", isChecked: false },
+    { id: 4, text: "Thursday", isChecked: false },
+    { id: 5, text: "Friday", isChecked: false },
+    { id: 6, text: "Saturday", isChecked: false },
+    { id: 7, text: "Sunday", isChecked: false },
+  ]);
 
   const onChange = (event: any, selectedTime: any) => {
     const time = selectedTime.toLocaleString();
@@ -98,6 +111,37 @@ const Operations = () => {
                 </View>
               </TouchableOpacity>
             </View>
+          </View>
+        </View>
+        <View className="mt-5">
+          <CustomText
+            text="Days Open*"
+            className="uppercase text-lg"
+            bold
+            primary
+          />
+          <View className="flex-row flex-wrap mt-2">
+            {days.map((day) => (
+              <View
+                key={day.id}
+                className="flex-row w-[120px] p-2 items-center space-x-2"
+              >
+                <Checkbox
+                  value={day.isChecked}
+                  onValueChange={() => {
+                    const updatedDays = days.map((item) => {
+                      if (item.id === day.id) {
+                        return { ...item, isChecked: !item.isChecked };
+                      }
+                      return { ...item };
+                    });
+                    setDays(updatedDays);
+                  }}
+                  color={day.isChecked ? "#16a085" : undefined}
+                />
+                <CustomText text={day.text} className="text-base" semibold />
+              </View>
+            ))}
           </View>
         </View>
       </ScrollView>
