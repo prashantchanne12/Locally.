@@ -86,42 +86,7 @@ const NameAndLocation = () => {
               <Text className="text-sm text-red-700">Name is required.</Text>
             )}
           </View>
-          <View className="space-y-1">
-            <CustomText
-              className="uppercase text-lg"
-              text="Contact Number*"
-              primary
-              bold
-            />
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-                minLength: 10,
-              }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  placeholder="Contact Number*"
-                  type="number"
-                  maxLength={10}
-                  value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                />
-              )}
-              name="contactNumber"
-            />
-            {errors.contactNumber?.type === "minLength" && (
-              <Text className="text-sm text-red-700">
-                Invalid contact number
-              </Text>
-            )}
-            {errors.contactNumber?.type === "required" && (
-              <Text className="text-sm text-red-700">
-                Contact number is required.
-              </Text>
-            )}
-          </View>
+
           <View className="space-y-1">
             <CustomText
               className="uppercase text-lg"
