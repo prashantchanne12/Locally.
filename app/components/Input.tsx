@@ -7,14 +7,14 @@ const Input = (props: any) => {
       maxLength={props.maxLength && props.maxLength}
       keyboardType={props.type === "number" ? "numeric" : "default"}
       onChangeText={(value) => props.onChangeText(value.replace(/[^0-9]/g, ""))}
-      className="bg-gray-50 p-3 pl-4 border border-gray-200 rounded-sm"
+      className=" p-[10px] pl-4 border border-gray-200 font-[robo]"
       style={props.style}
       autoCapitalize="none"
       value={props.value}
       placeholder={props.placeholder}
       placeholderTextColor="#9ca3af"
       onBlur={props.onBlur}
-      selectionColor="rgb(22, 160, 133)"
+      selectionColor="rgb(108, 92, 231)"
     />
   );
 };

@@ -1,6 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import CustomText from "../components/CustomText";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment-timezone";
@@ -10,6 +9,7 @@ import Checkbox from "expo-checkbox";
 import { useForm, Controller } from "react-hook-form";
 import { router } from "expo-router";
 import Input from "../components/Input";
+import { StatusBar } from "expo-status-bar";
 
 const Operations = () => {
   const sourceMoment = moment.unix(1636765200);
@@ -63,7 +63,8 @@ const Operations = () => {
   const onChange = (event: any, selectedTime: any) => {
     const time = selectedTime.toLocaleString();
     let newTime = time.split(", ")[1].split(" ");
-    const amOrPm = newTime[1];
+    const amOrPm = newTime[0].includes("am") ? "am" : "pm";
+    console.log(newTime);
     newTime = newTime[0].split(":")[0] + ":" + newTime[0].split(":")[1];
 
     if (startTime.clicked && event.type === "set") {
@@ -73,7 +74,6 @@ const Operations = () => {
       });
       setShow(false);
     } else if (endTime.clicked && event.type === "set") {
-      console.log("Setting end time....");
       setEndTime({
         time: `${newTime} ${amOrPm}`,
         clicked: false,
@@ -87,18 +87,25 @@ const Operations = () => {
   };
 
   return (
-    <SafeAreaView>
-      <ScrollView className="px-5 py-2 bg-gray-50 h-full">
+    <View>
+      <StatusBar style="dark" />
+      <ScrollView className="px-5 py-2 bg-white h-full">
         {show && (
           <View>
-            <DateTimePicker mode="time" value={time} onChange={onChange} />
+            <DateTimePicker
+              mode="time"
+              value={time}
+              onChange={onChange}
+              accentColor="#6c5ce7"
+              textColor="#6c5ce7"
+            />
           </View>
         )}
-        <CustomText className="text-4xl pt-2 mt-3" bold text="Operations" />
+        {/* <CustomText className="text-4xl pt-2 mt-3" bold text="Operations" /> */}
         <View>
           <View className="mt-5">
             <CustomText
-              className="uppercase text-lg"
+              className="capitalize text-base mb-1"
               text="Contact Number*"
               primary
               bold
@@ -140,13 +147,13 @@ const Operations = () => {
                 text="Opens at*"
                 bold
                 primary
-                className="text-lg uppercase"
+                className="text-base mb-1 capitalize"
               ></CustomText>
               <View className="flex-row space-x-2 items-center mt-2">
                 <CustomText
                   text={startTime.time}
                   semibold
-                  className="text-xl"
+                  className="text-lg"
                 />
                 <TouchableOpacity
                   onPress={() => {
@@ -154,8 +161,8 @@ const Operations = () => {
                     setStartTime({ ...startTime, clicked: true });
                   }}
                 >
-                  <View className="bg-[#16a085] rounded-full p-2 -mt-2">
-                    <Feather name="edit-2" size={22} color="white" />
+                  <View>
+                    <Feather name="edit-2" size={20} color="#6c5ce7" />
                   </View>
                 </TouchableOpacity>
               </View>
@@ -168,18 +175,18 @@ const Operations = () => {
                 text="Closes at*"
                 bold
                 primary
-                className="text-lg uppercase"
+                className="text-base mb-1 capitalize"
               ></CustomText>
               <View className="flex-row space-x-2 items-center mt-2">
-                <CustomText text={endTime.time} semibold className="text-xl" />
+                <CustomText text={endTime.time} semibold className="text-lg" />
                 <TouchableOpacity
                   onPress={() => {
                     setShow(!show);
                     setEndTime({ ...endTime, clicked: true });
                   }}
                 >
-                  <View className="bg-[#16a085] rounded-full p-2 -mt-2">
-                    <Feather name="edit-2" size={22} color="white" />
+                  <View>
+                    <Feather name="edit-2" size={18} color="#6c5ce7" />
                   </View>
                 </TouchableOpacity>
               </View>
@@ -188,11 +195,11 @@ const Operations = () => {
           <View className="mt-7">
             <CustomText
               text="Days Open*"
-              className="uppercase text-lg"
+              className="capitalize text-base mb-1"
               bold
               primary
             />
-            <View className="flex-row flex-wrap mt-2">
+            <View className="flex-row flex-wrap mt-2 items-center justify-between">
               {days.map((day) => (
                 <View
                   key={day.id}
@@ -209,7 +216,7 @@ const Operations = () => {
                       });
                       setDays(updatedDays);
                     }}
-                    color={day.isChecked ? "#16a085" : undefined}
+                    color={day.isChecked ? "#6c5ce7" : undefined}
                   />
                   <CustomText text={day.text} className="text-base" semibold />
                 </View>
@@ -230,7 +237,7 @@ const Operations = () => {
           <Button onClick={handleSubmit} text="Next" primary title="Submit" />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

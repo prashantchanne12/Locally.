@@ -30,6 +30,9 @@ export default function RootLayout() {
     mukta: require("../assets/fonts/Mukta-Regular.ttf"),
     "mukta-b": require("../assets/fonts/Mukta-Bold.ttf"),
     "mukta-sb": require("../assets/fonts/Mukta-SemiBold.ttf"),
+    robo: require("../assets/fonts/RobotoSlab-Regular.ttf"),
+    "robo-b": require("../assets/fonts/RobotoSlab-Bold.ttf"),
+    "robo-sb": require("../assets/fonts/RobotoSlab-SemiBold.ttf"),
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
@@ -59,21 +62,34 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
+const getHeaderStyles = (title: string) => {
+  return {
+    headerTitle: title,
+    statusBarColor: "#7158e2",
+    headerTintColor: "#000",
+    headerTitleAlign: "center",
+    headerTitleStyle: {
+      fontWeight: undefined,
+      fontFamily: "robo-b",
+    },
+  };
+};
+
 function RootLayoutNav() {
   return (
     <Stack>
       {/* <Stack.Screen
         name="(pages)/NameAndLocation"
-        options={{ headerShown: false }}
+        options={getHeaderStyles("New Serivce")}
       />
       <Stack.Screen name="(pages)/Home" options={{ headerShown: true }} /> */}
       {/* <Stack.Screen
         name="(pages)/Operations"
-        options={{ headerShown: false }}
+        options={getHeaderStyles("Operations")}
       /> */}
       <Stack.Screen
         name="(pages)/PhotosAndDescription"
-        options={{ headerShown: false }}
+        options={getHeaderStyles("Photos")}
       />
     </Stack>
   );

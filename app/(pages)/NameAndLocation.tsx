@@ -10,6 +10,7 @@ import { useForm, Controller } from "react-hook-form";
 import { Picker } from "@react-native-picker/picker";
 import { serviceTypes } from "@/utils/constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 
 const NameAndLocation = () => {
   const [location, setLocation] = useState(null);
@@ -36,33 +37,41 @@ const NameAndLocation = () => {
   };
 
   return (
-    <SafeAreaView className="bg-gray-50 h-full">
-      <ScrollView className="px-5 py-2">
-        <CustomText className="text-4xl pt-2 mt-3" bold text="New Service" />
-        <View className="space-y-6">
+    <View className="bg-white h-full">
+      <StatusBar style="dark" />
+      <ScrollView className="px-5">
+        <View className="space-y-6 mt-3">
           <View className="space-y-1">
             <CustomText
-              className="uppercase text-lg pt-2"
+              className="capitalize text-base mb-1 pt-2"
               text="Service Type*"
               bold
               primary
             />
-            <View className="border border-gray-200 rounded-sm ">
+            <View className="border border-gray-200 ">
               <Picker
-                dropdownIconColor="green"
-                dropdownIconRippleColor="green"
+                dropdownIconColor="rgb(108, 92, 231)"
+                dropdownIconRippleColor="rgb(108, 92, 231)"
                 selectedValue={service}
                 onValueChange={(itemValue, itemIndex) => setService(itemValue)}
               >
                 {serviceTypes.map((item) => (
-                  <Picker.Item key={item} label={item} value={item} />
+                  <Picker.Item
+                    key={item}
+                    label={item}
+                    value={item}
+                    style={{
+                      fontFamily: "serif",
+                      fontWeight: "600",
+                    }}
+                  />
                 ))}
               </Picker>
             </View>
           </View>
           <View className="space-y-1">
             <CustomText
-              className="uppercase text-lg"
+              className="capitalize text-base mb-1"
               text="Name*"
               primary
               bold
@@ -89,7 +98,7 @@ const NameAndLocation = () => {
 
           <View className="space-y-1">
             <CustomText
-              className="uppercase text-lg"
+              className="capitalize text-base mb-1"
               text="Address*"
               primary
               bold
@@ -162,17 +171,17 @@ const NameAndLocation = () => {
             </View>
           </View>
           <View className="space-y-1">
-            <View className="mb-2">
+            <View className="mb-1">
               <CustomText
                 text="Loaction*"
                 bold
                 primary
-                className="uppercase text-lg pt-1"
+                className="capitalize text-base mb-1 pt-1"
               />
-
-              <Text className="text-xs text-gray-500 -mt-2">
-                Selected automatically based on your location for now
-              </Text>
+              <CustomText
+                className="text-xs text-gray-500"
+                text="Selected automatically based on your location for now"
+              />
             </View>
             {/* <View className="h-[200px] w-full mt-2">
               <MapView
@@ -212,7 +221,7 @@ const NameAndLocation = () => {
           />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -39,7 +37,8 @@
     "plugins": [
       "expo-router",
       "@react-native-google-signin/google-signin",
-      "expo-location"
+      "expo-location",
+      "expo-image-picker"
     ],
     "experiments": {
       "typedRoutes": true
