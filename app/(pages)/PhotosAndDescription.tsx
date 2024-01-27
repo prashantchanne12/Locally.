@@ -34,7 +34,7 @@ const PhotosAndDescription = () => {
     <View className="bg-white h-full">
       <ScrollView className="px-5 py-5 h-full">
         <CustomText
-          text="Selected Images"
+          text={selectedImages.length ? "Selected Images" : "Add Images"}
           bold
           primary
           className="capitalize text-base mb-3 pt-1"
@@ -58,22 +58,19 @@ const PhotosAndDescription = () => {
                 </TouchableOpacity>
               </View>
             ))}
-          <View>
+          <View className="mt-8 justify-center items-center">
             <Ionicons
               name="add-circle-outline"
               onPress={pickImageAsync}
               size={48}
               color="#6c5ce7"
             />
+            <CustomText
+              text="Add more"
+              className="text-gray-400 text-xs text-center"
+            />
           </View>
         </View>
-        {/* <Image
-          placeholder={
-            "https://placehold.co/550x350?font=lora&text=Pick%20Images"
-          }
-          source={selectedImage}
-          className="w-full h-[250px] mb-5"
-        /> */}
       </ScrollView>
     </View>
   );

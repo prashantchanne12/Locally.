@@ -9,7 +9,7 @@ const CustomText = (props: any) => {
           ? "font-['robo-b']"
           : props.semibold
           ? "font-['robo-sb']"
-          : ""
+          : "font-['robo']"
       } ${props.primary ? `text-[#6c5ce7]` : ""}`}
       style={props.style}
     >
