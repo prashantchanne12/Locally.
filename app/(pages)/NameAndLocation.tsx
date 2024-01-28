@@ -23,7 +23,6 @@ const NameAndLocation = () => {
   } = useForm({
     defaultValues: {
       storeName: "",
-      contactNumber: null,
       address1: "",
       address2: "",
       address3: "",
@@ -33,7 +32,7 @@ const NameAndLocation = () => {
   const onSubmit = (data: any) => {
     // Simulate form submission
     console.log("Submitted Data:", data);
-    router.push("/(pages)/Home");
+    router.push("/(pages)/Operations");
   };
 
   return (
@@ -207,12 +206,6 @@ const NameAndLocation = () => {
           </View>
         </View>
         <View className="flex-row space-x-2 mt-5 mb-5 justify-end">
-          <Button
-            onClick={() => {
-              console.log("Clicked");
-            }}
-            text="Prev"
-          />
           <Button
             onClick={handleSubmit(onSubmit)}
             text="Next"

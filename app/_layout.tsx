@@ -79,15 +79,14 @@ const getHeaderStyles = (title: string) => {
 function RootLayoutNav() {
   return (
     <Stack>
-      {/* <Stack.Screen
+      <Stack.Screen
         name="(pages)/NameAndLocation"
         options={getHeaderStyles("New Serivce")}
       />
-      <Stack.Screen name="(pages)/Home" options={{ headerShown: true }} /> */}
-      {/* <Stack.Screen
+      <Stack.Screen
         name="(pages)/Operations"
         options={getHeaderStyles("Operations")}
-      /> */}
+      />
       <Stack.Screen
         name="(pages)/PhotosAndDescription"
         options={getHeaderStyles("Photos")}

@@ -9,6 +9,7 @@ import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
 import Input from "../components/Input";
 import { Controller, useForm } from "react-hook-form";
+import { router } from "expo-router";
 
 const PhotosAndDescription = () => {
   const [selectedImages, setSelectedImage] = useState([]);
@@ -127,7 +128,7 @@ const PhotosAndDescription = () => {
           </View>
         </View>
         <View className="flex-row justify-end items-center space-x-2  mt-5">
-          <Button text="Prev" />
+          <Button text="Prev" onClick={() => router.back()} />
           <Button onClick={handleSubmit} text="Next" primary title="Submit" />
         </View>
       </ScrollView>

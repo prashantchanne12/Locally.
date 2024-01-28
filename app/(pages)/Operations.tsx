@@ -57,7 +57,7 @@ const Operations = () => {
   const onSubmit = (data: any) => {
     // Simulate form submission
     console.log("Submitted Data:", data);
-    // router.push("/(pages)/Home");
+    router.push("/(pages)/PhotosAndDescription");
   };
 
   const onChange = (event: any, selectedTime: any) => {
@@ -119,6 +119,7 @@ const Operations = () => {
                 <Input
                   placeholder="Contact Number*"
                   type="number"
+                  number
                   maxLength={10}
                   value={value}
                   onChangeText={onChange}
@@ -229,13 +230,13 @@ const Operations = () => {
             )}
           </View>
         </View>
-      </ScrollView>
-      <View className="absolute right-0 bottom-0 p-5">
-        <View className="flex-row justify-end items-center space-x-2 ">
-          <Button text="Prev" />
-          <Button onClick={handleSubmit} text="Next" primary title="Submit" />
+        <View className="my-5">
+          <View className="flex-row justify-end items-center space-x-2 ">
+            <Button text="Prev" onClick={() => router.back()} />
+            <Button onClick={handleSubmit} text="Next" primary title="Submit" />
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
