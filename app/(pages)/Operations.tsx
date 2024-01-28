@@ -101,7 +101,6 @@ const Operations = () => {
             />
           </View>
         )}
-        {/* <CustomText className="text-4xl pt-2 mt-3" bold text="Operations" /> */}
         <View>
           <View className="mt-5">
             <CustomText
