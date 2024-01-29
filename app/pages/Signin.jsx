@@ -41,7 +41,7 @@ const Signin = () => {
                 } else {
                   throw new Error("no ID token present!");
                 }
-              } catch (error: any) {
+              } catch (error) {
                 if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                   // user cancelled the login flow
                 } else if (error.code === statusCodes.IN_PROGRESS) {

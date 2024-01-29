@@ -7,11 +7,11 @@ import Button from "../components/Button";
 import { Feather } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import { useForm, Controller } from "react-hook-form";
-import { router } from "expo-router";
 import Input from "../components/Input";
 import { StatusBar } from "expo-status-bar";
+import { PRIMARY } from "@/utils/constants";
 
-const Operations = () => {
+const Operations = ({ navigation }) => {
   const sourceMoment = moment.unix(1636765200);
   const sourceDate = sourceMoment.local().toDate();
   const [time, setTime] = useState(sourceDate);
@@ -54,13 +54,12 @@ const Operations = () => {
     originalHandleSubmit(onSubmit)();
   };
 
-  const onSubmit = (data: any) => {
-    // Simulate form submission
+  const onSubmit = (data) => {
     console.log("Submitted Data:", data);
-    router.push("/(pages)/PhotosAndDescription");
+    navigation.navigate("Photos");
   };
 
-  const onChange = (event: any, selectedTime: any) => {
+  const onChange = (event, selectedTime) => {
     const time = selectedTime.toLocaleString();
     let newTime = time.split(", ")[1].split(" ");
     const amOrPm = newTime[0].includes("am") ? "am" : "pm";
@@ -88,7 +87,7 @@ const Operations = () => {
 
   return (
     <View>
-      <StatusBar style="dark" />
+      <StatusBar backgroundColor={PRIMARY} />
       <ScrollView className="px-5 py-2 bg-white h-full">
         {show && (
           <View>
@@ -104,7 +103,7 @@ const Operations = () => {
         <View>
           <View className="mt-5">
             <CustomText
-              className="capitalize text-base mb-1"
+              className="capitalize text-base mb-2"
               text="Contact Number*"
               primary
               bold
@@ -141,13 +140,13 @@ const Operations = () => {
               />
             )}
           </View>
-          <View className="flex-row justify-between my-5 items-center mt-11">
+          <View className="flex-row justify-between items-center mt-7">
             <View>
               <CustomText
                 text="Opens at*"
                 bold
                 primary
-                className="text-base mb-1 capitalize"
+                className="text-base mb-1"
               ></CustomText>
               <View className="flex-row space-x-2 items-center mt-2">
                 <CustomText
@@ -168,14 +167,14 @@ const Operations = () => {
               </View>
             </View>
             <View>
-              <CustomText text="to" className="text-xl mt-9 " semibold />
+              <CustomText text="to" className="text-lg mt-9 " semibold />
             </View>
             <View>
               <CustomText
                 text="Closes at*"
                 bold
                 primary
-                className="text-base mb-1 capitalize"
+                className="text-base mb-1"
               ></CustomText>
               <View className="flex-row space-x-2 items-center mt-2">
                 <CustomText text={endTime.time} semibold className="text-lg" />
@@ -192,14 +191,14 @@ const Operations = () => {
               </View>
             </View>
           </View>
-          <View className="mt-7">
+          <View className="mt-8">
             <CustomText
               text="Days Open*"
               className="capitalize text-base mb-1"
               bold
               primary
             />
-            <View className="flex-row flex-wrap mt-2 items-center justify-between">
+            <View className="flex-row flex-wrap mt-1 items-center justify-between">
               {days.map((day) => (
                 <View
                   key={day.id}
@@ -232,7 +231,7 @@ const Operations = () => {
         </View>
         <View className="my-5">
           <View className="flex-row justify-end items-center space-x-2 ">
-            <Button text="Prev" onClick={() => router.back()} />
+            <Button text="Prev" onClick={() => navigation.goBack()} />
             <Button onClick={handleSubmit} text="Next" primary title="Submit" />
           </View>
         </View>

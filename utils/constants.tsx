@@ -14,4 +14,4 @@ export const serviceTypes = [
   "Information Technology",
   "Social",
 ];
-export const PRIMARY = "#16a085";
+export const PRIMARY = "#6c5ce7";

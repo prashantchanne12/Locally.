@@ -10,8 +10,9 @@ import { Ionicons } from "@expo/vector-icons";
 import Input from "../components/Input";
 import { Controller, useForm } from "react-hook-form";
 import { router } from "expo-router";
+import { PRIMARY } from "@/utils/constants";
 
-const PhotosAndDescription = () => {
+const PhotosAndDescription = ({ navigation }) => {
   const [selectedImages, setSelectedImage] = useState([]);
 
   const {
@@ -28,10 +29,8 @@ const PhotosAndDescription = () => {
     originalHandleSubmit(onSubmit)();
   };
 
-  const onSubmit = (data: any) => {
-    // Simulate form submission
+  const onSubmit = (data) => {
     console.log("Submitted Data:", data);
-    // router.push("/(pages)/Home");
   };
 
   const pickImageAsync = async () => {
@@ -47,7 +46,7 @@ const PhotosAndDescription = () => {
     }
   };
 
-  const removeImage = (fileName: string) => {
+  const removeImage = (fileName) => {
     const newSelectedImages = selectedImages.filter(
       (image) => image.fileName !== fileName
     );
@@ -56,6 +55,7 @@ const PhotosAndDescription = () => {
 
   return (
     <View className="bg-white h-full">
+      <StatusBar backgroundColor={PRIMARY} />
       <ScrollView className="px-5 py-5 h-full">
         <CustomText
           text={selectedImages.length ? "Selected Images" : "Add Images"}
@@ -114,7 +114,8 @@ const PhotosAndDescription = () => {
                   placeholder="Add a description*"
                   onChangeText={onChange}
                   onBlur={onBlur}
-                  numberOfLines={4}
+                  numberOfLines={3}
+                  multiline
                 />
               )}
               name="description"
@@ -128,7 +129,7 @@ const PhotosAndDescription = () => {
           </View>
         </View>
         <View className="flex-row justify-end items-center space-x-2  mt-5">
-          <Button text="Prev" onClick={() => router.back()} />
+          <Button text="Prev" onClick={() => navigation.goBack()} />
           <Button onClick={handleSubmit} text="Next" primary title="Submit" />
         </View>
       </ScrollView>

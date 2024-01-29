@@ -11,8 +11,9 @@ import { Picker } from "@react-native-picker/picker";
 import { serviceTypes } from "@/utils/constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import { PRIMARY } from "../../utils/constants";
 
-const NameAndLocation = () => {
+const NameAndLocation = ({ navigation }) => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [service, setService] = useState();
@@ -29,15 +30,14 @@ const NameAndLocation = () => {
     },
   });
 
-  const onSubmit = (data: any) => {
-    // Simulate form submission
+  const onSubmit = (data) => {
     console.log("Submitted Data:", data);
-    router.push("/(pages)/Operations");
+    navigation.navigate("Operations");
   };
 
   return (
     <View className="bg-white h-full">
-      <StatusBar style="dark" />
+      <StatusBar backgroundColor={PRIMARY} />
       <ScrollView className="px-5">
         <View className="space-y-6 mt-3">
           <View className="space-y-1">
@@ -91,7 +91,10 @@ const NameAndLocation = () => {
               name="storeName"
             />
             {errors.storeName && (
-              <Text className="text-sm text-red-700">Name is required.</Text>
+              <CustomText
+                className="text-sm text-red-700"
+                text="Name is required."
+              />
             )}
           </View>
 
@@ -120,9 +123,10 @@ const NameAndLocation = () => {
                   name="address1"
                 />
                 {errors.address1 && (
-                  <Text className="text-sm text-red-700">
-                    This field is required.
-                  </Text>
+                  <CustomText
+                    className="text-sm text-red-700"
+                    text="This field is required."
+                  />
                 )}
               </View>
 
@@ -143,9 +147,10 @@ const NameAndLocation = () => {
                   name="address2"
                 />
                 {errors.address2 && (
-                  <Text className="text-sm text-red-700">
-                    This field is required.
-                  </Text>
+                  <CustomText
+                    className="text-sm text-red-700"
+                    text="This field is required."
+                  />
                 )}
               </View>
               <View>
@@ -162,9 +167,10 @@ const NameAndLocation = () => {
                   name="address3"
                 />
                 {errors.address3 && (
-                  <Text className="text-sm text-red-700">
-                    This field is required.
-                  </Text>
+                  <CustomText
+                    className="text-sm text-red-700"
+                    text="This field is required."
+                  />
                 )}
               </View>
             </View>

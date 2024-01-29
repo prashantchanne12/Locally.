@@ -6,6 +6,7 @@ const Input = (props: any) => {
     <TextInput
       maxLength={props.maxLength && props.maxLength}
       numberOfLines={props.numberOfLines}
+      multiline={props.multiline}
       keyboardType={props.type === "number" ? "numeric" : "default"}
       onChangeText={
         props.number
