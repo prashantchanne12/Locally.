@@ -96,7 +96,7 @@ const Operations = ({ navigation }) => {
               value={time}
               onChange={onChange}
               accentColor="#6c5ce7"
-              textColor="#6c5ce7"
+              textColor="#2c3e50"
             />
           </View>
         )}
@@ -152,7 +152,7 @@ const Operations = ({ navigation }) => {
                 <CustomText
                   text={startTime.time}
                   semibold
-                  className="text-lg"
+                  className="text-base"
                 />
                 <TouchableOpacity
                   onPress={() => {
@@ -161,13 +161,13 @@ const Operations = ({ navigation }) => {
                   }}
                 >
                   <View>
-                    <Feather name="edit-2" size={20} color="#6c5ce7" />
+                    <Feather name="edit-2" size={18} color={PRIMARY} />
                   </View>
                 </TouchableOpacity>
               </View>
             </View>
             <View>
-              <CustomText text="to" className="text-lg mt-9 " semibold />
+              <CustomText text="to" className="text-base mt-9 " semibold />
             </View>
             <View>
               <CustomText
@@ -177,7 +177,11 @@ const Operations = ({ navigation }) => {
                 className="text-base mb-1"
               ></CustomText>
               <View className="flex-row space-x-2 items-center mt-2">
-                <CustomText text={endTime.time} semibold className="text-lg" />
+                <CustomText
+                  text={endTime.time}
+                  semibold
+                  className="text-base"
+                />
                 <TouchableOpacity
                   onPress={() => {
                     setShow(!show);
@@ -185,7 +189,7 @@ const Operations = ({ navigation }) => {
                   }}
                 >
                   <View>
-                    <Feather name="edit-2" size={18} color="#6c5ce7" />
+                    <Feather name="edit-2" size={18} color={PRIMARY} />
                   </View>
                 </TouchableOpacity>
               </View>
@@ -215,9 +219,9 @@ const Operations = ({ navigation }) => {
                       });
                       setDays(updatedDays);
                     }}
-                    color={day.isChecked ? "#6c5ce7" : undefined}
+                    color={day.isChecked ? "#2c3e50" : undefined}
                   />
-                  <CustomText text={day.text} className="text-base" semibold />
+                  <CustomText text={day.text} className="" semibold />
                 </View>
               ))}
             </View>

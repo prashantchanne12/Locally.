@@ -49,8 +49,8 @@ const NameAndLocation = ({ navigation }) => {
             />
             <View className="border border-gray-200 ">
               <Picker
-                dropdownIconColor="rgb(108, 92, 231)"
-                dropdownIconRippleColor="rgb(108, 92, 231)"
+                dropdownIconColor="#2c3e50"
+                dropdownIconRippleColor="#2c3e50"
                 selectedValue={service}
                 onValueChange={(itemValue, itemIndex) => setService(itemValue)}
               >

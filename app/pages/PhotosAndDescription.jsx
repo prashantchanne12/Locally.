@@ -87,7 +87,7 @@ const PhotosAndDescription = ({ navigation }) => {
               name="add-circle-outline"
               onPress={pickImageAsync}
               size={48}
-              color="#6c5ce7"
+              color={PRIMARY}
             />
             <CustomText
               text={selectedImages.length ? "Add more" : "Click to select"}

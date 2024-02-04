@@ -7,7 +7,7 @@ const Button = (props: any) => {
   return (
     <TouchableOpacity
       onPress={props.onClick}
-      className={`${props.primary ? "bg-[#6c5ce7]" : ``}`}
+      className={`${props.primary ? "bg-[#2c3e50]" : ``}`}
       style={props.style}
     >
       <CustomText

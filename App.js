@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import NameAndLocation from "./app/pages/NameAndLocation";
 import Operations from "./app/pages/Operations";
 import PhotosAndDescription from "./app/pages/PhotosAndDescription";
+import Home from "./app/pages/Home";
 import { useFonts } from "expo-font";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useEffect } from "react";
@@ -20,7 +21,7 @@ GoogleSignin.configure({
 
 const getHeaderStyles = () => {
   return {
-    statusBarColor: "#7158e2",
+    statusBarColor: "#2c3e50",
     headerTintColor: "#000",
     headerTitleAlign: "center",
     headerTitleStyle: {
@@ -46,39 +47,48 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShadowVisible: true,
-          headerStyle: {
-            elevation: 10,
-            shadowOpacity: 0,
-            borderBottomWidth: 1,
-            borderBottomColor: "rgba(108, 92, 231, 0.3)",
-          },
-        }}
-      >
-        <Stack.Screen
-          name="New Service"
-          component={NameAndLocation}
-          options={getHeaderStyles()}
-        />
-        <Stack.Screen
-          name="Operations"
-          component={Operations}
-          options={getHeaderStyles()}
-        />
-        <Stack.Screen
-          name="Photos"
-          component={PhotosAndDescription}
-          options={getHeaderStyles()}
-        />
-        <Stack.Screen
-          name="Signin"
-          component={Signin}
-          options={getHeaderStyles()}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Home />
+    // <NavigationContainer>
+    //   <Stack.Navigator
+    //     screenOptions={{
+    //       headerShadowVisible: true,
+    //       headerTitleStyle: {
+    //         color: "#2c3e50",
+    //       },
+    //       headerStyle: {
+    //         elevation: 10,
+    //         shadowOpacity: 0,
+    //         borderBottomWidth: 1,
+    //         borderBottomColor: "rgba(0, 0, 0, 0.05)",
+    //       },
+    //     }}
+    //   >
+    //     <Stack.Screen
+    //       name="New Service"
+    //       component={Home}
+    //       options={getHeaderStyles()}
+    //     />
+    //     <Stack.Screen
+    //       name="New Service"
+    //       component={NameAndLocation}
+    //       options={getHeaderStyles()}
+    //     />
+    //     <Stack.Screen
+    //       name="Operations"
+    //       component={Operations}
+    //       options={getHeaderStyles()}
+    //     />
+    //     <Stack.Screen
+    //       name="Photos"
+    //       component={PhotosAndDescription}
+    //       options={getHeaderStyles()}
+    //     />
+    //     <Stack.Screen
+    //       name="Signin"
+    //       component={Signin}
+    //       options={getHeaderStyles()}
+    //     />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
 }

@@ -20,7 +20,7 @@ const Input = (props: any) => {
       placeholder={props.placeholder}
       placeholderTextColor="#9ca3af"
       onBlur={props.onBlur}
-      selectionColor="rgb(108, 92, 231)"
+      selectionColor="#2c3e50"
     />
   );
 };
