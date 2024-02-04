@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import CustomText from "../components/CustomText";
+import { PRIMARY } from "@/utils/constants";
 
 const FirstRoute = () => (
   <View>
@@ -34,29 +35,34 @@ export default function TabViewExample() {
     { key: "second", title: "Second" },
   ]);
 
-  const renderTabBar = (props) => {
-    const inputRange = props.navigationState.routes.map((x, i) => i);
-
+  const renderTabBar = ({ navigationState }) => {
+    const { index } = navigationState;
     return (
-      // <View style={styles.tabBar}>
-      <View>
-        {props.navigationState.routes.map((route, i) => {
-          const opacity = props.position.interpolate({
-            inputRange,
-            outputRange: inputRange.map((inputIndex) =>
-              inputIndex === i ? 1 : 0.5
-            ),
-          });
-
-          return (
-            <TouchableOpacity
-              // style={styles.tabItem}
-              onPress={() => setIndex(i)}
-            >
-              <Animated.Text style={{ opacity }}>{route.title}</Animated.Text>
-            </TouchableOpacity>
-          );
-        })}
+      <View className="pt-2 px-5">
+        <View>
+          <CustomText text="ServiceX" className="text-2xl" bold />
+        </View>
+        <View className="flex-row space-x-4 mt-3">
+          {navigationState.routes.map((route, i) => {
+            const isSelected = i === index;
+            return (
+              <TouchableOpacity onPress={() => setIndex(i)} key={route.title}>
+                <View
+                  className={`${
+                    isSelected
+                      ? `bg-[${PRIMARY}]`
+                      : "bg-gray-200 border border-gray-300"
+                  } px-5 py-2`}
+                >
+                  <CustomText
+                    text={route.title}
+                    className={isSelected ? "text-white" : "text-black"}
+                  />
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
       </View>
     );
   };
