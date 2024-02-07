@@ -12,7 +12,7 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const FirstRoute = () => (
-  <View>
+  <View className="bg-white h-full">
     <StatusBar style="dark" />
     <CustomText text="First" bold />
   </View>
@@ -42,7 +42,7 @@ export default function TabViewExample() {
   const renderTabBar = ({ navigationState }) => {
     const { index } = navigationState;
     return (
-      <SafeAreaView className="pt-2 px-5">
+      <SafeAreaView className="pt-2 px-5 bg-white">
         <View>
           <CustomText text="ServiceX" className="text-2xl" bold />
         </View>
