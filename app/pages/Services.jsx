@@ -10,13 +10,40 @@ import CustomText from "../components/CustomText";
 import { PRIMARY } from "@/utils/constants";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Image } from "expo-image";
+import { Ionicons } from "@expo/vector-icons";
+import { ScrollView } from "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Card from "../components/Card";
+import { supabase } from "@/utils/supabase";
 
-const FirstRoute = () => (
-  <View className="bg-white h-full">
-    <StatusBar style="dark" />
-    <CustomText text="First" bold />
-  </View>
-);
+const FirstRoute = () => {
+  const [services, setServices] = React.useState([]);
+  React.useEffect(() => {
+    const fethData = async () => {
+      let { data: Services, error } = await supabase
+        .from("Services")
+        .select("*");
+
+      setServices(Services);
+    };
+
+    fethData();
+  }, []);
+
+  return (
+    <GestureHandlerRootView>
+      <ScrollView className="bg-white h-full p-3">
+        <StatusBar style="dark" />
+        <View>
+          {services.map((service) => (
+            <Card service={service} />
+          ))}
+        </View>
+      </ScrollView>
+    </GestureHandlerRootView>
+  );
+};
 
 const SecondRoute = () => (
   <View>
@@ -26,7 +53,7 @@ const SecondRoute = () => (
 );
 
 const renderScene = SceneMap({
-  first: FirstRoute,
+  nearby: FirstRoute,
   second: SecondRoute,
 });
 
@@ -35,14 +62,14 @@ export default function TabViewExample() {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "first", title: "First" },
+    { key: "nearby", title: "Nearby" },
     { key: "second", title: "Second" },
   ]);
 
   const renderTabBar = ({ navigationState }) => {
     const { index } = navigationState;
     return (
-      <SafeAreaView className="pt-2 px-5 bg-white">
+      <SafeAreaView className="pt-2 px-5 bg-white pb-1">
         <View>
           <CustomText text="ServiceX" className="text-2xl" bold />
         </View>

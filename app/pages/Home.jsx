@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 import Services from "./Services";
-import Signin from "./Signin";
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 
@@ -15,11 +14,19 @@ const Chats = () => {
   );
 };
 
+const Settings = () => {
+  return (
+    <View>
+      <Text>Settings</Text>
+    </View>
+  );
+};
+
 const Home = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={({ route, navigation }) => ({
+        screenOptions={({ route }) => ({
           tabBarActiveTintColor: "black",
           headerShown: false,
           tabBarShowLabel: false,
@@ -32,12 +39,12 @@ const Home = () => {
             } else if (route.name === "Chats") {
               iconName = focused ? "mail-sharp" : "mail-outline";
             }
-            return <Ionicons name={iconName} size={24} color={color} />;
+            return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
       >
         <Tab.Screen name="Home" component={Services} />
-        <Tab.Screen name="Settings" component={Signin} />
+        <Tab.Screen name="Settings" component={Settings} />
         <Tab.Screen name="Chats" component={Chats} />
       </Tab.Navigator>
     </NavigationContainer>
