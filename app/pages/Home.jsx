@@ -5,6 +5,8 @@ const Tab = createBottomTabNavigator();
 import Services from "./Services";
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
+import ServicePage from "./ServicePage";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Chats = () => {
   return (
@@ -23,6 +25,8 @@ const Settings = () => {
 };
 
 const Home = () => {
+  const Stack = createNativeStackNavigator();
+
   return (
     <NavigationContainer>
       <Tab.Navigator

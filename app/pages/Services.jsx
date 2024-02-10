@@ -1,49 +1,12 @@
 import * as React from "react";
-import {
-  Animated,
-  TouchableOpacity,
-  View,
-  useWindowDimensions,
-} from "react-native";
+import { TouchableOpacity, View, useWindowDimensions } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import CustomText from "../components/CustomText";
 import { PRIMARY } from "@/utils/constants";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Image } from "expo-image";
-import { Ionicons } from "@expo/vector-icons";
-import { ScrollView } from "react-native-gesture-handler";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import Card from "../components/Card";
-import { supabase } from "@/utils/supabase";
-
-const FirstRoute = () => {
-  const [services, setServices] = React.useState([]);
-  React.useEffect(() => {
-    const fethData = async () => {
-      let { data: Services, error } = await supabase
-        .from("Services")
-        .select("*");
-
-      setServices(Services);
-    };
-
-    fethData();
-  }, []);
-
-  return (
-    <GestureHandlerRootView>
-      <ScrollView className="bg-white h-full p-3">
-        <StatusBar style="dark" />
-        <View>
-          {services.map((service) => (
-            <Card service={service} />
-          ))}
-        </View>
-      </ScrollView>
-    </GestureHandlerRootView>
-  );
-};
+import CardWrapper from "../components/CardWrapper";
+import Nearby from "./Nearby";
 
 const SecondRoute = () => (
   <View>
@@ -53,7 +16,7 @@ const SecondRoute = () => (
 );
 
 const renderScene = SceneMap({
-  nearby: FirstRoute,
+  nearby: Nearby,
   second: SecondRoute,
 });
 

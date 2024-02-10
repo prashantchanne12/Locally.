@@ -4,6 +4,10 @@ import CustomText from "./CustomText";
 import { Ionicons } from "@expo/vector-icons";
 import { PRIMARY } from "@/utils/constants";
 import { Image } from "expo-image";
+import {
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 
 const date = new Date()
   .toLocaleString("en-US", { hour12: false })
@@ -46,7 +50,7 @@ const convertToMinutes = (timeString) => {
   return time[0] * 60 + time[1];
 };
 
-const Card = ({ service }) => {
+const Card = ({ service, navigation }) => {
   let time = "";
   const a = service.opens_at.slice(0, 5);
   const b = service.closes_at.slice(0, 5);
@@ -57,7 +61,12 @@ const Card = ({ service }) => {
   }
 
   return (
-    <View className="border bg-white border-gray-200 px-2 pt-2 pb-4 my-2">
+    <TouchableWithoutFeedback
+      className="border bg-white border-gray-200 px-2 pt-2 pb-4 my-2"
+      onPress={() => {
+        navigation.navigate("service");
+      }}
+    >
       <View>
         <Image
           className="w-full h-48 bg-cover"
@@ -88,7 +97,7 @@ const Card = ({ service }) => {
           <CustomText text={time} className="text-xs text-gray-500" />
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
