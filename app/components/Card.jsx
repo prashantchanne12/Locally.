@@ -1,7 +1,12 @@
 import { View } from "react-native";
 import React from "react";
 import CustomText from "./CustomText";
-import { Ionicons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  FontAwesome,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { PRIMARY } from "@/utils/constants";
 import { Image } from "expo-image";
 import {
@@ -52,51 +57,80 @@ const convertToMinutes = (timeString) => {
 
 const Card = ({ service, navigation }) => {
   let time = "";
-  const a = service.opens_at.slice(0, 5);
-  const b = service.closes_at.slice(0, 5);
-  if (isInRange(a, b, date)) {
-    time = "Open until " + get12HoursTime(b);
-  } else {
-    time = "Opens at " + get12HoursTime(a);
-  }
+  // const a = service.opens_at.slice(0, 5);
+  // const b = service.closes_at.slice(0, 5);
+  // if (isInRange(a, b, date)) {
+  //   time = "Open until " + get12HoursTime(b);
+  // } else {
+  //   time = "Opens at " + get12HoursTime(a);
+  // }
 
   return (
     <TouchableWithoutFeedback
-      className="border bg-white border-gray-200 px-2 pt-2 pb-4 my-2"
+      className="border bg-white border-gray-200 px-2 pt-1 pb-3 my-2 mt-5 relative "
       onPress={() => {
         navigation.navigate("service");
       }}
     >
-      <View>
+      {/* <View className="absolute z-10 flex-row -top-2 right-1 space-x-2 rounded-full">
+        <View className="bg-white rounded-full border border-green-600  p-2 ">
+          <Ionicons name="call-outline" size={18} color="green" />
+        </View>
+        <View className="bg-white rounded-full  p-2">
+          <MaterialCommunityIcons name="google-maps" size={18} color="blue" />
+        </View>
+      </View> */}
+
+      <View className="mt-1 relative">
         <Image
-          className="w-full h-48 bg-cover"
+          className="w-full h-44 bg-cover"
           contentFit="cover"
           source={service.images[0]}
         />
       </View>
+
       <View className="flex-row items-center mt-3 justify-between">
         <CustomText text={service.name} bold className="text-lg" />
-        <View className="flex-row items-center gap-1">
-          <Ionicons name="star" size={18} color={PRIMARY} />
-          <CustomText text="4.5" />
+        <View className="flex-row  items-center space-x-1">
+          <AntDesign name="checkcircle" size={12} color="#16a085" />
+          <CustomText
+            text="Open"
+            semibold
+            className="text-[13px] text-[#16a085] text-center"
+          />
+          {/* <AntDesign name="closecircle" size={12} color="#c0392b" />
+          <CustomText
+            text="Closed"
+            semibold
+            className="text-[13px] text-[#c0392b] text-center"
+          /> */}
         </View>
       </View>
-      <View className="flex-row items-center mt-2 justify-between">
-        <View className="flex-row space-x-2">
+      <View className="flex-row items-center justify-between mt-[2px]">
+        <View className="flex-row space-x-1">
           {service.tags.map((tag, index) => (
-            <View key={`${service.id}-${tag}-${index}`}>
+            <View
+              key={`${service.id}-${tag}-${index}`}
+              className="flex-row items-center"
+            >
+              <FontAwesome name="square" size={4} color="gray" />
               <CustomText
                 text={tag}
-                className="border border-gray-200 text-gray-500 text-center p-1 px-2 text-xs"
+                className="text-gray-500 text-center px-1 text-xs"
               />
             </View>
           ))}
         </View>
-        <View className="flex-row items-center space-x-1 text-gray-500">
-          <Ionicons name="time-outline" size={18} color="black" />
-          <CustomText text={time} className="text-xs text-gray-500" />
+        <View className="flex-row items-center">
+          {/* <Ionicons name="star" size={18} color={PRIMARY} /> */}
+          {/* <CustomText text="4.5" /> */}
+          <CustomText text="6.6 km" className="text-xs text-gray-500" />
         </View>
       </View>
+      {/* <View className="flex-row items-center mt-1 space-x-3">
+        <Ionicons name="call-outline" size={20} color="black" />
+        <MaterialCommunityIcons name="google-maps" size={20} color="black" />
+      </View> */}
     </TouchableWithoutFeedback>
   );
 };
