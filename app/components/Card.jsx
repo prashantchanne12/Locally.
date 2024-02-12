@@ -67,12 +67,13 @@ const Card = ({ service, navigation }) => {
 
   return (
     <TouchableWithoutFeedback
-      className="border bg-white border-gray-200 px-[10px] pt-2 pb-3 my-2 mt-3 relative rounded-xl"
+      className="border bg-white border-gray-200 pt-2 my-4 relative rounded-xl"
       onPress={() => {
         navigation.navigate("service");
       }}
     >
-      <View className="absolute z-10 flex-row -top-3 right-1 space-x-2 rounded-full">
+      {/* ICONS */}
+      <View className="absolute z-10 flex-row -top-4 right-1 space-x-2 rounded-full">
         <View className="bg-[#2c3e50] rounded-full p-2 ">
           <Ionicons name="call-outline" size={18} color="white" />
         </View>
@@ -81,73 +82,55 @@ const Card = ({ service, navigation }) => {
         </View>
       </View>
 
-      <View className="mb-1">
+      {/* NAME AND TAGS */}
+      <View className="mb-1 px-[10px]">
         <CustomText text={service.name} bold className="text-lg" />
-        <View className="flex-row space-x-1">
-          {service.tags.map((tag, index) => (
-            <View
-              key={`${service.id}-${tag}-${index}`}
-              className="flex-row items-center"
-            >
-              <FontAwesome name="square" size={4} color="gray" />
-              <CustomText
-                text={tag}
-                className="text-gray-500 text-center px-1 text-xs"
-              />
+        <View className="flex-row items-center justify-between mt-[2px]">
+          <View className="flex-row space-x-1">
+            {service.tags.map((tag, index) => (
+              <View
+                key={`${service.id}-${tag}-${index}`}
+                className="flex-row items-center"
+              >
+                <FontAwesome name="square" size={4} color="gray" />
+                <CustomText
+                  text={tag}
+                  className="text-gray-500 text-center px-1 text-xs"
+                />
+              </View>
+            ))}
+          </View>
+          <View>
+            <View className="items-end">
+              <View className="flex-row  items-center space-x-1">
+                <AntDesign name="checkcircle" size={12} color="#16a085" />
+                <CustomText
+                  text="Open"
+                  semibold
+                  className="text-[13px] text-[#16a085] text-center"
+                />
+                <View>
+                  <CustomText text="6.6 km" className="text-xs text-gray-500" />
+                </View>
+                {/* <AntDesign name="closecircle" size={12} color="#c0392b" />
+            <CustomText
+              text="Closed"
+              semibold
+              className="text-[13px] text-[#c0392b] text-center"
+            /> */}
+              </View>
             </View>
-          ))}
+          </View>
         </View>
-        {/* <View className="flex-row  items-center space-x-1"> */}
-        {/* <AntDesign name="checkcircle" size={12} color="#16a085" />
-          <CustomText
-            text="Open"
-            semibold
-            className="text-[13px] text-[#16a085] text-center"
-          /> */}
-        {/* <AntDesign name="closecircle" size={12} color="#c0392b" />
-          <CustomText
-            text="Closed"
-            semibold
-            className="text-[13px] text-[#c0392b] text-center"
-          /> */}
-        {/* </View> */}
       </View>
-      <View className="mt-2 relative">
+
+      {/* IMAGE */}
+      <View className="mt-[10px] relative">
         <Image
-          className="w-full h-48 bg-cover rounded-lg"
+          className="w-full h-48 bg-cover rounded-tl rounded-tr rounded-bl-xl rounded-br-xl"
           contentFit="cover"
           source={service.images[0]}
         />
-      </View>
-
-      <View className="flex-row items-center justify-between mt-3">
-        <View className="flex-1">
-          <CustomText
-            text={service.desc.slice(0, 50) + "..."}
-            className="text-xs text-gray-500"
-          />
-        </View>
-        <View className="items-end space-y-1">
-          <View className="flex-row  items-center space-x-1">
-            <AntDesign name="checkcircle" size={12} color="#16a085" />
-            <CustomText
-              text="Open"
-              semibold
-              className="text-[13px] text-[#16a085] text-center"
-            />
-            {/* <AntDesign name="closecircle" size={12} color="#c0392b" />
-          <CustomText
-            text="Closed"
-            semibold
-            className="text-[13px] text-[#c0392b] text-center"
-          /> */}
-          </View>
-          <View className="flex-row items-center">
-            {/* <Ionicons name="star" size={18} color={PRIMARY} /> */}
-            {/* <CustomText text="4.5" /> */}
-            <CustomText text="6.6 km" className="text-xs text-gray-500" />
-          </View>
-        </View>
       </View>
     </TouchableWithoutFeedback>
   );
