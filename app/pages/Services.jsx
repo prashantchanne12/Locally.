@@ -32,11 +32,11 @@ export default function TabViewExample() {
   const renderTabBar = ({ navigationState }) => {
     const { index } = navigationState;
     return (
-      <SafeAreaView className="pt-2 px-5 bg-white pb-1">
+      <SafeAreaView className="pt-1 px-5 bg-white">
         <View>
           <CustomText text="ServiceX" className="text-2xl" bold />
         </View>
-        <View className="flex-row space-x-4 mt-3">
+        <View className="flex-row space-x-2 mt-2">
           {navigationState.routes.map((route, i) => {
             const isSelected = i === index;
             return (
@@ -46,7 +46,7 @@ export default function TabViewExample() {
                     isSelected
                       ? `bg-[${PRIMARY}]`
                       : "bg-gray-200 border border-gray-200"
-                  } px-5 py-2`}
+                  } px-5 py-2 rounded-full`}
                 >
                   <CustomText
                     text={route.title}

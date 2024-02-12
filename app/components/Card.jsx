@@ -67,46 +67,22 @@ const Card = ({ service, navigation }) => {
 
   return (
     <TouchableWithoutFeedback
-      className="border bg-white border-gray-200 px-2 pt-1 pb-3 my-2 mt-5 relative "
+      className="border bg-white border-gray-200 px-[10px] pt-2 pb-3 my-2 mt-3 relative rounded-xl"
       onPress={() => {
         navigation.navigate("service");
       }}
     >
-      {/* <View className="absolute z-10 flex-row -top-2 right-1 space-x-2 rounded-full">
-        <View className="bg-white rounded-full border border-green-600  p-2 ">
-          <Ionicons name="call-outline" size={18} color="green" />
+      <View className="absolute z-10 flex-row -top-3 right-1 space-x-2 rounded-full">
+        <View className="bg-[#2c3e50] rounded-full p-2 ">
+          <Ionicons name="call-outline" size={18} color="white" />
         </View>
-        <View className="bg-white rounded-full  p-2">
-          <MaterialCommunityIcons name="google-maps" size={18} color="blue" />
+        <View className="bg-[#2c3e50] rounded-full p-2">
+          <MaterialCommunityIcons name="google-maps" size={18} color="white" />
         </View>
-      </View> */}
-
-      <View className="mt-1 relative">
-        <Image
-          className="w-full h-44 bg-cover"
-          contentFit="cover"
-          source={service.images[0]}
-        />
       </View>
 
-      <View className="flex-row items-center mt-3 justify-between">
+      <View className="mb-1">
         <CustomText text={service.name} bold className="text-lg" />
-        <View className="flex-row  items-center space-x-1">
-          <AntDesign name="checkcircle" size={12} color="#16a085" />
-          <CustomText
-            text="Open"
-            semibold
-            className="text-[13px] text-[#16a085] text-center"
-          />
-          {/* <AntDesign name="closecircle" size={12} color="#c0392b" />
-          <CustomText
-            text="Closed"
-            semibold
-            className="text-[13px] text-[#c0392b] text-center"
-          /> */}
-        </View>
-      </View>
-      <View className="flex-row items-center justify-between mt-[2px]">
         <View className="flex-row space-x-1">
           {service.tags.map((tag, index) => (
             <View
@@ -121,16 +97,58 @@ const Card = ({ service, navigation }) => {
             </View>
           ))}
         </View>
-        <View className="flex-row items-center">
-          {/* <Ionicons name="star" size={18} color={PRIMARY} /> */}
-          {/* <CustomText text="4.5" /> */}
-          <CustomText text="6.6 km" className="text-xs text-gray-500" />
+        {/* <View className="flex-row  items-center space-x-1"> */}
+        {/* <AntDesign name="checkcircle" size={12} color="#16a085" />
+          <CustomText
+            text="Open"
+            semibold
+            className="text-[13px] text-[#16a085] text-center"
+          /> */}
+        {/* <AntDesign name="closecircle" size={12} color="#c0392b" />
+          <CustomText
+            text="Closed"
+            semibold
+            className="text-[13px] text-[#c0392b] text-center"
+          /> */}
+        {/* </View> */}
+      </View>
+      <View className="mt-2 relative">
+        <Image
+          className="w-full h-48 bg-cover rounded-lg"
+          contentFit="cover"
+          source={service.images[0]}
+        />
+      </View>
+
+      <View className="flex-row items-center justify-between mt-3">
+        <View className="flex-1">
+          <CustomText
+            text={service.desc.slice(0, 50) + "..."}
+            className="text-xs text-gray-500"
+          />
+        </View>
+        <View className="items-end space-y-1">
+          <View className="flex-row  items-center space-x-1">
+            <AntDesign name="checkcircle" size={12} color="#16a085" />
+            <CustomText
+              text="Open"
+              semibold
+              className="text-[13px] text-[#16a085] text-center"
+            />
+            {/* <AntDesign name="closecircle" size={12} color="#c0392b" />
+          <CustomText
+            text="Closed"
+            semibold
+            className="text-[13px] text-[#c0392b] text-center"
+          /> */}
+          </View>
+          <View className="flex-row items-center">
+            {/* <Ionicons name="star" size={18} color={PRIMARY} /> */}
+            {/* <CustomText text="4.5" /> */}
+            <CustomText text="6.6 km" className="text-xs text-gray-500" />
+          </View>
         </View>
       </View>
-      {/* <View className="flex-row items-center mt-1 space-x-3">
-        <Ionicons name="call-outline" size={20} color="black" />
-        <MaterialCommunityIcons name="google-maps" size={20} color="black" />
-      </View> */}
     </TouchableWithoutFeedback>
   );
 };
