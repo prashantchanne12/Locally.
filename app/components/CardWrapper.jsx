@@ -30,7 +30,15 @@ const CardWrapper = ({ navigation }) => {
         <StatusBar style="dark" />
         <View>
           {services.map((service) => (
-            <Card key={service.id} service={service} navigation={navigation} />
+            <Card
+              key={service.id}
+              name={service.name}
+              howFar="6.6 km"
+              isOpen={true}
+              tags={service.tags}
+              photos={service.photos}
+              navigation={navigation}
+            />
           ))}
         </View>
       </ScrollView>
