@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import NameAndLocation from "./app/pages/NameAndLocation";
 import Operations from "./app/pages/Operations";
 import PhotosAndDescription from "./app/pages/PhotosAndDescription";
-import Home from "./app/pages/Home";
+import HomePage from "./app/pages/HomePage";
 import { useFonts } from "expo-font";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useEffect } from "react";
@@ -47,7 +47,7 @@ export default function App() {
   }, []);
 
   return (
-    <Home />
+    <HomePage />
     // <NavigationContainer>
     //   <Stack.Navigator
     //     screenOptions={{
