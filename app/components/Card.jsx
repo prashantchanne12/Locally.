@@ -10,8 +10,23 @@ import {
 import { PRIMARY } from "@/utils/constants";
 import { Image } from "expo-image";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { giveMeGoogleImageURL } from "@/utils/utilities";
 
-const Card = ({ id, name, tags, isOpen, howFar, photos, navigation }) => {
+const Card = ({
+  id,
+  name,
+  tags,
+  isOpen,
+  howFar,
+  photos,
+  navigation,
+  phoneNumber,
+  location,
+  isGoogle,
+}) => {
+  let imageURL = photos[0];
+  if (isGoogle) imageURL = giveMeGoogleImageURL(photos[0]);
+
   return (
     <TouchableWithoutFeedback
       className="border bg-white border-gray-200 pt-2 my-4 relative rounded-xl"
@@ -74,7 +89,7 @@ const Card = ({ id, name, tags, isOpen, howFar, photos, navigation }) => {
         <Image
           className="w-full h-48 bg-cover rounded-tl rounded-tr rounded-bl-xl rounded-br-xl"
           contentFit="cover"
-          source={photos[0]}
+          source={imageURL}
         />
       </View>
     </TouchableWithoutFeedback>

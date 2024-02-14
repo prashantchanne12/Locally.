@@ -52,8 +52,6 @@ const MapsPage = () => {
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
       setPlacesLocation(location);
-      //   console.log(location);
-      //   console.log(location.coords.latitude, location.coords.longitude);
     })();
   }, []);
 
@@ -90,7 +88,7 @@ const MapsPage = () => {
         "Content-Type": "application/json",
         "X-Goog-Api-Key": apiKey,
         "X-Goog-FieldMask":
-          "places.displayName,places.rating,places.location,places.formattedAddress,places.nationalPhoneNumber,places.regularOpeningHours,places.primaryType,places.shortFormattedAddress,places.photos,places.reviews,places.iconMaskBaseUri,places.iconBackgroundColor",
+          "places.id,places.types,places.displayName,places.rating,places.location,places.formattedAddress,places.nationalPhoneNumber,places.regularOpeningHours,places.primaryType,places.shortFormattedAddress,places.photos,places.reviews,places.iconMaskBaseUri,places.iconBackgroundColor",
         "X-Android-Package": "com.channe.storex",
         "X-Android-Cert":
           "5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25",
@@ -101,9 +99,7 @@ const MapsPage = () => {
     try {
       const response = await fetch(url, options);
       const data = await response.json();
-      console.log(data);
       setPlaces(data.places);
-      // console.log(JSON.stringify(data, null, 2));
     } catch (error) {
       console.error("Error fetching nearby places:", error);
     }
@@ -116,8 +112,8 @@ const MapsPage = () => {
           <View className="py-2 px-5">
             <CustomText text="What's near me" className="text-xl" bold />
             <View>
-              <View className="h-[300px] w-full mt-2">
-                {/* <MapView
+              {/* <View className="h-[300px] w-full mt-2">
+                 <MapView
                   provider={PROVIDER_GOOGLE}
                   className="w-full h-full"
                   showsUserLocation={true}
@@ -154,18 +150,23 @@ const MapsPage = () => {
                       description={service.desc}
                     />
                   ))}
-                </MapView> */}
-              </View>
+                </MapView> 
+              </View> */}
               <View>
                 {places.map((place) => {
-                  const service = {
-                    name: place.displayName.text,
-                    location: place.location,
-                    images: place.photos[0],
-                  };
-                  console.log(service);
-                  return <View></View>;
-                  // return <Card service={service} />;
+                  return (
+                    <Card
+                      key={place.id}
+                      id={place.id}
+                      name={place.displayName.text}
+                      location={place.location}
+                      photos={place.photos}
+                      howFar="5.5 km"
+                      tags={["Cafe"]}
+                      isOpen={true}
+                      isGoogle={true}
+                    />
+                  );
                 })}
               </View>
             </View>

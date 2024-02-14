@@ -32,6 +32,7 @@ const CardWrapper = ({ navigation }) => {
           {services.map((service) => (
             <Card
               key={service.id}
+              id={service.id}
               name={service.name}
               howFar="6.6 km"
               isOpen={true}
