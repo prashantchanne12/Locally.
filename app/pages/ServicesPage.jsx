@@ -12,6 +12,7 @@ import CustomText from "../components/CustomText";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { PRIMARY } from "@/utils/constants";
+import { AntDesign, Octicons } from "@expo/vector-icons";
 
 const images = {
   milk: require("@/assets/images/milk.png"),
@@ -37,9 +38,24 @@ const ServicesPage = ({ navigation }) => {
 
   return (
     <GestureHandlerRootView>
+      <StatusBar style="dark" />
       <SafeAreaView>
+        <View className="py-2  flex-row items-center border-b border-gray-100 justify-between bg-white ">
+          <View className="flex-1 ml-4">
+            <Octicons name="three-bars" size={22} color={PRIMARY} />
+          </View>
+          <View
+            className={`bg-[${PRIMARY}] -ml-4 w-10 justify-center items-center rounded-md py-1 px-2`}
+          >
+            <CustomText
+              text="L"
+              className="text-2xl text-center text-white"
+              semibold
+            />
+          </View>
+          <View className="flex-1"></View>
+        </View>
         <ScrollView className="bg-white h-full p-3">
-          <StatusBar style="dark" />
           <Essentails />
           <Explore services={services} navigation={navigation} />
         </ScrollView>
@@ -52,26 +68,30 @@ export default ServicesPage;
 
 const Explore = ({ services, navigation }) => {
   return (
-    <View className="mt-5">
-      <View>
+    <View className="mt-2">
+      <View className="justify-between items-center flex-row">
+        <View className={`flex-1 h-[1px] bg-[${PRIMARY}]`} />
         <CustomText
-          text="Explore local"
-          className={`text-[${PRIMARY}] text-lg`}
-          bold
+          text="Explore Local"
+          className={`p-2 text-center text-[${PRIMARY}]`}
+          semibold
         />
+        <View className={`flex-1 h-[1px] bg-[${PRIMARY}]`} />
       </View>
-      {services.map((service) => (
-        <Card
-          key={service.id}
-          id={service.id}
-          name={service.name}
-          howFar="6.6 km"
-          isOpen={true}
-          tags={service.tags}
-          photos={service.photos}
-          navigation={navigation}
-        />
-      ))}
+      <View className="mt-2">
+        {services.map((service) => (
+          <Card
+            key={service.id}
+            id={service.id}
+            name={service.name}
+            howFar="6.6 km"
+            isOpen={true}
+            tags={service.tags}
+            photos={service.photos}
+            navigation={navigation}
+          />
+        ))}
+      </View>
     </View>
   );
 };
@@ -80,13 +100,10 @@ const Essentails = () => {
   return (
     <View className="">
       <View>
-        <CustomText
-          text="Essentials"
-          className={`text-[${PRIMARY}] text-lg`}
-          bold
-        />
-        <View className="mt-2 rounded-xl border">
-          <View className="flex-row justify-between border-b">
+        <View className={`rounded-xl border border-[${PRIMARY}]`}>
+          <View
+            className={`flex-row justify-between border-b border-[${PRIMARY}]`}
+          >
             <View className="py-3 pb-4 px-4 items-center">
               <Image source={images.milk} className=" h-24 w-32 bg-cover" />
               <CustomText
@@ -95,7 +112,7 @@ const Essentails = () => {
                 className={`text-[${PRIMARY}] text-xs pt-1`}
               />
             </View>
-            <View className="w-0 border-r" />
+            <View className={`w-0 border-r border-[${PRIMARY}]`} />
             <View className=" py-3 pb-4 px-4 items-center">
               <Image source={images.internet} className=" h-24 w-32 bg-cover" />
               <CustomText
@@ -117,7 +134,7 @@ const Essentails = () => {
                 className={`text-[${PRIMARY}] text-xs pt-1`}
               />
             </View>
-            <View className="w-0 border-r" />
+            <View className={`w-0 border-r border-[${PRIMARY}]`} />
             <View className=" rounded-lg items-center py-3 pb-4 px-4 ">
               <Image source={images.jim} className=" h-24 w-32 bg-cover" />
               <CustomText
@@ -129,12 +146,8 @@ const Essentails = () => {
           </View>
         </View>
       </View>
-      <View className="mt-2">
-        <CustomText
-          text="Show more"
-          className="text-xs pt-1 text-gray-500 text-center"
-          semibold
-        />
+      <View className="mt-2 flex-row justify-center">
+        <AntDesign name="downcircle" size={25} color={PRIMARY} />
       </View>
     </View>
   );
