@@ -75,7 +75,7 @@ const Explore = ({ services, navigation }) => {
         <View className={`flex-1 h-[1px] bg-[${PRIMARY}]`} />
         <CustomText
           text="Explore Local"
-          className={`p-2 text-center text-[${PRIMARY}]`}
+          className={`p-2 text-center text-gray-400`}
           semibold
         />
         <View className={`flex-1 h-[1px] bg-[${PRIMARY}]`} />
@@ -102,62 +102,76 @@ const Essentails = () => {
   return (
     <View className="">
       <View>
-        <View className={`border p-2 border-[${PRIMARY}] rounded-xl`}>
-          <View className={`flex-row justify-between items-center  `}>
-            <View className="items-center">
-              <Image source={images.milk} className="h-20 w-20 bg-cover" />
+        <View className={`border border-gray-300 p-3 rounded-xl`}>
+          <View
+            className={`flex-row justify-between items-center border-gray-300  `}
+          >
+            <View className="items-center ">
+              <Image
+                source={images.milk}
+                className="h-[75px] w-[75px] bg-cover"
+              />
               <CustomText
                 text="Dhoodhwala"
                 semibold
-                className={`text-[${PRIMARY}] text-xs pt-1`}
+                className={`text-gray-400 text-xs pt-1`}
               />
             </View>
             <View className="items-center">
-              <Image source={images.internet} className="h-20 w-20 bg-cover" />
+              <Image
+                source={images.internet}
+                className="h-[75px] w-[75px] bg-cover"
+              />
               <CustomText
                 text="Cable & Internet"
                 semibold
-                className={`text-[${PRIMARY}] text-xs pt-[5px]`}
+                className={`text-gray-400 text-xs pt-[5px]`}
               />
             </View>
             <View className="items-center">
               <Image
                 source={images.electrician}
-                className=" h-20 w-20 bg-cover"
+                className="h-[75px] w-[75px] bg-cover"
               />
               <CustomText
                 text="Electricians"
                 semibold
-                className={`text-[${PRIMARY}] text-xs pt-1`}
+                className={`text-gray-400 text-xs pt-1`}
               />
             </View>
           </View>
-          <View className="flex-row justify-between items-center mt-3">
+          <View className="flex-row justify-between items-center mt-5">
             <View className="  items-center">
-              <Image source={images.jim} className=" h-20 w-20 bg-cover" />
+              <Image
+                source={images.jim}
+                className="h-[73px] w-[73px] bg-cover"
+              />
               <CustomText
                 text="Gyms"
                 semibold
-                className={`text-[${PRIMARY}] text-xs pt-1`}
+                className={`text-gray-400 text-xs pt-1`}
+              />
+            </View>
+            <View className="ml-[2px] items-center">
+              <Image
+                source={images.painter}
+                className="h-[78px] w-[78px] bg-cover"
+              />
+              <CustomText
+                text="Painters"
+                semibold
+                className={`text-gray-400 text-xs pt-1`}
               />
             </View>
             <View className=" items-center  ">
               <Image
                 source={images.carpenter}
-                className=" h-20 w-20 bg-cover"
+                className="h-[73px] w-[75px] bg-cover"
               />
               <CustomText
                 text="Carpenters"
                 semibold
-                className={`text-[${PRIMARY}] text-xs pt-1`}
-              />
-            </View>
-            <View className="  items-center">
-              <Image source={images.painter} className=" h-20 w-20 bg-cover" />
-              <CustomText
-                text="Painters"
-                semibold
-                className={`text-[${PRIMARY}] text-xs pt-1`}
+                className={`text-gray-400 text-xs pt-1`}
               />
             </View>
           </View>
