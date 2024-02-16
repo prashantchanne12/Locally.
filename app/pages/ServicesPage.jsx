@@ -19,6 +19,8 @@ const images = {
   internet: require("@/assets/images/internet.png"),
   electrician: require("@/assets/images/electrician.png"),
   jim: require("@/assets/images/jim.png"),
+  carpenter: require("@/assets/images/carpenter.png"),
+  painter: require("@/assets/images/painter.png"),
 };
 
 const ServicesPage = ({ navigation }) => {
@@ -69,7 +71,7 @@ export default ServicesPage;
 const Explore = ({ services, navigation }) => {
   return (
     <View className="mt-2">
-      <View className="justify-between items-center flex-row">
+      {/* <View className="justify-between items-center flex-row">
         <View className={`flex-1 h-[1px] bg-[${PRIMARY}]`} />
         <CustomText
           text="Explore Local"
@@ -77,7 +79,7 @@ const Explore = ({ services, navigation }) => {
           semibold
         />
         <View className={`flex-1 h-[1px] bg-[${PRIMARY}]`} />
-      </View>
+      </View> */}
       <View className="mt-2">
         {services.map((service) => (
           <Card
@@ -100,33 +102,28 @@ const Essentails = () => {
   return (
     <View className="">
       <View>
-        <View className={`rounded-xl border border-[${PRIMARY}]`}>
-          <View
-            className={`flex-row justify-between border-b border-[${PRIMARY}]`}
-          >
-            <View className="py-3 pb-4 px-4 items-center">
-              <Image source={images.milk} className=" h-24 w-32 bg-cover" />
+        <View className={`border p-2 border-[${PRIMARY}] rounded-xl`}>
+          <View className={`flex-row justify-between items-center  `}>
+            <View className="items-center">
+              <Image source={images.milk} className="h-20 w-20 bg-cover" />
               <CustomText
                 text="Dhoodhwala"
                 semibold
                 className={`text-[${PRIMARY}] text-xs pt-1`}
               />
             </View>
-            <View className={`w-0 border-r border-[${PRIMARY}]`} />
-            <View className=" py-3 pb-4 px-4 items-center">
-              <Image source={images.internet} className=" h-24 w-32 bg-cover" />
+            <View className="items-center">
+              <Image source={images.internet} className="h-20 w-20 bg-cover" />
               <CustomText
                 text="Cable & Internet"
                 semibold
-                className={`text-[${PRIMARY}] text-xs pt-1`}
+                className={`text-[${PRIMARY}] text-xs pt-[5px]`}
               />
             </View>
-          </View>
-          <View className="flex-row justify-between">
-            <View className="py-3 pb-4 px-4 items-center">
+            <View className="items-center">
               <Image
                 source={images.electrician}
-                className=" h-24 w-32 bg-cover"
+                className=" h-20 w-20 bg-cover"
               />
               <CustomText
                 text="Electricians"
@@ -134,11 +131,31 @@ const Essentails = () => {
                 className={`text-[${PRIMARY}] text-xs pt-1`}
               />
             </View>
-            <View className={`w-0 border-r border-[${PRIMARY}]`} />
-            <View className=" rounded-lg items-center py-3 pb-4 px-4 ">
-              <Image source={images.jim} className=" h-24 w-32 bg-cover" />
+          </View>
+          <View className="flex-row justify-between items-center mt-3">
+            <View className="  items-center">
+              <Image source={images.jim} className=" h-20 w-20 bg-cover" />
               <CustomText
                 text="Gyms"
+                semibold
+                className={`text-[${PRIMARY}] text-xs pt-1`}
+              />
+            </View>
+            <View className=" items-center  ">
+              <Image
+                source={images.carpenter}
+                className=" h-20 w-20 bg-cover"
+              />
+              <CustomText
+                text="Carpenters"
+                semibold
+                className={`text-[${PRIMARY}] text-xs pt-1`}
+              />
+            </View>
+            <View className="  items-center">
+              <Image source={images.painter} className=" h-20 w-20 bg-cover" />
+              <CustomText
+                text="Painters"
                 semibold
                 className={`text-[${PRIMARY}] text-xs pt-1`}
               />
