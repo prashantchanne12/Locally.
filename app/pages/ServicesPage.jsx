@@ -58,7 +58,7 @@ const ServicesPage = ({ navigation }) => {
           <View className="flex-1"></View>
         </View>
         <ScrollView className="bg-white h-full p-3">
-          <Essentails />
+          <Esssentials />
           <Explore services={services} navigation={navigation} />
         </ScrollView>
       </SafeAreaView>
@@ -71,16 +71,16 @@ export default ServicesPage;
 const Explore = ({ services, navigation }) => {
   return (
     <View className="mt-2">
-      {/* <View className="justify-between items-center flex-row">
-        <View className={`flex-1 h-[1px] bg-[${PRIMARY}]`} />
+      <View className="justify-between items-center flex-row">
+        <View className={`flex-1 h-[1px] bg-gray-200`} />
         <CustomText
           text="Explore Local"
-          className={`p-2 text-center text-gray-400`}
+          className={`p-2 text-center text-[${PRIMARY}]`}
           semibold
         />
-        <View className={`flex-1 h-[1px] bg-[${PRIMARY}]`} />
-      </View> */}
-      <View className="mt-2">
+        <View className={`flex-1 h-[1px] bg-gray-200`} />
+      </View>
+      <View className="mt-2 mb-32">
         {services.map((service) => (
           <Card
             key={service.id}
@@ -98,7 +98,7 @@ const Explore = ({ services, navigation }) => {
   );
 };
 
-const Essentails = () => {
+const Esssentials = () => {
   return (
     <View>
       <View>
