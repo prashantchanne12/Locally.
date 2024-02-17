@@ -1,21 +1,19 @@
-import { View, Text } from "react-native";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import ServicePage from "./ServicePage";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import * as React from "react";
-import CardWrapper from "../components/CardWrapper";
-
+import ServicesPage from "./ServicesPage";
+import ServiceDetailsPage from "./ServiceDetailsPage";
 const Stack = createNativeStackNavigator();
 
-const Nearby = () => {
+const Services = () => {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="list" component={CardWrapper} />
-        <Stack.Screen name="service" component={ServicePage} />
+        <Stack.Screen name="services" component={ServicesPage} />
+        <Stack.Screen name="service" component={ServiceDetailsPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default Nearby;
+export default Services;

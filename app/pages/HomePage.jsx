@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
-import Services from "./Services";
+import ServicesContainer from "./ServicesContainer";
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 import MapsPage from "./MapsPage";
@@ -23,7 +23,7 @@ const Search = () => {
   );
 };
 
-const Home = () => {
+const HomePage = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -46,7 +46,7 @@ const Home = () => {
           },
         })}
       >
-        <Tab.Screen name="Home" component={Services} />
+        <Tab.Screen name="Home" component={ServicesContainer} />
         <Tab.Screen name="Map" component={MapsPage} />
         <Tab.Screen name="Search" component={Search} />
         <Tab.Screen name="Chats" component={Chats} />
@@ -55,4 +55,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
