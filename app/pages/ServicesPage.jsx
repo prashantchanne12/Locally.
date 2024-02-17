@@ -100,24 +100,22 @@ const Explore = ({ services, navigation }) => {
 
 const Essentails = () => {
   return (
-    <View className="">
+    <View>
       <View>
-        <View className={`border border-gray-300 p-3 rounded-xl`}>
-          <View
-            className={`flex-row justify-between items-center border-gray-300  `}
-          >
-            <View className="items-center ">
+        <View className="border border-gray-300 p-3 rounded-xl">
+          <View className="flex-row justify-between items-center border-gray-300">
+            <View className="items-center space-y-1">
               <Image
                 source={images.milk}
-                className="h-[75px] w-[75px] bg-cover"
+                className="h-[73px] w-[75px] bg-cover"
               />
               <CustomText
                 text="Dhoodhwala"
                 semibold
-                className={`text-gray-400 text-xs pt-1`}
+                className="text-gray-400 text-xs"
               />
             </View>
-            <View className="items-center">
+            <View className="items-center space-y-1">
               <Image
                 source={images.internet}
                 className="h-[75px] w-[75px] bg-cover"
@@ -125,10 +123,10 @@ const Essentails = () => {
               <CustomText
                 text="Cable & Internet"
                 semibold
-                className={`text-gray-400 text-xs pt-[5px]`}
+                className="text-gray-400 text-xs"
               />
             </View>
-            <View className="items-center">
+            <View className="items-center space-y-1">
               <Image
                 source={images.electrician}
                 className="h-[75px] w-[75px] bg-cover"
@@ -136,12 +134,12 @@ const Essentails = () => {
               <CustomText
                 text="Electricians"
                 semibold
-                className={`text-gray-400 text-xs pt-1`}
+                className="text-gray-400 text-xs"
               />
             </View>
           </View>
           <View className="flex-row justify-between items-center mt-5">
-            <View className="  items-center">
+            <View className="space-y-1  items-center">
               <Image
                 source={images.jim}
                 className="h-[73px] w-[73px] bg-cover"
@@ -149,10 +147,10 @@ const Essentails = () => {
               <CustomText
                 text="Gyms"
                 semibold
-                className={`text-gray-400 text-xs pt-1`}
+                className="text-gray-400 text-xs"
               />
             </View>
-            <View className="ml-[2px] items-center">
+            <View className="ml-[2px] items-center  space-y-1">
               <Image
                 source={images.painter}
                 className="h-[78px] w-[78px] bg-cover"
@@ -160,18 +158,18 @@ const Essentails = () => {
               <CustomText
                 text="Painters"
                 semibold
-                className={`text-gray-400 text-xs pt-1`}
+                className="text-gray-400 text-xs"
               />
             </View>
-            <View className=" items-center  ">
+            <View className="items-center space-y-1">
               <Image
                 source={images.carpenter}
-                className="h-[73px] w-[75px] bg-cover"
+                className="h-[75px] w-[75px] bg-cover"
               />
               <CustomText
                 text="Carpenters"
                 semibold
-                className={`text-gray-400 text-xs pt-1`}
+                className="text-gray-400 text-xs"
               />
             </View>
           </View>
