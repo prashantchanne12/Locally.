@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import React from "react";
 import { useState, useEffect } from "react";
 import {
@@ -31,7 +31,6 @@ const ServicesPage = ({ navigation }) => {
       let { data: Services, error } = await supabase
         .from("Services")
         .select("*");
-
       setServices(Services);
     };
 
@@ -68,7 +67,7 @@ const ServicesPage = ({ navigation }) => {
 
 export default ServicesPage;
 
-const Explore = ({ services, navigation }) => {
+const Explore = ({ services = [], navigation }) => {
   return (
     <View className="mt-2">
       <View className="justify-between items-center flex-row">
@@ -81,18 +80,23 @@ const Explore = ({ services, navigation }) => {
         <View className={`flex-1 h-[1px] bg-gray-200`} />
       </View>
       <View className="mt-2 mb-32">
-        {services.map((service) => (
-          <Card
-            key={service.id}
-            id={service.id}
-            name={service.name}
-            howFar="6.6 km"
-            isOpen={true}
-            tags={service.tags}
-            photos={service.photos}
-            navigation={navigation}
-          />
-        ))}
+        {services.length ? (
+          services.map((service) => (
+            <Card
+              key={service.id}
+              id={service.id}
+              name={service.name}
+              howFar="6.6 km"
+              isOpen={true}
+              tags={service.tags}
+              photos={service.photos}
+              navigation={navigation}
+              isGoogle={false}
+            />
+          ))
+        ) : (
+          <CustomText text="Loading..." />
+        )}
       </View>
     </View>
   );

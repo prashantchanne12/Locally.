@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import React from "react";
 import CustomText from "./CustomText";
 import {
@@ -49,7 +49,7 @@ const Card = ({
         <CustomText text={name} bold className="text-lg" />
         <View className="flex-row items-center justify-between mt-[2px]">
           <View className="flex-row space-x-1">
-            {tags.map((tag, index) => (
+            {/* {tags.map((tag, index) => (
               <View
                 key={`${id}-${tag}-${index}`}
                 className="flex-row items-center"
@@ -60,7 +60,7 @@ const Card = ({
                   className="text-gray-500 text-center px-1 text-xs"
                 />
               </View>
-            ))}
+            ))} */}
           </View>
           <View>
             <View className="items-end">
