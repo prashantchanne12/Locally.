@@ -15,7 +15,7 @@ import { giveMeGoogleImageURL } from "@/utils/utilities";
 const Card = ({
   id,
   name,
-  tags,
+  types,
   isOpen,
   howFar,
   photos,
@@ -26,6 +26,10 @@ const Card = ({
 }) => {
   let imageURL = photos[0];
   if (isGoogle) imageURL = giveMeGoogleImageURL(photos[0]);
+
+  const getType = (type) => {
+    return type.split('_').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')
+  }
 
   return (
     <TouchableWithoutFeedback
@@ -49,18 +53,18 @@ const Card = ({
         <CustomText text={name} bold className="text-lg" />
         <View className="flex-row items-center justify-between mt-[2px]">
           <View className="flex-row space-x-1">
-            {/* {tags.map((tag, index) => (
+             {types.map((tag, index) => (
               <View
                 key={`${id}-${tag}-${index}`}
                 className="flex-row items-center"
               >
                 <FontAwesome name="square" size={4} color="gray" />
                 <CustomText
-                  text={tag}
+                  text={getType(tag)}
                   className="text-gray-500 text-center px-1 text-xs"
                 />
               </View>
-            ))} */}
+            ))}
           </View>
           <View>
             <View className="items-end">
@@ -97,3 +101,5 @@ const Card = ({
 };
 
 export default Card;
+
+

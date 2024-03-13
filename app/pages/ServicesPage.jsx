@@ -88,7 +88,7 @@ const Explore = ({ services = [], navigation }) => {
               name={service.name}
               howFar="6.6 km"
               isOpen={true}
-              tags={service.tags}
+              types={service.types}
               photos={service.photos}
               navigation={navigation}
               isGoogle={false}
