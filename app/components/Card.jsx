@@ -32,16 +32,19 @@ const Card = ({
 
   return (
     <TouchableWithoutFeedback
-      className="border bg-white border-gray-200 pt-2 my-2 relative rounded-xl"
+      className="border bg-white border-gray-200 border-b-0 pt-2 my-2 relative rounded-xl"
       onPress={() => {
         navigation.navigate("service");
       }}
+    style={{
+      elevation: 2,
+    }}
     >
       {/* NAME AND TAGS */}
-      <View className="mb-1 px-[10px]">
-        <View className="flex-row justify-between items-start">
-          <View>
-            <CustomText text={name} bold className="text-xl" />
+      <View className="mb-1 px-[10px]" >
+        <View className="flex-row justify-between items-start" >
+          <View className="space-y-0.5" >
+            <CustomText text={name} bold className="text-lg" />
             <View>
               <View className="flex-row space-x-1">
                 {types.map((tag, index) => (
@@ -57,11 +60,11 @@ const Card = ({
                     </View>
                 ))}
               </View>
-
             </View>
           </View>
 
-          <View className="items-start">
+          {/* ICONS */}
+          <View className="items-start mt-0.5">
             <View className="items-end flex-row space-x-1">
               <View className="flex-row items-center space-x-1">
                 {isOpen ? (
@@ -72,12 +75,12 @@ const Card = ({
                 <CustomText
                     text={isOpen ? "Open" : "Closed"}
                     semibold
-                    className={cn(isOpen ? "text-[#16a085]" : "text-[#c0392b]", "text-[13px] text-center")}
+                    className={cn(isOpen ? "text-[#16a085]" : "text-[#c0392b]", "text-xs text-center")}
                 />
               </View>
               <View className="flex-row items-center space-x-0.5">
                 <SimpleLineIcons name="location-pin" size={15} color="gray" />
-                <CustomText text={howFar} className="text-[13px] text-gray-500" />
+                <CustomText text={howFar} className="text-xs text-gray-500" />
               </View>
             </View>
           </View>

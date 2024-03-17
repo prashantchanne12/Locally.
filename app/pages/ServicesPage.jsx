@@ -120,9 +120,9 @@ const Explore = ({ services = [], navigation }) => {
 
 const Essentials = () => {
   return (
-    <View>
-      <View>
-        <View className="border border-gray-300 p-3 rounded-xl">
+    <View >
+      <View >
+        <View className="border border-gray-300 p-3 rounded-xl" >
           <View className="flex-row justify-between items-center border-gray-300">
             <View className="items-center space-y-1">
               <Image
