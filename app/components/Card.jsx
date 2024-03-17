@@ -19,7 +19,6 @@ const Card = ({
   location,
   isGoogle,
   openingHours,
-  currentLocation
   }) => {
 
   const [isOpen, setIsOpen] = useState(null);
@@ -33,21 +32,11 @@ const Card = ({
 
   return (
     <TouchableWithoutFeedback
-      className="border bg-white border-gray-200 pt-2 my-4 relative rounded-xl"
+      className="border bg-white border-gray-200 pt-2 my-2 relative rounded-xl"
       onPress={() => {
         navigation.navigate("service");
       }}
     >
-      {/* ICONS */}
-      <View className="absolute z-10 flex-row -top-4 right-1 space-x-2 rounded-full">
-        <View className={`bg-[${PRIMARY}] rounded-full p-2`}>
-          <Ionicons name="call-outline" size={18} color="white" />
-        </View>
-        <View className={`bg-[${PRIMARY}] rounded-full p-2`}>
-          <MaterialCommunityIcons name="google-maps" size={18} color="white" />
-        </View>
-      </View>
-
       {/* NAME AND TAGS */}
       <View className="mb-1 px-[10px]">
         <CustomText text={name} bold className="text-xl" />

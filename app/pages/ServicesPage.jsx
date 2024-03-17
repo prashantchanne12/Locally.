@@ -108,7 +108,6 @@ const Explore = ({ services = [], navigation }) => {
               navigation={navigation}
               isGoogle={false}
               openingHours={service.opening_hours}
-              currentLocation={currentLocation}
             />
           ))
         ) : (
