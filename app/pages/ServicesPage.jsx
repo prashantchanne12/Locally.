@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import {Dimensions, Text, View} from "react-native";
 import React from "react";
 import { useState, useEffect } from "react";
 import {
@@ -14,16 +14,34 @@ import { Image } from "expo-image";
 import { PRIMARY } from "@/utils/constants";
 import { AntDesign, Octicons } from "@expo/vector-icons";
 import * as Location from "expo-location";
-import {calculateDistance, getCurrentLocation} from "@/utils/utilities";
+import {calculateDistance, cn, getCurrentLocation} from "@/utils/utilities";
 
-const images = {
-  milk: require("@/assets/images/milk.png"),
-  internet: require("@/assets/images/internet.png"),
-  electrician: require("@/assets/images/electrician.png"),
-  jim: require("@/assets/images/jim.png"),
-  carpenter: require("@/assets/images/carpenter.png"),
-  painter: require("@/assets/images/painter.png"),
-};
+const essentialItems = [
+  {
+    name: "Milk",
+    image: require("@/assets/images/milk.svg"),
+  },
+  {
+    name: "Internet",
+    image: require("@/assets/images/internet.svg"),
+  },
+  {
+    name: "Electrician",
+    image: require("@/assets/images/electrician.svg"),
+  },
+  {
+    name: "Gyms",
+    image: require("@/assets/images/jim.svg"),
+  },
+  {
+    name: "Carpenter",
+    image: require("@/assets/images/carpenter.svg"),
+  },
+  {
+    name: "Painter",
+    image: require("@/assets/images/painter.svg"),
+  }
+];
 
 const ServicesPage = ({ navigation }) => {
   const [services, setServices] = useState([]);
@@ -57,8 +75,8 @@ const ServicesPage = ({ navigation }) => {
           </View>
           <View className="flex-1"></View>
         </View>
-        <ScrollView className="bg-white h-full p-3">
-          <Essentials />
+        <ScrollView className="bg-white h-full px-3 ">
+          {/*<Essentials />*/}
           <Explore services={services} navigation={navigation} />
         </ScrollView>
       </SafeAreaView>
@@ -84,17 +102,15 @@ const Explore = ({ services = [], navigation }) => {
 
 
   return (
-    <View className="mt-2">
-      <View className="justify-between items-center flex-row">
-        <View className={`flex-1 h-[1px] bg-gray-200`} />
+    <View className="">
+      <View className="items-center flex-row">
         <CustomText
-          text="Explore Local"
-          className={`p-2 text-center text-[${PRIMARY}]`}
-          semibold
+          text="Nearby Services."
+          className={`p-2 text-center text-xl`}
+          bold
         />
-        <View className={`flex-1 h-[1px] bg-gray-200`} />
       </View>
-      <View className="mt-2 mb-32">
+      <View className="mb-32">
         {services.length ? (
           services.map((service) => (
             <Card
@@ -119,85 +135,31 @@ const Explore = ({ services = [], navigation }) => {
 };
 
 const Essentials = () => {
+  const width = Dimensions.get("window").width;
   return (
-    <View >
-      <View >
-        <View className="border border-gray-300 p-3 rounded-xl" >
-          <View className="flex-row justify-between items-center border-gray-300">
-            <View className="items-center space-y-1">
-              <Image
-                source={images.milk}
-                className="h-[73px] w-[75px] bg-cover"
-              />
-              <CustomText
-                text="Dhoodhwala"
-                semibold
-                className="text-gray-400 text-xs"
-              />
-            </View>
-            <View className="items-center space-y-1">
-              <Image
-                source={images.internet}
-                className="h-[75px] w-[75px] bg-cover"
-              />
-              <CustomText
-                text="Cable & Internet"
-                semibold
-                className="text-gray-400 text-xs"
-              />
-            </View>
-            <View className="items-center space-y-1">
-              <Image
-                source={images.electrician}
-                className="h-[75px] w-[75px] bg-cover"
-              />
-              <CustomText
-                text="Electricians"
-                semibold
-                className="text-gray-400 text-xs"
-              />
-            </View>
-          </View>
-          <View className="flex-row justify-between items-center mt-5">
-            <View className="space-y-1  items-center">
-              <Image
-                source={images.jim}
-                className="h-[73px] w-[73px] bg-cover"
-              />
-              <CustomText
-                text="Gyms"
-                semibold
-                className="text-gray-400 text-xs"
-              />
-            </View>
-            <View className="ml-[2px] items-center  space-y-1">
-              <Image
-                source={images.painter}
-                className="h-[78px] w-[78px] bg-cover"
-              />
-              <CustomText
-                text="Painters"
-                semibold
-                className="text-gray-400 text-xs"
-              />
-            </View>
-            <View className="items-center space-y-1">
-              <Image
-                source={images.carpenter}
-                className="h-[75px] w-[75px] bg-cover"
-              />
-              <CustomText
-                text="Carpenters"
-                semibold
-                className="text-gray-400 text-xs"
-              />
-            </View>
-          </View>
+      <View>
+        <View>
+          <CustomText
+              text="Essentials."
+              className={`p-2 text-[${PRIMARY}] text-base`}
+              bold
+          />
+        </View>
+        <View className="flex-row flex-wrap gap-3 items-center justify-center mt-0" >
+          {
+            essentialItems.map(item => (
+                <View
+                    key={item.name}
+                    className="py-4 px-2 border-0"
+                    style={{
+                      width: 150,
+                      elevation: 0.5,
+                    }}>
+                  <CustomText text={item.name} semibold className="text-center text-base"/>
+                </View>
+            ))
+          }
         </View>
       </View>
-      <View className="mt-2 flex-row justify-center">
-        <AntDesign name="downcircle" size={25} color={PRIMARY} />
-      </View>
-    </View>
   );
 };
