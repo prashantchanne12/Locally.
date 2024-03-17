@@ -13,6 +13,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { PRIMARY } from "@/utils/constants";
 import { AntDesign, Octicons } from "@expo/vector-icons";
+import * as Location from "expo-location";
+import {calculateDistance, getCurrentLocation} from "@/utils/utilities";
 
 const images = {
   milk: require("@/assets/images/milk.png"),
@@ -25,7 +27,6 @@ const images = {
 
 const ServicesPage = ({ navigation }) => {
   const [services, setServices] = useState([]);
-
   useEffect(() => {
     const fethData = async () => {
       let { data: Services, error } = await supabase
@@ -57,7 +58,7 @@ const ServicesPage = ({ navigation }) => {
           <View className="flex-1"></View>
         </View>
         <ScrollView className="bg-white h-full p-3">
-          <Esssentials />
+          <Essentials />
           <Explore services={services} navigation={navigation} />
         </ScrollView>
       </SafeAreaView>
@@ -68,6 +69,20 @@ const ServicesPage = ({ navigation }) => {
 export default ServicesPage;
 
 const Explore = ({ services = [], navigation }) => {
+
+  const [currentLocation, setCurrentLocation] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      const location = await getCurrentLocation();
+      setCurrentLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude
+      });
+    })();
+  }, []);
+
+
   return (
     <View className="mt-2">
       <View className="justify-between items-center flex-row">
@@ -86,13 +101,14 @@ const Explore = ({ services = [], navigation }) => {
               key={service.id}
               id={service.id}
               name={service.name}
-              howFar="6.6 km"
+              howFar={calculateDistance(currentLocation, service.location)}
               isOpen={true}
               types={service.types}
               photos={service.photos}
               navigation={navigation}
               isGoogle={false}
               openingHours={service.opening_hours}
+              currentLocation={currentLocation}
             />
           ))
         ) : (
@@ -103,7 +119,7 @@ const Explore = ({ services = [], navigation }) => {
   );
 };
 
-const Esssentials = () => {
+const Essentials = () => {
   return (
     <View>
       <View>

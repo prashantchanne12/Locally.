@@ -6,6 +6,7 @@ import {PRIMARY} from "@/utils/constants";
 import {Image} from "expo-image";
 import {TouchableWithoutFeedback} from "react-native-gesture-handler";
 import {cn, giveMeGoogleImageURL} from "@/utils/utilities";
+import * as Location from "expo-location";
 
 const Card = ({
   id,
@@ -17,7 +18,8 @@ const Card = ({
   phoneNumber,
   location,
   isGoogle,
-  openingHours
+  openingHours,
+  currentLocation
   }) => {
 
   const [isOpen, setIsOpen] = useState(null);
