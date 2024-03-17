@@ -7,7 +7,7 @@ import {Image} from "expo-image";
 import {TouchableWithoutFeedback} from "react-native-gesture-handler";
 import {cn, giveMeGoogleImageURL} from "@/utils/utilities";
 import * as Location from "expo-location";
-
+import { SimpleLineIcons } from '@expo/vector-icons';
 const Card = ({
   id,
   name,
@@ -39,38 +39,45 @@ const Card = ({
     >
       {/* NAME AND TAGS */}
       <View className="mb-1 px-[10px]">
-        <CustomText text={name} bold className="text-xl" />
-        <View className="flex-row items-center justify-between mt-[2px]">
-          <View className="flex-row space-x-1">
-             {types.map((tag, index) => (
-              <View
-                key={`${id}-${tag}-${index}`}
-                className="flex-row items-center"
-              >
-                <FontAwesome name="square" size={4} color="gray" />
-                <CustomText
-                  text={getType(tag)}
-                  className="text-gray-500 text-center px-1 text-xs"
-                />
-              </View>
-            ))}
-          </View>
+        <View className="flex-row justify-between items-start">
           <View>
-            <View className="items-end">
-              <View className="flex-row  items-center space-x-1">
+            <CustomText text={name} bold className="text-xl" />
+            <View>
+              <View className="flex-row space-x-1">
+                {types.map((tag, index) => (
+                    <View
+                        key={`${id}-${tag}-${index}`}
+                        className="flex-row items-center"
+                    >
+                      <FontAwesome name="square" size={4} color="gray" />
+                      <CustomText
+                          text={getType(tag)}
+                          className="text-gray-500 text-center px-1 text-xs"
+                      />
+                    </View>
+                ))}
+              </View>
+
+            </View>
+          </View>
+
+          <View className="items-start">
+            <View className="items-end flex-row space-x-1">
+              <View className="flex-row items-center space-x-1">
                 {isOpen ? (
-                  <AntDesign name="checkcircle" size={12} color="#16a085" />
+                    <AntDesign name="checkcircle" size={12} color="#16a085" />
                 ) : (
-                  <AntDesign name="closecircle" size={12} color="#c0392b" />
+                    <AntDesign name="closecircle" size={12} color="#c0392b" />
                 )}
                 <CustomText
-                  text={isOpen ? "Open" : "Closed"}
-                  semibold
-                  className={cn(isOpen ? "text-[#16a085]" : "text-[#c0392b]", "text-[13px] text-center")}
+                    text={isOpen ? "Open" : "Closed"}
+                    semibold
+                    className={cn(isOpen ? "text-[#16a085]" : "text-[#c0392b]", "text-[13px] text-center")}
                 />
-                <View>
-                  <CustomText text={howFar} className="text-xs text-gray-500" />
-                </View>
+              </View>
+              <View className="flex-row items-center space-x-0.5">
+                <SimpleLineIcons name="location-pin" size={15} color="gray" />
+                <CustomText text={howFar} className="text-[13px] text-gray-500" />
               </View>
             </View>
           </View>
@@ -78,9 +85,9 @@ const Card = ({
       </View>
 
       {/* IMAGE */}
-      <View className="mt-[10px] relative">
+      <View className="mt-[5px] relative">
         <Image
-          className="w-full h-48 bg-cover rounded-tl rounded-tr rounded-bl-xl rounded-br-xl"
+          className="w-full h-48 bg-cover rounded-bl-xl rounded-br-xl"
           contentFit="cover"
           source={imageURL}
         />
