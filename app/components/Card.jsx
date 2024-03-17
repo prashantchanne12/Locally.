@@ -1,35 +1,92 @@
-import { Text, View } from "react-native";
-import React from "react";
+import {View} from "react-native";
+import React, {useEffect, useState} from "react";
 import CustomText from "./CustomText";
-import {
-  AntDesign,
-  FontAwesome,
-  Ionicons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import { PRIMARY } from "@/utils/constants";
-import { Image } from "expo-image";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { giveMeGoogleImageURL } from "@/utils/utilities";
+import {AntDesign, FontAwesome, Ionicons, MaterialCommunityIcons,} from "@expo/vector-icons";
+import {PRIMARY} from "@/utils/constants";
+import {Image} from "expo-image";
+import {TouchableWithoutFeedback} from "react-native-gesture-handler";
+import {cn, giveMeGoogleImageURL} from "@/utils/utilities";
 
 const Card = ({
   id,
   name,
   types,
-  isOpen,
   howFar,
   photos,
   navigation,
   phoneNumber,
   location,
   isGoogle,
-}) => {
+  openingHours
+  }) => {
   let imageURL = photos[0];
   if (isGoogle) imageURL = giveMeGoogleImageURL(photos[0]);
+
+  const [isOpen, setIsOpen] = useState(null)
 
   const getType = (type) => {
     return type.split('_').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')
   }
+
+  const isOpenDuringTime = (schedule, time) => {
+    // Convert time strings to minutes
+    const parseTime = (timeString) => {
+      const [hours, minutes] = timeString.split(':').map(part => parseInt(part));
+      return hours * 60 + minutes;
+    };
+
+    const parse12HourTime = (timeString) => {
+      const [time, period] = timeString.split(' ');
+      const [hours, minutes] = time.split(':').map(part => parseInt(part));
+      const totalMinutes = hours * 60 + minutes;
+      if (period.toLowerCase() === 'pm' && hours !== 12) {
+        return totalMinutes + 12 * 60; // add 12 hours for PM times except 12 PM
+      }
+      return totalMinutes;
+    };
+
+    const openTime = parse12HourTime(schedule.open);
+    const closeTime = parse12HourTime(schedule.close);
+    const targetTime = parse12HourTime(time);
+
+    // Check if target time is between open and close times
+    return targetTime >= openTime && targetTime <= closeTime;
+  }
+
+  const getCurrentTime = () => {
+    const now = new Date(); // Get the current date and time
+    let hours = now.getHours(); // Get the current hour (0-23)
+    let minutes = now.getMinutes(); // Get the current minute (0-59)
+    const ampm = hours >= 12 ? 'pm' : 'am'; // Determine AM or PM
+
+    // Convert to 12-hour format
+    hours = hours % 12;
+    hours = hours ? hours : 12; // Handle 0 as 12 PM
+
+    // Pad minutes with leading zero if needed
+    minutes = minutes.toString().padStart(2, '0');
+
+    // Format the time string
+    return `${hours}:${minutes} ${ampm}`;
+  }
+
+  const isServiceOpen = (openingHours) => {
+    let day = new Date();
+    day = day.getDay() - 1;
+    let currentWorkingHours = null;
+    if (day < 0){
+      currentWorkingHours = openingHours[openingHours.length - 1]
+    }else{
+      currentWorkingHours = openingHours[day]
+    }
+
+    if (currentWorkingHours.isClosed) return false
+    return  isOpenDuringTime(currentWorkingHours, getCurrentTime())
+  }
+
+  useEffect(() => {
+    setIsOpen(isServiceOpen(openingHours));
+  }, []);
 
   return (
     <TouchableWithoutFeedback
@@ -50,7 +107,7 @@ const Card = ({
 
       {/* NAME AND TAGS */}
       <View className="mb-1 px-[10px]">
-        <CustomText text={name} bold className="text-lg" />
+        <CustomText text={name} bold className="text-xl" />
         <View className="flex-row items-center justify-between mt-[2px]">
           <View className="flex-row space-x-1">
              {types.map((tag, index) => (
@@ -77,7 +134,7 @@ const Card = ({
                 <CustomText
                   text={isOpen ? "Open" : "Closed"}
                   semibold
-                  className="text-[13px] text-[#16a085] text-center"
+                  className={cn(isOpen ? "text-[#16a085]" : "text-[#c0392b]", "text-[13px] text-center")}
                 />
                 <View>
                   <CustomText text={howFar} className="text-xs text-gray-500" />

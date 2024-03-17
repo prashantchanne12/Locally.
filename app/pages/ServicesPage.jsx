@@ -92,6 +92,7 @@ const Explore = ({ services = [], navigation }) => {
               photos={service.photos}
               navigation={navigation}
               isGoogle={false}
+              openingHours={service.opening_hours}
             />
           ))
         ) : (
