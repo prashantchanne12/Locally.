@@ -40,7 +40,7 @@ const ServicesPage = ({ navigation }) => {
           </View>
           <View className="flex-1"></View>
         </View>
-        <ScrollView className="bg-[#fbfbfb] h-full px-3 ">
+        <ScrollView className="bg-[#fcfcfc] h-full px-3 ">
           <Essentials />
           <Explore services={services} navigation={navigation} />
         </ScrollView>
@@ -67,7 +67,7 @@ const Explore = ({ services = [], navigation }) => {
 
 
   return (
-    <View className="mt-2">
+    <View className="mt-1.5">
       <View className="items-center flex-row">
         <CustomText
           text="Nearby Services."
@@ -103,7 +103,7 @@ const Explore = ({ services = [], navigation }) => {
 const Essentials = () => {
   const width = Dimensions.get("window").width;
   return (
-      <View className="mt-4">
+      <View className="mt-3.5">
         {/*<View>*/}
         {/*  <CustomText*/}
         {/*      text="Essentials."*/}
