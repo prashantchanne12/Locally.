@@ -32,7 +32,7 @@ const Card = ({
 
   return (
     <TouchableWithoutFeedback
-      className="border bg-white border-gray-200 border-b-0 pt-2 my-2 mx-1 relative rounded-xl"
+      className="border bg-white border-gray-200 border-b-0 pt-2 my-2  relative rounded-xl"
       onPress={() => {
         navigation.navigate("service");
       }}

@@ -33,14 +33,14 @@ const ServicesPage = ({ navigation }) => {
     <GestureHandlerRootView>
       <StatusBar style="light" backgroundColor="black" />
       <SafeAreaView>
-        <View className={cn("pt-2 pb-1.5 pl-5 border-b border-gray-200  bg-gray-50")} style={{elevation: 5,}}>
+        <View className={cn("pt-2 pb-1.5 pl-5 border-b border-gray-200 bg-white")} style={{elevation: 5,}}>
           <View className="">
             {/*<CustomText text="Locally." bold className="text-2xl items-center " />*/}
             <Text className="font-['beba'] text-3xl">Locally.</Text>
           </View>
           <View className="flex-1"></View>
         </View>
-        <ScrollView className="bg-white h-full px-3 ">
+        <ScrollView className="bg-[#fbfbfb] h-full px-3 ">
           <Essentials />
           <Explore services={services} navigation={navigation} />
         </ScrollView>
@@ -74,6 +74,7 @@ const Explore = ({ services = [], navigation }) => {
           className={`pt-2 pl-2 text-center text-lg`}
           bold
         />
+        {/*<Text className={`pt-2 pl-2 text-center font-['beba'] text-[25px]`}>Nearby</Text>*/}
       </View>
       <View className="mb-32">
         {services.length ? (
@@ -115,19 +116,19 @@ const Essentials = () => {
             showsHorizontalScrollIndicator={false}
         >
           <View className="flex-row gap-2.5 pl-2" >
-            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px]">
+            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px] bg-white">
               <MaterialIcons name="local-drink" size={48} color="#0984e3" />
               <CustomText text="Dhoodhwala" className="text-xs pt-1 text-gray-500" semibold />
             </View>
-            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px]">
+            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px] bg-white">
               <FontAwesome name="wifi" size={47} color="#00b894" />
               <CustomText text="Internet" className="text-xs pt-1 text-gray-500" semibold  />
             </View>
-            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px]">
+            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px] bg-white">
               <MaterialCommunityIcons name="weight-lifter" size={48} color="#d63031" />
               <CustomText text="Gyms" className="text-xs pt-0.5 text-gray-500" semibold  />
             </View>
-            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px]">
+            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px] bg-white">
               <MaterialCommunityIcons name="lightning-bolt" size={48} color="#f1c40f" />
               <CustomText text="Electrician" className="text-xs pt-0.5 text-gray-500"  semibold />
             </View>
