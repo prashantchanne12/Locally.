@@ -36,6 +36,7 @@ export default function App() {
     robo: require("./assets/fonts/RobotoSlab-Regular.ttf"),
     "robo-b": require("./assets/fonts/RobotoSlab-Bold.ttf"),
     "robo-sb": require("./assets/fonts/RobotoSlab-SemiBold.ttf"),
+    "beba": require("./assets/fonts/BebasNeue-Regular.ttf"),
   });
 
   useEffect(() => {

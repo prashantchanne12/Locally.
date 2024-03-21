@@ -10,38 +10,11 @@ import { supabase } from "@/utils/supabase";
 import Card from "../components/Card";
 import CustomText from "../components/CustomText";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Image } from "expo-image";
-import { PRIMARY } from "@/utils/constants";
-import { AntDesign, Octicons } from "@expo/vector-icons";
+import {AntDesign, FontAwesome, Octicons} from "@expo/vector-icons";
 import * as Location from "expo-location";
 import {calculateDistance, cn, getCurrentLocation} from "@/utils/utilities";
-
-const essentialItems = [
-  {
-    name: "Milk",
-    image: require("@/assets/images/milk.svg"),
-  },
-  {
-    name: "Internet",
-    image: require("@/assets/images/internet.svg"),
-  },
-  {
-    name: "Electrician",
-    image: require("@/assets/images/electrician.svg"),
-  },
-  {
-    name: "Gyms",
-    image: require("@/assets/images/jim.svg"),
-  },
-  {
-    name: "Carpenter",
-    image: require("@/assets/images/carpenter.svg"),
-  },
-  {
-    name: "Painter",
-    image: require("@/assets/images/painter.svg"),
-  }
-];
+import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const ServicesPage = ({ navigation }) => {
   const [services, setServices] = useState([]);
@@ -58,25 +31,17 @@ const ServicesPage = ({ navigation }) => {
 
   return (
     <GestureHandlerRootView>
-      <StatusBar style="dark" />
+      <StatusBar style="light" backgroundColor="black" />
       <SafeAreaView>
-        <View className="py-2  flex-row items-center border-b border-gray-100 justify-between bg-white ">
-          <View className="flex-1 ml-4">
-            <Octicons name="three-bars" size={22} color={PRIMARY} />
-          </View>
-          <View
-            className={`bg-[${PRIMARY}] -ml-4 w-10 justify-center items-center rounded-md py-1 px-2`}
-          >
-            <CustomText
-              text="L"
-              className="text-2xl text-center text-white"
-              semibold
-            />
+        <View className={cn("pt-2 pb-1.5 pl-5 border-b border-gray-200  bg-gray-50")} style={{elevation: 5,}}>
+          <View className="">
+            {/*<CustomText text="Locally." bold className="text-2xl items-center " />*/}
+            <Text className="font-['beba'] text-3xl">Locally.</Text>
           </View>
           <View className="flex-1"></View>
         </View>
         <ScrollView className="bg-white h-full px-3 ">
-          {/*<Essentials />*/}
+          <Essentials />
           <Explore services={services} navigation={navigation} />
         </ScrollView>
       </SafeAreaView>
@@ -102,11 +67,11 @@ const Explore = ({ services = [], navigation }) => {
 
 
   return (
-    <View className="">
+    <View className="mt-2">
       <View className="items-center flex-row">
         <CustomText
           text="Nearby Services."
-          className={`p-2 text-center text-xl`}
+          className={`pt-2 pl-2 text-center text-lg`}
           bold
         />
       </View>
@@ -137,29 +102,38 @@ const Explore = ({ services = [], navigation }) => {
 const Essentials = () => {
   const width = Dimensions.get("window").width;
   return (
-      <View>
-        <View>
-          <CustomText
-              text="Essentials."
-              className={`p-2 text-[${PRIMARY}] text-base`}
-              bold
-          />
-        </View>
-        <View className="flex-row flex-wrap gap-3 items-center justify-center mt-0" >
-          {
-            essentialItems.map(item => (
-                <View
-                    key={item.name}
-                    className="py-4 px-2 border-0"
-                    style={{
-                      width: 150,
-                      elevation: 0.5,
-                    }}>
-                  <CustomText text={item.name} semibold className="text-center text-base"/>
-                </View>
-            ))
-          }
-        </View>
+      <View className="mt-4">
+        {/*<View>*/}
+        {/*  <CustomText*/}
+        {/*      text="Essentials."*/}
+        {/*      className={`p-2 text-lg`}*/}
+        {/*      bold*/}
+        {/*  />*/}
+        {/*</View>*/}
+        <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+        >
+          <View className="flex-row gap-2.5 pl-2" >
+            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px]">
+              <MaterialIcons name="local-drink" size={48} color="#0984e3" />
+              <CustomText text="Dhoodhwala" className="text-xs pt-1 text-gray-500" semibold />
+            </View>
+            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px]">
+              <FontAwesome name="wifi" size={47} color="#00b894" />
+              <CustomText text="Internet" className="text-xs pt-1 text-gray-500" semibold  />
+            </View>
+            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px]">
+              <MaterialCommunityIcons name="weight-lifter" size={48} color="#d63031" />
+              <CustomText text="Gyms" className="text-xs pt-0.5 text-gray-500" semibold  />
+            </View>
+            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px]">
+              <MaterialCommunityIcons name="lightning-bolt" size={48} color="#f1c40f" />
+              <CustomText text="Electrician" className="text-xs pt-0.5 text-gray-500"  semibold />
+            </View>
+            {/*<MaterialIcons name="carpenter" size={24} color="black" />*/}
+          </View>
+        </ScrollView>
       </View>
   );
 };
