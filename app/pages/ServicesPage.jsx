@@ -15,6 +15,7 @@ import * as Location from "expo-location";
 import {calculateDistance, cn, getCurrentLocation} from "@/utils/utilities";
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Header from "@/app/components/Header";
 
 const ServicesPage = ({ navigation }) => {
   const [services, setServices] = useState([]);
@@ -33,13 +34,7 @@ const ServicesPage = ({ navigation }) => {
     <GestureHandlerRootView>
       <StatusBar style="light" backgroundColor="black" />
       <SafeAreaView>
-        <View className={cn("pt-2 pb-1.5 pl-5 border-b border-gray-200 bg-white")} style={{elevation: 5}}>
-          <View className="" >
-            {/*<CustomText text="Locally." bold className="text-2xl items-center " />*/}
-            <Text className="font-['beba'] text-3xl">Locally.</Text>
-          </View>
-          <View className="flex-1"></View>
-        </View>
+        <Header title="Locally." />
         <ScrollView className="bg-[#fcfcfc] h-full px-3 ">
           <Essentials navigation={navigation} />
           <Explore services={services} navigation={navigation} />
@@ -110,7 +105,7 @@ const Essentials = ({navigation}) => {
         >
           <View className="flex-row gap-2.5 pl-2 py-1" >
             <TouchableOpacity
-                onPress={() => {navigation.push("essential")}}
+                onPress={() => {navigation.push("essential", {title: "Doodhwalas"})}}
                 className="items-center justify-center p-3  rounded-lg w-[100px] h-[100px] bg-white"
                 style={{elevation: 2,}}>
               <MaterialIcons name="local-drink" size={48} color="#0984e3"/>
