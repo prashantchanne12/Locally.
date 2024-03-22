@@ -7,15 +7,12 @@ import {GestureHandlerRootView, ScrollView} from "react-native-gesture-handler";
 import CustomText from "@/app/components/CustomText";
 import {AntDesign, FontAwesome6, SimpleLineIcons} from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import {cn} from "@/utils/utilities";
+import {calculateDistance, cn, isServiceOpen} from "@/utils/utilities";
 import {useLocationContext} from "@/app/contexts/LocationContext";
 
 const EssentialsPage = ({route, navigation}) => {
     const {title} = route.params;
     const [essentials, setEssentials] = useState([]);
-    const { state, dispatch } = useLocationContext();
-
-    console.log(state);
 
     useEffect(() => {
         const fethData = async () => {
@@ -51,9 +48,14 @@ const EssentialsPage = ({route, navigation}) => {
 }
 
 const EssentialCard = ({item}) => {
-    const isOpen=true;
-    const howFar = "100m";
-   return (
+    const { state, dispatch } = useLocationContext();
+    const [isOpen, setIsOpen] = useState(null);
+
+    useEffect(() => {
+        setIsOpen(isServiceOpen(item.opening_hours));
+    }, []);
+
+    return (
        <View className="h-auto">
            <View className="px-3.5 pb-3 pt-1.5 border rounded-lg border-gray-300 relative">
                <View className="flex-row justify-between">
@@ -76,7 +78,7 @@ const EssentialCard = ({item}) => {
                            </View>
                            <View className="flex-row items-center space-x-0.5">
                                <SimpleLineIcons name="location-pin" size={15} color="gray" />
-                               <CustomText text={howFar} className="text-xs text-gray-500" />
+                               <CustomText text={calculateDistance(state.currentLocation, item.location)} className="text-xs text-gray-500" />
                            </View>
                        </View>
                    </View>
