@@ -10,6 +10,7 @@ import { useFonts } from "expo-font";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useEffect } from "react";
 import Signin from "./app/pages/Signin";
+import {LocationProvider} from '@/app/contexts/LocationContext';
 
 const Stack = createStackNavigator();
 
@@ -48,7 +49,9 @@ export default function App() {
   }, []);
 
   return (
-    <HomePage />
+      <LocationProvider>
+        <HomePage />
+      </LocationProvider>
     // <NavigationContainer>
     //   <Stack.Navigator
     //     screenOptions={{

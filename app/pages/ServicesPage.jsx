@@ -16,9 +16,12 @@ import {calculateDistance, cn, getCurrentLocation} from "@/utils/utilities";
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Header from "@/app/components/Header";
+import { useLocationContext } from '@/app/contexts/LocationContext';
 
 const ServicesPage = ({ navigation }) => {
   const [services, setServices] = useState([]);
+  const { state, dispatch } = useLocationContext();
+
   useEffect(() => {
     const fethData = async () => {
       let { data: Services, error } = await supabase
@@ -37,7 +40,7 @@ const ServicesPage = ({ navigation }) => {
         <Header title="Locally." />
         <ScrollView className="bg-[#fcfcfc] h-full px-3 ">
           <Essentials navigation={navigation} />
-          <Explore services={services} navigation={navigation} />
+          <Explore services={services} navigation={navigation} dispatch={dispatch} />
         </ScrollView>
       </SafeAreaView>
     </GestureHandlerRootView>
@@ -46,17 +49,19 @@ const ServicesPage = ({ navigation }) => {
 
 export default ServicesPage;
 
-const Explore = ({ services = [], navigation }) => {
+const Explore = ({ services = [], navigation, dispatch}) => {
 
   const [currentLocation, setCurrentLocation] = useState({});
 
   useEffect(() => {
     (async () => {
       const location = await getCurrentLocation();
-      setCurrentLocation({
+      const newLocation = {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude
-      });
+      }
+      setCurrentLocation(newLocation);
+      dispatch({type: "ADD_LOCATION", payload: newLocation});
     })();
   }, []);
 
@@ -105,7 +110,7 @@ const Essentials = ({navigation}) => {
         >
           <View className="flex-row gap-2.5 pl-2 py-1" >
             <TouchableOpacity
-                onPress={() => {navigation.push("essential", {title: "Doodhwalas"})}}
+                onPress={() => {navigation.push("essential", {title: "Doodhwala"})}}
                 className="items-center justify-center p-3  rounded-lg w-[100px] h-[100px] bg-white"
                 style={{elevation: 2,}}>
               <MaterialIcons name="local-drink" size={48} color="#0984e3"/>
