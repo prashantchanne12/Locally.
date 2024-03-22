@@ -1,0 +1,12 @@
+import {Text, View} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+const EssentialsPage = () => {
+    return (
+        <SafeAreaView>
+            <Text>Hello world</Text>
+        </SafeAreaView>
+    )
+}
+
+export default EssentialsPage;

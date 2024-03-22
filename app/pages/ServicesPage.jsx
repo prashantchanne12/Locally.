@@ -1,4 +1,4 @@
-import {Dimensions, Text, View} from "react-native";
+import {Dimensions, Text, TouchableOpacity, View} from "react-native";
 import React from "react";
 import { useState, useEffect } from "react";
 import {
@@ -33,15 +33,15 @@ const ServicesPage = ({ navigation }) => {
     <GestureHandlerRootView>
       <StatusBar style="light" backgroundColor="black" />
       <SafeAreaView>
-        <View className={cn("pt-2 pb-1.5 pl-5 border-b border-gray-200 bg-white")} style={{elevation: 5,}}>
-          <View className="">
+        <View className={cn("pt-2 pb-1.5 pl-5 border-b border-gray-200 bg-white")} style={{elevation: 5}}>
+          <View className="" >
             {/*<CustomText text="Locally." bold className="text-2xl items-center " />*/}
             <Text className="font-['beba'] text-3xl">Locally.</Text>
           </View>
           <View className="flex-1"></View>
         </View>
         <ScrollView className="bg-[#fcfcfc] h-full px-3 ">
-          <Essentials />
+          <Essentials navigation={navigation} />
           <Explore services={services} navigation={navigation} />
         </ScrollView>
       </SafeAreaView>
@@ -67,7 +67,7 @@ const Explore = ({ services = [], navigation }) => {
 
 
   return (
-    <View className="mt-1.5">
+    <View className="mt-3">
       <View className="items-center flex-row">
         <CustomText
           text="Nearby Services."
@@ -100,35 +100,31 @@ const Explore = ({ services = [], navigation }) => {
   );
 };
 
-const Essentials = () => {
+const Essentials = ({navigation}) => {
   const width = Dimensions.get("window").width;
   return (
       <View className="mt-3.5">
-        {/*<View>*/}
-        {/*  <CustomText*/}
-        {/*      text="Essentials."*/}
-        {/*      className={`p-2 text-lg`}*/}
-        {/*      bold*/}
-        {/*  />*/}
-        {/*</View>*/}
         <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
         >
-          <View className="flex-row gap-2.5 pl-2" >
-            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px] bg-white">
-              <MaterialIcons name="local-drink" size={48} color="#0984e3" />
-              <CustomText text="Dhoodhwala" className="text-xs pt-1 text-gray-500" semibold />
-            </View>
-            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px] bg-white">
+          <View className="flex-row gap-2.5 pl-2 py-1" >
+            <TouchableOpacity
+                onPress={() => {navigation.push("essential")}}
+                className="items-center justify-center p-3  rounded-lg w-[100px] h-[100px] bg-white"
+                style={{elevation: 2,}}>
+              <MaterialIcons name="local-drink" size={48} color="#0984e3"/>
+              <CustomText text="Dhoodhwala" className="text-xs pt-[6px] text-gray-500" semibold/>
+            </TouchableOpacity>
+            <View className="items-center justify-center p-3 rounded-lg w-[100px] h-[100px] bg-white" style={{elevation: 2,}}>
               <FontAwesome name="wifi" size={47} color="#00b894" />
               <CustomText text="Internet" className="text-xs pt-1 text-gray-500" semibold  />
             </View>
-            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px] bg-white">
+            <View className="items-center justify-center p-3 rounded-lg  w-[100px] h-[100px] bg-white" style={{elevation: 2,}}>
               <MaterialCommunityIcons name="weight-lifter" size={48} color="#d63031" />
               <CustomText text="Gyms" className="text-xs pt-0.5 text-gray-500" semibold  />
             </View>
-            <View className="items-center justify-center p-3 pb-1.5 rounded-lg border border-gray-200 w-[100px] bg-white">
+            <View className="items-center justify-center p-3 rounded-lg w-[100px] h-[100px] bg-white" style={{elevation: 2,}}>
               <MaterialCommunityIcons name="lightning-bolt" size={48} color="#f1c40f" />
               <CustomText text="Electrician" className="text-xs pt-0.5 text-gray-500"  semibold />
             </View>
