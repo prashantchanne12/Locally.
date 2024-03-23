@@ -34,10 +34,9 @@ const getHeaderStyles = () => {
 
 export default function App() {
   const [loaded, error] = useFonts({
-    robo: require("./assets/fonts/RobotoSlab-Regular.ttf"),
-    "robo-b": require("./assets/fonts/RobotoSlab-Bold.ttf"),
-    "robo-sb": require("./assets/fonts/RobotoSlab-SemiBold.ttf"),
-    "beba": require("./assets/fonts/BebasNeue-Regular.ttf"),
+    product: require("./assets/fonts/ProductSans-Regular.ttf"),
+    "product-sb": require("./assets/fonts/ProductSans-Medium.ttf"),
+    "product-b": require("./assets/fonts/ProductSans-Bold.ttf"),
   });
 
   useEffect(() => {

@@ -30,7 +30,7 @@ const EssentialsPage = ({route, navigation}) => {
     return (
         <GestureHandlerRootView>
             <SafeAreaView>
-                <Header title={title+'s'} goBack={true} goBackOnClick={() => navigation.goBack()}/>
+                <Header small title={title+'s'} goBack={true} goBackOnClick={() => navigation.goBack()}/>
                 <ScrollView className="bg-[#fcfcfc] h-full px-3 ">
                     <View className="mt-3">
                         {
@@ -105,7 +105,7 @@ const EssentialCard = ({item, navigation}) => {
                         <TouchableOpacity>
                             <FontAwesome6 name="whatsapp" size={22} color="#00b894" />
                         </TouchableOpacity>
-                       <TouchableOpacity onPress={() => {navigation.push("essentialDetails")}}>
+                       <TouchableOpacity onPress={() => {navigation.push("essentialDetails", {item})}}>
                            <CustomText text="More details" semibold className="text-gray-600 text-xs" />
                        </TouchableOpacity>
                </View>

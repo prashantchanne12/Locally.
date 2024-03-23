@@ -6,10 +6,10 @@ const CustomText = (props: any) => {
     <Text
       className={`${
         props.bold
-          ? "font-['robo-b']"
+          ? "font-['product-b']"
           : props.semibold
-          ? "font-['robo-sb']"
-          : "font-['robo']"
+          ? "font-['product-sb']"
+          : "font-['product']"
       } ${props.primary ? `text-[#2c3e50]` : ""}`}
       style={props.style}
     >
