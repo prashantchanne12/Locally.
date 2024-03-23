@@ -35,7 +35,8 @@ const EssentialsPage = ({route, navigation}) => {
                     <View className="mt-3">
                         {
                             essentials.length ?
-                                essentials.map(essential => (<EssentialCard  key={essential.id} item={essential}/>)) :
+                                essentials.map(essential => (
+                                    <EssentialCard key={essential.id} item={essential} navigation={navigation}/>)) :
                                 <View>
                                     <CustomText text="Loading..."/>
                                 </View>
@@ -47,7 +48,7 @@ const EssentialsPage = ({route, navigation}) => {
     )
 }
 
-const EssentialCard = ({item}) => {
+const EssentialCard = ({item, navigation}) => {
     const { state, dispatch } = useLocationContext();
     const [isOpen, setIsOpen] = useState(null);
 
@@ -92,10 +93,6 @@ const EssentialCard = ({item}) => {
                        <CustomText text="Monthly: " className="text-xs" />
                        <CustomText text={"₹"+item.average_price[0]} bold className=""/>
                    </View>
-                   {/*<View className="flex-row items-center">*/}
-                   {/*    <CustomText text="6 Months: " className="text-xs" />*/}
-                   {/*    <CustomText text={"₹"+item.average_price[1]} bold className="text-[14px] text-green-800"/>*/}
-                   {/*</View>*/}
                    <View className="flex-row items-center">
                        <CustomText text="Annually: " className="text-xs"/>
                        <CustomText text={"₹"+item.average_price[2]} bold className=""/>
@@ -108,7 +105,7 @@ const EssentialCard = ({item}) => {
                         <TouchableOpacity>
                             <FontAwesome6 name="whatsapp" size={22} color="#00b894" />
                         </TouchableOpacity>
-                       <TouchableOpacity>
+                       <TouchableOpacity onPress={() => {navigation.push("essentialDetails")}}>
                            <CustomText text="More details" semibold className="text-gray-600 text-xs" />
                        </TouchableOpacity>
                </View>
