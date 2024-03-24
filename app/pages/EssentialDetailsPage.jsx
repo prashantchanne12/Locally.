@@ -4,30 +4,20 @@ import Header from "@/app/components/Header";
 import {GestureHandlerRootView, ScrollView} from "react-native-gesture-handler";
 import React from "react";
 import {AntDesign, SimpleLineIcons} from "@expo/vector-icons";
-import {calculateDistance, cn, getType} from "@/utils/utilities";
+import {cn, getType, handleCall, handleWhatsApp} from "@/utils/utilities";
 import PagerView from 'react-native-pager-view';
-import {StyleSheet, View, Text, TouchableOpacity, Touchable, TouchableHighlight} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Linking} from 'react-native';
 import {Image} from "expo-image";
-import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
 const EssentialDetailsPage = ({route, navigation}) => {
     const {item} = route.params;
-    const isOpen = true;
-    const howFar = "100m"
+    const isOpen = item.isOpen;
 
-    const actions = [
-        {
-            text: "Accessibility",
-            icon: <FontAwesome name="whatsapp" size={24} color="black" />,
-            name: "bt_accessibility",
-            position: 1
-        },
-    ];
     return (
         <GestureHandlerRootView>
             <SafeAreaView>
-                <Header title={item.name} goBack={true} goBackOnClick={() => {navigation.goBack()}} />
+                <Header small title={item.name} goBack={true} goBackOnClick={() => {navigation.goBack()}} />
                 <View>
                     <ScrollView className="bg-white h-full relative px-0.5">
                         <View className="mt-3.5 px-3.5">
@@ -41,8 +31,9 @@ const EssentialDetailsPage = ({route, navigation}) => {
                                 </View>
                                 <View className={"mt-1"}>
                                     <View className={"mt-0"}>
-                                        <View className="flex-row">
-                                            <CustomText text={"Home delivery"} semibold className="text-gray-600 pt-0.5" />
+                                        <View>
+                                            <CustomText text={"Home delivery"} semibold
+                                                        className="text-gray-600 pt-0.5 text-right"/>
                                         </View>
                                     </View>
                                     <View className="items-end justify-end flex-row space-x-1 mt-[3px] ">
@@ -60,7 +51,7 @@ const EssentialDetailsPage = ({route, navigation}) => {
                                         </View>
                                         <View className="flex-row items-center space-x-0.5">
                                             <SimpleLineIcons name="location-pin" size={15} color="gray" />
-                                            <CustomText text={"100m"} className="text-xs text-gray-500" />
+                                            <CustomText text={item.howFar} className="text-xs text-gray-500" />
                                         </View>
                                     </View>
                                 </View>
@@ -157,14 +148,16 @@ const EssentialDetailsPage = ({route, navigation}) => {
                         </View>
                     </ScrollView>
                     <View className="absolute right-3.5 bottom-[180px] space-y-2.5">
-                        <TouchableOpacity className="items-center justify-center">
+                        <TouchableOpacity className="items-center justify-center"
+                                          onPress={() => handleCall(item.contact_numbers[0])}>
                             <View className="bg-gray-50 rounded-full p-3.5" style={{
                                 elevation: 2
                             }}>
                                 <Ionicons name="call-outline" size={24} color="#0984e3"/>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity className="items-center justify-center">
+                        <TouchableOpacity className="items-center justify-center"
+                                          onPress={() => handleWhatsApp(item.contact_numbers[0])}>
                             <View className="bg-gray-50 rounded-full p-3.5" style={{
                                 elevation: 2
                             }}>

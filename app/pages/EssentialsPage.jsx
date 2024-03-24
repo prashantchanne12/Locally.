@@ -7,7 +7,7 @@ import {GestureHandlerRootView, ScrollView} from "react-native-gesture-handler";
 import CustomText from "@/app/components/CustomText";
 import {AntDesign, FontAwesome6, SimpleLineIcons} from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import {calculateDistance, cn, isServiceOpen} from "@/utils/utilities";
+import {calculateDistance, cn, handleCall, handleWhatsApp, isServiceOpen} from "@/utils/utilities";
 import {useLocationContext} from "@/app/contexts/LocationContext";
 
 const EssentialsPage = ({route, navigation}) => {
@@ -50,17 +50,16 @@ const EssentialsPage = ({route, navigation}) => {
 
 const EssentialCard = ({item, navigation}) => {
     const { state, dispatch } = useLocationContext();
-    const [isOpen, setIsOpen] = useState(null);
-
-    useEffect(() => {
-        setIsOpen(isServiceOpen(item.opening_hours));
-    }, []);
+    const isOpen = isServiceOpen(item.opening_hours)
+    const howFar = calculateDistance(state.currentLocation, item.location);
 
     return (
        <View className="h-auto">
            <View className="px-3.5 pb-3 pt-1.5 border rounded-lg border-gray-200 bg-white relative" style={{elevation: 0.5}}>
                <View className="flex-row justify-between">
-                   <TouchableOpacity onPress={() => {navigation.push("essentialDetails", {item})}}>
+                   <TouchableOpacity onPress={() => {
+                       navigation.push("essentialDetails", {item: {...item, isOpen, howFar}})
+                   }}>
                        <CustomText text={item.name} bold className="text-2xl text-[#14947b]"/>
                    </TouchableOpacity>
                    <View className="mt-1">
@@ -79,7 +78,7 @@ const EssentialCard = ({item, navigation}) => {
                            </View>
                            <View className="flex-row items-center space-x-0.5">
                                <SimpleLineIcons name="location-pin" size={15} color="gray" />
-                               <CustomText text={calculateDistance(state.currentLocation, item.location)} className="text-xs text-gray-500" />
+                               <CustomText text={howFar} className="text-xs text-gray-500" />
                            </View>
                        </View>
                    </View>
@@ -99,13 +98,15 @@ const EssentialCard = ({item, navigation}) => {
                    </View>
                </View>
                <View className="mt-4 flex-row items-center space-x-2 ">
-                       <TouchableOpacity>
+                       <TouchableOpacity onPress={() => handleCall(item.contact_numbers[0])}>
                            <Ionicons name="call-outline" size={21} color="#0984e3" />
                        </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => handleWhatsApp(item.contact_numbers[0])}>
                             <FontAwesome6 name="whatsapp" size={22} color="#00b894" />
                         </TouchableOpacity>
-                       <TouchableOpacity onPress={() => {navigation.push("essentialDetails", {item})}}>
+                   <TouchableOpacity onPress={() => {
+                       navigation.push("essentialDetails", {item: {...item, isOpen, howFar}})
+                   }}>
                            <CustomText text="More details" semibold className="text-gray-600 text-xs" />
                        </TouchableOpacity>
                </View>

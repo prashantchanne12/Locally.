@@ -1,6 +1,7 @@
 import {clsx} from "clsx"
 import {twMerge} from "tailwind-merge"
 import * as Location from "expo-location";
+import {Linking} from "react-native";
 
 export const giveMeGoogleImageURL = (photo) => {
   return `https://places.googleapis.com/v1/${photo.name}/media?key=${process.env.EXPO_PUBLIC_GOOGLE_API_KEY}&maxHeightPx=${photo.heightPx}&maxWidthPx=${photo.widthPx}`;
@@ -107,3 +108,15 @@ export const isServiceOpen = (openingHours) => {
   if (currentWorkingHours.isClosed) return false
   return  isOpenDuringTime(currentWorkingHours, getCurrentTime())
 }
+
+export const handleCall = (contactNumber) => {
+  const url = `tel:${contactNumber}`;
+  Linking.openURL(url);
+};
+
+export const handleWhatsApp = (contactNumber) => {
+  const url = `whatsapp://send?phone=${contactNumber}`;
+  Linking.openURL(url).catch(() => {
+    alert('Make sure WhatsApp is installed on your device.');
+  });
+};
