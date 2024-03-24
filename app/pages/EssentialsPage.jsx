@@ -58,11 +58,11 @@ const EssentialCard = ({item, navigation}) => {
 
     return (
        <View className="h-auto">
-           <View className="px-3.5 pb-3 pt-1.5 border rounded-lg border-gray-300 relative">
+           <View className="px-3.5 pb-3 pt-1.5 border rounded-lg border-gray-200 bg-white relative" style={{elevation: 0.5}}>
                <View className="flex-row justify-between">
-                   <View>
-                       <CustomText text={item.name} bold className="text-2xl"/>
-                   </View>
+                   <TouchableOpacity onPress={() => {navigation.push("essentialDetails", {item})}}>
+                       <CustomText text={item.name} bold className="text-2xl text-[#14947b]"/>
+                   </TouchableOpacity>
                    <View className="mt-1">
                        <View className="items-end flex-row space-x-1">
                            <View className="flex-row items-center space-x-1">

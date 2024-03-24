@@ -6,7 +6,7 @@ import React from "react";
 import {AntDesign, SimpleLineIcons} from "@expo/vector-icons";
 import {calculateDistance, cn, getType} from "@/utils/utilities";
 import PagerView from 'react-native-pager-view';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Touchable, TouchableHighlight} from 'react-native';
 import {Image} from "expo-image";
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -33,7 +33,8 @@ const EssentialDetailsPage = ({route, navigation}) => {
                         <View className="mt-3.5 px-3.5">
                             <View className="flex-row justify-between items-center">
                                 <View>
-                                    <CustomText text={item.name} bold className="text-2xl"/>
+                                    {/*14947b*/}
+                                    <CustomText text={item.name} bold className="text-2xl text-[#14947b]"/>
                                     <View className="flex-row items-center">
                                         <CustomText text={item.address[0]['address1'] + '.'} className="text-gray-500 text-[13px]" />
                                     </View>
@@ -157,17 +158,17 @@ const EssentialDetailsPage = ({route, navigation}) => {
                     </ScrollView>
                     <View className="absolute right-3.5 bottom-[180px] space-y-2.5">
                         <TouchableOpacity className="items-center justify-center">
-                            <View className="bg-[#fcfcfc] rounded-full p-3.5 px-4" style={{
+                            <View className="bg-gray-50 rounded-full p-3.5" style={{
                                 elevation: 2
                             }}>
-                                <Ionicons name="call-outline" size={25} color="#0984e3" />
+                                <Ionicons name="call-outline" size={24} color="#0984e3"/>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity className="items-center justify-center">
-                            <View className="bg-[#fcfcfc]  rounded-full p-3.5 px-4" style={{
+                            <View className="bg-gray-50 rounded-full p-3.5" style={{
                                 elevation: 2
                             }}>
-                                <FontAwesome name="whatsapp" size={25} color="#00b894" />
+                                <Ionicons name="logo-whatsapp" size={25} color="#00b894" />
                             </View>
                         </TouchableOpacity>
                     </View>
