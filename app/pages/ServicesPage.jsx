@@ -68,13 +68,11 @@ const Explore = ({ services = [], navigation, dispatch}) => {
 
   return (
     <View className="mt-3">
-      <View className="items-center flex-row">
-        <CustomText
-          text="Nearby Services."
-          className={`pt-2 pl-2 text-center text-lg`}
-          bold
-        />
-        {/*<Text className={`pt-2 pl-2 text-center font-['beba'] text-[25px]`}>Nearby</Text>*/}
+      <View className="py-1.5">
+        <View className="flex-row items-center space-x-1">
+          <View className="h-5 w-1 ml-1 bg-[#16a085]"></View>
+          <CustomText text="Nearby Services." bold className="text-lg" />
+        </View>
       </View>
       <View className="mb-32">
         {services.length ? (

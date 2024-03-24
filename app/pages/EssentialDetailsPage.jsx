@@ -6,19 +6,30 @@ import React from "react";
 import {AntDesign, SimpleLineIcons} from "@expo/vector-icons";
 import {calculateDistance, cn, getType} from "@/utils/utilities";
 import PagerView from 'react-native-pager-view';
-import { StyleSheet, View, Text } from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {Image} from "expo-image";
+import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const EssentialDetailsPage = ({route, navigation}) => {
     const {item} = route.params;
     const isOpen = true;
     const howFar = "100m"
+
+    const actions = [
+        {
+            text: "Accessibility",
+            icon: <FontAwesome name="whatsapp" size={24} color="black" />,
+            name: "bt_accessibility",
+            position: 1
+        },
+    ];
     return (
         <GestureHandlerRootView>
             <SafeAreaView>
                 <Header title={item.name} goBack={true} goBackOnClick={() => {navigation.goBack()}} />
                 <View>
-                    <ScrollView className="bg-[#fcfcfc] h-full">
+                    <ScrollView className="bg-white h-full relative px-0.5">
                         <View className="mt-3.5 px-3.5">
                             <View className="flex-row justify-between items-center">
                                 <View>
@@ -89,12 +100,77 @@ const EssentialDetailsPage = ({route, navigation}) => {
                             </View>
                         </View>
                         <View className="px-3.5 mt-3.5">
-                            <View className="flex-row items-center space-x-1">
-                                <View className="h-5 w-1 bg-[#16a085]"></View>
-                                <CustomText text="Prices" bold className="text-xl" />
+                           <View>
+                               <View className="flex-row items-center space-x-1">
+                                   <View className="h-5 w-1 bg-[#16a085]"></View>
+                                   <CustomText text="Prices." bold className="text-xl" />
+                               </View>
+                               <CustomText text="Average prices*" className="text-xs text-gray-500" />
+                           </View>
+
+                            <View className="flex-row space-x-5 mt-2.5 p-1">
+                                <View className="space-y-0.5">
+                                    <CustomText text="Monthly" className="text-base"/>
+                                    <CustomText text="6 Months" className="text-base"/>
+                                    <CustomText text="Annually" className="text-base"/>
+                                </View>
+                                <View className="h-full w-[1px] bg-gray-200"></View>
+                                <View className="space-y-0.5">
+                                    <CustomText text={'₹ '+item.average_price[0]} className="text-base" semibold/>
+                                    <CustomText text={'₹ '+item.average_price[1]} className="text-base" semibold/>
+                                    <CustomText text={'₹ '+item.average_price[2]} className="text-base" semibold/>
+                                </View>
+                            </View>
+                        </View>
+                        <View className="px-3.5 mt-3.5 mb-44">
+                            <View>
+                                <View className="flex-row items-center space-x-1">
+                                    <View className="h-5 w-1 bg-[#16a085]"></View>
+                                    <CustomText text="Opening Hours." bold className="text-xl" />
+                                </View>
+                            </View>
+                            <View className="mt-2.5 pl-1">
+                                {
+                                    <CustomText text={isOpen ? "Open Now*" : "Closed Now*"}
+                                                className={cn(isOpen ? "text-green-600" : "text-red-600", " text-base")}
+                                                semibold/>
+                                }
+                            </View>
+                            <View className="flex-row space-x-5 p-1">
+                                <View className="space-y-0.5">
+                                    {item.opening_hours.map(day => (
+                                        <View key={day.id} className="space-x-4">
+                                            <CustomText text={day.label} className="text-base"/>
+                                        </View>
+                                    ))}
+                                </View>
+                                <View className="space-y-0.5">
+                                    {item.opening_hours.map(day => (
+                                        <View key={day.id} className="flex-row items-center space-x-4">
+                                            <CustomText text={day.open + ' - ' + day.close} className="text-base"
+                                                        semibold/>
+                                        </View>
+                                    ))}
+                                </View>
                             </View>
                         </View>
                     </ScrollView>
+                    <View className="absolute right-3.5 bottom-[180px] space-y-2.5">
+                        <TouchableOpacity className="items-center justify-center">
+                            <View className="bg-[#fcfcfc] rounded-full p-3.5 px-4" style={{
+                                elevation: 2
+                            }}>
+                                <Ionicons name="call-outline" size={25} color="#0984e3" />
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity className="items-center justify-center">
+                            <View className="bg-[#fcfcfc]  rounded-full p-3.5 px-4" style={{
+                                elevation: 2
+                            }}>
+                                <FontAwesome name="whatsapp" size={25} color="#00b894" />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </SafeAreaView>
         </GestureHandlerRootView>
