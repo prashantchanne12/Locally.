@@ -33,7 +33,7 @@ const EssentialDetailsPage = ({route, navigation}) => {
                            <View>
                                <View className="flex-row items-center space-x-1">
                                    <View className="h-5 w-1 bg-[#16a085]"></View>
-                                   <CustomText text="Prices." bold className="text-xl" />
+                                   <CustomText text="Prices." bold className="text-lg" />
                                </View>
                                <CustomText text="Average prices*" className="text-xs text-gray-500" />
                            </View>

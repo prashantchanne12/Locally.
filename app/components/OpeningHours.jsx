@@ -9,13 +9,13 @@ const OpeningHours = ({item, isOpen}) => {
             <View>
                 <View className="flex-row items-center space-x-1">
                     <View className="h-5 w-1 bg-[#16a085]"></View>
-                    <CustomText text="Opening Hours." bold className="text-xl"/>
+                    <CustomText text="Opening Hours." bold className="text-lg"/>
                 </View>
             </View>
             <View className="mt-2.5 pl-1">
                 {
                     <CustomText text={isOpen ? "Open Now*" : "Closed Now*"}
-                                className={cn(isOpen ? "text-green-600" : "text-red-600", " text-base")}
+                                className={cn(isOpen ? "text-green-600" : "text-red-600", "")}
                                 semibold/>
                 }
             </View>

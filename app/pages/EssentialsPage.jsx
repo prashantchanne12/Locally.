@@ -30,7 +30,7 @@ const EssentialsPage = ({route, navigation}) => {
     return (
         <GestureHandlerRootView>
             <SafeAreaView>
-                <Header small title={title+'s'} goBack={true} goBackOnClick={() => navigation.goBack()}/>
+                <Header small title={title+'s.'} goBack={true} goBackOnClick={() => navigation.goBack()}/>
                 <ScrollView className="bg-[#fcfcfc] h-full px-3 ">
                     <View className="mt-3">
                         {
