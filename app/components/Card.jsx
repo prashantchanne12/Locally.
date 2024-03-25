@@ -24,7 +24,7 @@ const Card = ({
       <View className="mb-1 px-[10px]" >
         <View className="flex-row justify-between items-start" >
           <View className="space-y-0.5" >
-            <CustomText text={name} bold className={cn("text-base", `text-[${PRIMARY}]`)} />
+            <CustomText text={name} bold className={cn("text-base")} />
             <View>
               <View className="flex-row space-x-1">
                 {types.map((tag, index) => (

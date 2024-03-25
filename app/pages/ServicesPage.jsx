@@ -10,11 +10,9 @@ import { supabase } from "@/utils/supabase";
 import Card from "../components/Card";
 import CustomText from "../components/CustomText";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {AntDesign, FontAwesome, Octicons} from "@expo/vector-icons";
-import * as Location from "expo-location";
+import {FontAwesome, MaterialCommunityIcons} from "@expo/vector-icons";
 import {calculateDistance, cn, getCurrentLocation, isServiceOpen} from "@/utils/utilities";
 import { MaterialIcons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Header from "@/app/components/Header";
 import { useLocationContext } from '@/app/contexts/LocationContext';
 
@@ -52,6 +50,7 @@ export default ServicesPage;
 const Explore = ({ services = [], navigation, dispatch}) => {
 
   const [currentLocation, setCurrentLocation] = useState({});
+  const [isHorizontal, setIsHorizontal] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -69,9 +68,23 @@ const Explore = ({ services = [], navigation, dispatch}) => {
   return (
     <View className="mt-3">
       <View className="py-1.5">
-        <View className="flex-row items-center space-x-1">
-          <View className="h-5 w-1 ml-1 bg-[#16a085]"></View>
-          <CustomText text="Nearby Services." bold className="text-lg" />
+        <View className="flex-row justify-between items-center">
+          <View className="flex-row items-center space-x-1">
+            <View className="h-5 w-1 ml-1 bg-[#16a085]"></View>
+            <CustomText text="Nearby Services." bold className="text-lg" />
+          </View>
+          <View className="flex-row items-center mr-1">
+            <TouchableOpacity onPress={() => setIsHorizontal(true)}
+                              className={cn("px-2 py-0.5", isHorizontal ? "bg-white" : "bg-gray-200", "rounded-tl rounded-bl")}
+                              style={{elevation: isHorizontal ? 2 : 1}}>
+              <MaterialCommunityIcons name="reorder-horizontal" size={22} color="black"/>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setIsHorizontal(false)}
+                              className={cn("px-2 py-0.5", !isHorizontal ? "bg-white" : "bg-gray-200", "rounded-tr rounded-br")}
+                              style={{elevation: !isHorizontal ? 2 : 1}}>
+              <MaterialCommunityIcons name="reorder-vertical" size={22} color="gray"/>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       <View className="mb-32">
