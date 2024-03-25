@@ -76,28 +76,34 @@ const Explore = ({ services = [], navigation, dispatch}) => {
       </View>
       <View className="mb-32">
         {services.length ? (
-          services.map((service) => (
-              <TouchableWithoutFeedback
-                  key={service.id}
-                  className="border bg-white border-gray-200 border-b-0 pt-2 my-2  relative rounded-xl"
-                  onPress={() => {
-                    navigation.navigate("service", {service});
-                  }}
-                  style={{
-                    elevation: 2,
-                  }}
-              >
-                <Card
-                    id={service.id}
-                    name={service.name}
-                    howFar={calculateDistance(currentLocation, service.location)}
-                    types={service.types}
-                    photos={service.photos}
-                    isGoogle={false}
-                    isOpen={isServiceOpen(service.opening_hours)}
-                />
-              </TouchableWithoutFeedback>
-          ))
+          services.map((service) => {
+
+            const isOpen = isServiceOpen(service.opening_hours);
+            const howFar = calculateDistance(currentLocation, service.location);
+
+            return (
+                <TouchableWithoutFeedback
+                    key={service.id}
+                    className="border bg-white border-gray-200 border-b-0 pt-2 my-2  relative rounded-xl"
+                    onPress={() => {
+                      navigation.navigate("service", {service: {...service, isOpen, howFar}});
+                    }}
+                    style={{
+                      elevation: 2,
+                    }}
+                >
+                  <Card
+                      id={service.id}
+                      name={service.name}
+                      howFar={howFar}
+                      types={service.types}
+                      photos={service.photos}
+                      isGoogle={false}
+                      isOpen={isOpen}
+                  />
+                </TouchableWithoutFeedback>
+            )
+          })
         ) : (
           <CustomText text="Loading..." />
         )}

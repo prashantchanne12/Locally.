@@ -1,0 +1,33 @@
+import {View} from "react-native";
+import CustomText from "@/app/components/CustomText";
+import {cn, getType} from "@/utils/utilities";
+import React from "react";
+
+const Tags = ({item}) => {
+    return (
+        <View className="px-3.5 mt-3">
+           <View className={cn("flex-row items-center", item.is_essential && "space-x-2")}>
+               <View>
+                   {
+                       item.is_essential ?
+                           <View className="bg-gray-200 rounded" style={{elevation: 1}} key={0}>
+                               <CustomText text={item.essential_type} bold className="px-2.5 py-1.5 text-[13px]"/>
+                           </View>
+                           : <></>
+                   }
+               </View>
+               <View className="flex-row space-x-2 py-1">
+                   {
+                       item.types.map((type, index) => (
+                           <View key={index+1} className="bg-gray-200 rounded z-50" style={{elevation: 1}}>
+                               <CustomText text={getType(type)} bold className="px-2.5 py-1.5 text-[13px]"/>
+                           </View>
+                       ))
+                   }
+               </View>
+           </View>
+        </View>
+    )
+}
+
+export default Tags;
