@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import {
   GestureHandlerRootView,
-  ScrollView,
+  ScrollView, TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { supabase } from "@/utils/supabase";
@@ -12,7 +12,7 @@ import CustomText from "../components/CustomText";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {AntDesign, FontAwesome, Octicons} from "@expo/vector-icons";
 import * as Location from "expo-location";
-import {calculateDistance, cn, getCurrentLocation} from "@/utils/utilities";
+import {calculateDistance, cn, getCurrentLocation, isServiceOpen} from "@/utils/utilities";
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Header from "@/app/components/Header";
@@ -77,18 +77,26 @@ const Explore = ({ services = [], navigation, dispatch}) => {
       <View className="mb-32">
         {services.length ? (
           services.map((service) => (
-            <Card
-              key={service.id}
-              id={service.id}
-              name={service.name}
-              howFar={calculateDistance(currentLocation, service.location)}
-              isOpen={true}
-              types={service.types}
-              photos={service.photos}
-              navigation={navigation}
-              isGoogle={false}
-              openingHours={service.opening_hours}
-            />
+              <TouchableWithoutFeedback
+                  key={service.id}
+                  className="border bg-white border-gray-200 border-b-0 pt-2 my-2  relative rounded-xl"
+                  onPress={() => {
+                    navigation.navigate("service", {service});
+                  }}
+                  style={{
+                    elevation: 2,
+                  }}
+              >
+                <Card
+                    id={service.id}
+                    name={service.name}
+                    howFar={calculateDistance(currentLocation, service.location)}
+                    types={service.types}
+                    photos={service.photos}
+                    isGoogle={false}
+                    isOpen={isServiceOpen(service.opening_hours)}
+                />
+              </TouchableWithoutFeedback>
           ))
         ) : (
           <CustomText text="Loading..." />

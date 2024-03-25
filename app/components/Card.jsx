@@ -1,12 +1,9 @@
 import {View} from "react-native";
-import React, {useEffect, useState} from "react";
 import CustomText from "./CustomText";
-import {AntDesign, FontAwesome, Ionicons, MaterialCommunityIcons,} from "@expo/vector-icons";
+import {AntDesign, FontAwesome} from "@expo/vector-icons";
 import {PRIMARY} from "@/utils/constants";
 import {Image} from "expo-image";
-import {TouchableWithoutFeedback} from "react-native-gesture-handler";
 import {cn, getType, giveMeGoogleImageURL, isServiceOpen} from "@/utils/utilities";
-import * as Location from "expo-location";
 import { SimpleLineIcons } from '@expo/vector-icons';
 const Card = ({
   id,
@@ -14,32 +11,15 @@ const Card = ({
   types,
   howFar,
   photos,
-  navigation,
-  phoneNumber,
-  location,
   isGoogle,
-  openingHours,
+  isOpen,
   }) => {
-
-  const [isOpen, setIsOpen] = useState(null);
 
   let imageURL = photos[0];
   if (isGoogle) imageURL = giveMeGoogleImageURL(photos[0]);
 
-  useEffect(() => {
-    setIsOpen(isServiceOpen(openingHours));
-  }, []);
-
   return (
-    <TouchableWithoutFeedback
-      className="border bg-white border-gray-200 border-b-0 pt-2 my-2  relative rounded-xl"
-      onPress={() => {
-        navigation.navigate("service");
-      }}
-    style={{
-      elevation: 2,
-    }}
-    >
+    <View>
       {/* NAME AND TAGS */}
       <View className="mb-1 px-[10px]" >
         <View className="flex-row justify-between items-start" >
@@ -95,7 +75,7 @@ const Card = ({
           source={imageURL}
         />
       </View>
-    </TouchableWithoutFeedback>
+    </View>
   );
 };
 
