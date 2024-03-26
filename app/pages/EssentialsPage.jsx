@@ -9,6 +9,7 @@ import {AntDesign, FontAwesome6, SimpleLineIcons} from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import {calculateDistance, cn, handleCall, handleWhatsApp, isServiceOpen} from "@/utils/utilities";
 import {useLocationContext} from "@/app/contexts/LocationContext";
+import ServiceCardFooter from "@/app/components/ServiceCardFooter";
 
 const EssentialsPage = ({route, navigation}) => {
     const {title} = route.params;
@@ -97,18 +98,10 @@ const EssentialCard = ({item, navigation}) => {
                        <CustomText text={"₹"+item.average_price[2]} bold className=""/>
                    </View>
                </View>
-               <View className="mt-4 flex-row items-center space-x-2 ">
-                       <TouchableOpacity onPress={() => handleCall(item.contact_numbers[0])}>
-                           <Ionicons name="call-outline" size={21} color="#0984e3" />
-                       </TouchableOpacity>
-                        <TouchableOpacity onPress={() => handleWhatsApp(item.contact_numbers[0])}>
-                            <FontAwesome6 name="whatsapp" size={22} color="#00b894" />
-                        </TouchableOpacity>
-                   <TouchableOpacity onPress={() => {
+               <View className="mt-4">
+                   <ServiceCardFooter contactNumbers={item.contact_numbers} onPress={() => {
                        navigation.push("essentialDetails", {item: {...item, isOpen, howFar}})
-                   }}>
-                           <CustomText text="More details" semibold className="text-gray-600 text-xs" />
-                       </TouchableOpacity>
+                   }} />
                </View>
 
            </View>

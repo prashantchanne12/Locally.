@@ -1,19 +1,27 @@
-import {View} from "react-native";
+import {TouchableOpacity, View} from "react-native";
 import CustomText from "./CustomText";
-import {AntDesign, FontAwesome} from "@expo/vector-icons";
+import {AntDesign, FontAwesome, FontAwesome6, Ionicons} from "@expo/vector-icons";
 import {PRIMARY} from "@/utils/constants";
 import {Image} from "expo-image";
-import {cn, getType, giveMeGoogleImageURL, isServiceOpen} from "@/utils/utilities";
+import {cn, getType, giveMeGoogleImageURL, handleCall, handleWhatsApp, isServiceOpen} from "@/utils/utilities";
 import { SimpleLineIcons } from '@expo/vector-icons';
+import React from "react";
+import ServiceCardFooter from "@/app/components/ServiceCardFooter";
+
 const Card = ({
-  id,
-  name,
-  types,
-  howFar,
-  photos,
-  isGoogle,
-  isOpen,
-  }) => {
+                id,
+                name,
+                types,
+                howFar,
+                photos,
+                isGoogle,
+                isOpen,
+                isHorizontal,
+                desc,
+                address,
+                contactNumbers,
+                onPress
+              }) => {
 
   let imageURL = photos[0];
   if (isGoogle) imageURL = giveMeGoogleImageURL(photos[0]);
@@ -21,12 +29,12 @@ const Card = ({
   return (
     <View>
       {/* NAME AND TAGS */}
-      <View className="mb-1 px-[10px]" >
+      <View className="mb-1 px-3" >
         <View className="flex-row justify-between items-start" >
-          <View className="space-y-0.5" >
+          <View>
             <CustomText text={name} bold className={cn("text-base")} />
             <View>
-              <View className="flex-row space-x-1">
+              {isHorizontal ? <View className="flex-row space-x-1">
                 {types.map((tag, index) => (
                     <View
                         key={`${id}-${tag}-${index}`}
@@ -39,7 +47,11 @@ const Card = ({
                       />
                     </View>
                 ))}
-              </View>
+              </View> : <View className="flex-row items-center gap-1">
+                <CustomText text={address[0]['address1'] + '.'} className="text-xs text-gray-500"/>
+                {address[1] ?
+                    <CustomText text={address[1]['address2'] + '.'} className="text-xs text-gray-500"/> : <></>}
+              </View>}
             </View>
           </View>
 
@@ -67,14 +79,30 @@ const Card = ({
         </View>
       </View>
 
+      {/* DESCRIPTION */}
+      {
+        !isHorizontal ?
+            <View className="px-[10px] mt-1.5">
+              <CustomText text={desc} className="text-gray-500"/>
+            </View> :
+            <></>
+      }
+
       {/* IMAGE */}
-      <View className="mt-[5px] relative">
-        <Image
-          className="w-full h-48 bg-cover rounded-bl-xl rounded-br-xl"
-          contentFit="cover"
-          source={imageURL}
-        />
-      </View>
+      {
+        isHorizontal ? <View className="mt-[5px] relative">
+          <Image
+              className="w-full h-48 bg-cover rounded-bl-lg rounded-br-lg"
+              contentFit="cover"
+              source={imageURL}
+          />
+        </View> : <View></View>
+      }
+
+      {/* Footer */}
+        {!isHorizontal ? <View className="px-3 mt-3 pb-2.5">
+            <ServiceCardFooter contactNumbers={contactNumbers} onPress={onPress}/>
+        </View> : <></>}
     </View>
   );
 };

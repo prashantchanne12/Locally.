@@ -97,7 +97,7 @@ const Explore = ({ services = [], navigation, dispatch}) => {
             return (
                 <TouchableWithoutFeedback
                     key={service.id}
-                    className="border bg-white border-gray-200 border-b-0 pt-2 my-2  relative rounded-xl"
+                    className="border bg-white border-gray-200 border-b-0 pt-2 my-2  relative rounded-lg"
                     onPress={() => {
                       navigation.navigate("service", {service: {...service, isOpen, howFar}});
                     }}
@@ -113,6 +113,13 @@ const Explore = ({ services = [], navigation, dispatch}) => {
                       photos={service.photos}
                       isGoogle={false}
                       isOpen={isOpen}
+                      isHorizontal={isHorizontal}
+                      desc={service.desc}
+                      address={service.address}
+                      contactNumbers={service.contact_numbers}
+                      onPress={() => {
+                        navigation.navigate("service", {service: {...service, isOpen, howFar}});
+                      }}
                   />
                 </TouchableWithoutFeedback>
             )
