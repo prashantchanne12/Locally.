@@ -10,7 +10,7 @@ const Tags = ({item, small}) => {
             <View>
                 {
                     item.is_essential ?
-                        <View className="bg-gray-200 rounded" style={{elevation: 1}} key={0}>
+                        <View className="bg-gray-50 border border-gray-500 rounded z-50" style={{elevation: 1}} key={0}>
                             <CustomText text={item.essential_type} bold className={styles}/>
                         </View>
                         : <></>
@@ -19,7 +19,7 @@ const Tags = ({item, small}) => {
             <View className="flex-row space-x-2 py-1">
                 {
                     item.types.map((type, index) => (
-                        <View key={index + 1} className="bg-gray-200 rounded z-50" style={{elevation: 1}}>
+                        <View key={index + 1} className="bg-gray-50 border border-gray-500 rounded z-50" style={{elevation: 1}}>
                             <CustomText text={getType(type)} bold className={styles}/>
                         </View>
                     ))
