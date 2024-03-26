@@ -16,7 +16,7 @@ const Card = ({
                 photos,
                 isGoogle,
                 isOpen,
-                isHorizontal,
+                compact,
                 desc,
                 address,
                 contactNumbers,
@@ -34,7 +34,7 @@ const Card = ({
           <View>
             <CustomText text={name} bold className={cn("text-base")} />
             <View>
-              {isHorizontal ? <View className="flex-row space-x-1">
+              {!compact ? <View className="flex-row space-x-1">
                 {types.map((tag, index) => (
                     <View
                         key={`${id}-${tag}-${index}`}
@@ -81,7 +81,7 @@ const Card = ({
 
       {/* DESCRIPTION */}
       {
-        !isHorizontal ?
+        compact ?
             <View className="px-[10px] mt-1.5">
               <CustomText text={desc} className="text-gray-500"/>
             </View> :
@@ -90,7 +90,7 @@ const Card = ({
 
       {/* IMAGE */}
       {
-        isHorizontal ? <View className="mt-[5px] relative">
+        !compact ? <View className="mt-[5px] relative">
           <Image
               className="w-full h-48 bg-cover rounded-bl-lg rounded-br-lg"
               contentFit="cover"
@@ -100,7 +100,7 @@ const Card = ({
       }
 
       {/* Footer */}
-        {!isHorizontal ? <View className="px-3 mt-3 pb-2.5">
+        {compact ? <View className="px-3 mt-3 pb-2.5">
             <ServiceCardFooter contactNumbers={contactNumbers} onPress={onPress}/>
         </View> : <></>}
     </View>

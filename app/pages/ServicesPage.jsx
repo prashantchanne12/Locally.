@@ -50,7 +50,7 @@ export default ServicesPage;
 const Explore = ({ services = [], navigation, dispatch}) => {
 
   const [currentLocation, setCurrentLocation] = useState({});
-  const [isHorizontal, setIsHorizontal] = useState(true);
+  const [compact, setCompact] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -74,15 +74,15 @@ const Explore = ({ services = [], navigation, dispatch}) => {
             <CustomText text="Nearby Services." bold className="text-lg" />
           </View>
           <View className="flex-row items-center mr-1">
-            <TouchableOpacity onPress={() => setIsHorizontal(true)}
-                              className={cn("px-2 py-0.5", isHorizontal ? "bg-white" : "bg-gray-200", "rounded-tl rounded-bl")}
-                              style={{elevation: isHorizontal ? 2 : 1}}>
-              <MaterialCommunityIcons name="cards-variant" size={22} color={isHorizontal ? "black" : "gray"} />
+            <TouchableOpacity onPress={() => setCompact(true)}
+                              className={cn("px-2 py-0.5", compact ? "bg-white" : "bg-gray-200", "rounded-tr rounded-br")}
+                              style={{elevation: compact ? 2 : 1}}>
+              <MaterialCommunityIcons name="reorder-horizontal" size={22} color={compact ? "black" : "gray"}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setIsHorizontal(false)}
-                              className={cn("px-2 py-0.5", !isHorizontal ? "bg-white" : "bg-gray-200", "rounded-tr rounded-br")}
-                              style={{elevation: !isHorizontal ? 2 : 1}}>
-              <MaterialCommunityIcons name="reorder-horizontal" size={22} color={!isHorizontal ? "black" : "gray"}/>
+            <TouchableOpacity onPress={() => setCompact(false)}
+                              className={cn("px-2 py-0.5", !compact ? "bg-white" : "bg-gray-200", "rounded-tl rounded-bl")}
+                              style={{elevation: !compact ? 2 : 1}}>
+              <MaterialCommunityIcons name="cards-variant" size={22} color={!compact ? "black" : "gray"} />
             </TouchableOpacity>
           </View>
         </View>
@@ -113,7 +113,7 @@ const Explore = ({ services = [], navigation, dispatch}) => {
                       photos={service.photos}
                       isGoogle={false}
                       isOpen={isOpen}
-                      isHorizontal={isHorizontal}
+                      compact={compact}
                       desc={service.desc}
                       address={service.address}
                       contactNumbers={service.contact_numbers}
