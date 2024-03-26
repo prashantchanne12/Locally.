@@ -77,12 +77,12 @@ const Explore = ({ services = [], navigation, dispatch}) => {
             <TouchableOpacity onPress={() => setIsHorizontal(true)}
                               className={cn("px-2 py-0.5", isHorizontal ? "bg-white" : "bg-gray-200", "rounded-tl rounded-bl")}
                               style={{elevation: isHorizontal ? 2 : 1}}>
-              <MaterialCommunityIcons name="reorder-horizontal" size={22} color="black"/>
+              <MaterialCommunityIcons name="cards-variant" size={22} color={isHorizontal ? "black" : "gray"} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setIsHorizontal(false)}
                               className={cn("px-2 py-0.5", !isHorizontal ? "bg-white" : "bg-gray-200", "rounded-tr rounded-br")}
                               style={{elevation: !isHorizontal ? 2 : 1}}>
-              <MaterialCommunityIcons name="reorder-vertical" size={22} color="gray"/>
+              <MaterialCommunityIcons name="reorder-horizontal" size={22} color={!isHorizontal ? "black" : "gray"}/>
             </TouchableOpacity>
           </View>
         </View>
