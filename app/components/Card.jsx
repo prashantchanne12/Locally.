@@ -101,14 +101,20 @@ const Card = ({
         </View> : <View></View>
       }
 
-      <View className="px-3 mt-3">
-          <Tags item={service} small/>
-      </View>
+      {compact ?
+          <View className="px-3 mt-3">
+              <Tags item={service} small/>
+          </View> :
+          <></>
+      }
 
       {/* Footer */}
-        {compact ? <View className="px-3 mt-3 pb-2.5">
-            <ServiceCardFooter contactNumbers={contactNumbers} onPress={onPress}/>
-        </View> : <></>}
+        {compact ?
+            <View className="px-3 mt-3 pb-2.5">
+                <ServiceCardFooter contactNumbers={contactNumbers} onPress={onPress}/>
+            </View>
+            : <></>
+        }
     </View>
   );
 };

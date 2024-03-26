@@ -98,9 +98,9 @@ const Explore = ({ services = [], navigation, dispatch}) => {
                 <TouchableWithoutFeedback
                     key={service.id}
                     className="border bg-white border-gray-200 border-b-0 pt-2 my-2  relative rounded-lg"
-                    onPress={() => {
+                    onPress={!compact ? () => {
                       navigation.navigate("service", {service: {...service, isOpen, howFar}});
-                    }}
+                    } : null}
                     style={{
                       elevation: 2,
                     }}
