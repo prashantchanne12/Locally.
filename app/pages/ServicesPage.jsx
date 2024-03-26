@@ -75,12 +75,12 @@ const Explore = ({ services = [], navigation, dispatch}) => {
           </View>
           <View className="flex-row items-center mr-1">
             <TouchableOpacity onPress={() => setCompact(true)}
-                              className={cn("px-2 py-0.5", compact ? "bg-white" : "bg-gray-200", "rounded-tr rounded-br")}
+                              className={cn("px-2 py-0.5", compact ? "bg-white" : "bg-gray-200", "rounded-tl rounded-bl")}
                               style={{elevation: compact ? 2 : 1}}>
               <MaterialCommunityIcons name="reorder-horizontal" size={22} color={compact ? "black" : "gray"}/>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setCompact(false)}
-                              className={cn("px-2 py-0.5", !compact ? "bg-white" : "bg-gray-200", "rounded-tl rounded-bl")}
+                              className={cn("px-2 py-0.5", !compact ? "bg-white" : "bg-gray-200", "rounded-tr rounded-br")}
                               style={{elevation: !compact ? 2 : 1}}>
               <MaterialCommunityIcons name="cards-variant" size={22} color={!compact ? "black" : "gray"} />
             </TouchableOpacity>
@@ -120,6 +120,7 @@ const Explore = ({ services = [], navigation, dispatch}) => {
                       onPress={() => {
                         navigation.navigate("service", {service: {...service, isOpen, howFar}});
                       }}
+                      service={service}
                   />
                 </TouchableWithoutFeedback>
             )

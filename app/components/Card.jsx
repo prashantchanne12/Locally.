@@ -7,20 +7,22 @@ import {cn, getType, giveMeGoogleImageURL, handleCall, handleWhatsApp, isService
 import { SimpleLineIcons } from '@expo/vector-icons';
 import React from "react";
 import ServiceCardFooter from "@/app/components/ServiceCardFooter";
+import Tags from "@/app/components/Tags";
 
 const Card = ({
-                id,
-                name,
-                types,
-                howFar,
-                photos,
-                isGoogle,
-                isOpen,
-                compact,
-                desc,
-                address,
-                contactNumbers,
-                onPress
+                  id,
+                  name,
+                  types,
+                  howFar,
+                  photos,
+                  isGoogle,
+                  isOpen,
+                  compact,
+                  desc,
+                  address,
+                  contactNumbers,
+                  onPress,
+                  service
               }) => {
 
   let imageURL = photos[0];
@@ -98,6 +100,10 @@ const Card = ({
           />
         </View> : <View></View>
       }
+
+      <View className="px-3 mt-3">
+          <Tags item={service} small/>
+      </View>
 
       {/* Footer */}
         {compact ? <View className="px-3 mt-3 pb-2.5">

@@ -27,7 +27,9 @@ const EssentialDetailsPage = ({route, navigation}) => {
                     <ScrollView className="bg-white h-full relative px-0.5">
                         <DetailsHeader item={item} isOpen={isOpen} />
 
-                        <Tags item={item} />
+                        <View className="px-3.5 mt-3">
+                            <Tags item={item}/>
+                        </View>
 
                         <View className="px-3.5 mt-3.5">
                            <View>

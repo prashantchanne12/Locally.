@@ -19,7 +19,9 @@ const ServiceDetailsPage = ({ route, navigation }) => {
             <View>
                 <ScrollView className="bg-white h-full relative px-0.5">
                     <DetailsHeader item={service} isOpen={service.isOpen} />
-                    <Tags item={service} />
+                    <View className="px-3.5 mt-3">
+                        <Tags item={service} />
+                    </View>
                     <OpeningHours item={service} isOpen={service.isOpen} />
                 </ScrollView>
                 <View className="absolute right-3.5 bottom-[180px] space-y-2.5">
