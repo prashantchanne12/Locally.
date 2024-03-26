@@ -14,6 +14,7 @@ import Tags from "@/app/components/Tags";
 import OpeningHours from "@/app/components/OpeningHours";
 import CallButton from "@/app/components/CallButton";
 import WhatsappButton from "@/app/components/WhatsappButton";
+import PriceTable from "@/app/components/PriceTable";
 
 const EssentialDetailsPage = ({route, navigation}) => {
     const {item} = route.params;
@@ -40,19 +41,10 @@ const EssentialDetailsPage = ({route, navigation}) => {
                                <CustomText text="Average prices*" className="text-xs text-gray-500" />
                            </View>
 
-                            <View className="flex-row space-x-5 mt-2.5 p-1">
-                                <View className="space-y-0.5">
-                                    <CustomText text="Monthly" className="text-base"/>
-                                    <CustomText text="6 Months" className="text-base"/>
-                                    <CustomText text="Annually" className="text-base"/>
-                                </View>
-                                <View className="h-full w-[1px] bg-gray-200"></View>
-                                <View className="space-y-0.5">
-                                    <CustomText text={'₹ '+item.average_price[0]} className="text-base" semibold/>
-                                    <CustomText text={'₹ '+item.average_price[1]} className="text-base" semibold/>
-                                    <CustomText text={'₹ '+item.average_price[2]} className="text-base" semibold/>
-                                </View>
+                            <View className="mt-2.5 p-1">
+                                <PriceTable prices={item.price_table} />
                             </View>
+
                         </View>
 
                         <OpeningHours item={item} isOpen={isOpen}/>

@@ -8,6 +8,8 @@ import Tags from "@/app/components/Tags";
 import OpeningHours from "@/app/components/OpeningHours";
 import CallButton from "@/app/components/CallButton";
 import WhatsappButton from "@/app/components/WhatsappButton";
+import CustomText from "@/app/components/CustomText";
+import PriceTable from "@/app/components/PriceTable";
 
 const ServiceDetailsPage = ({ route, navigation }) => {
   const {service} = route.params;
@@ -22,6 +24,22 @@ const ServiceDetailsPage = ({ route, navigation }) => {
                     <View className="px-3.5 mt-3">
                         <Tags item={service} />
                     </View>
+                    {service.price_tables ?
+                        <View className="px-3.5 mt-3.5">
+                            <View>
+                                <View className="flex-row items-center space-x-1">
+                                    <View className="h-5 w-1 bg-[#16a085]"></View>
+                                    <CustomText text="Prices." bold className="text-lg" />
+                                </View>
+                                <CustomText text="Average prices*" className="text-xs text-gray-500" />
+                            </View>
+
+                            <View className="mt-2.5 p-1">
+                                <PriceTable prices={service.price_table} />
+                            </View>
+
+                        </View>
+                    : <></>}
                     <OpeningHours item={service} isOpen={service.isOpen} />
                 </ScrollView>
                 <View className="absolute right-3.5 bottom-[180px] space-y-2.5">

@@ -90,13 +90,17 @@ const EssentialCard = ({item, navigation}) => {
                </View>
                <View className="mt-4 flex-row items-center space-x-4">
                    <View className="flex-row items-center">
-                       <CustomText text="Monthly: " className="text-xs" />
-                       <CustomText text={"₹"+item.average_price[0]} bold className=""/>
+                       <CustomText text={item.price_table[0].label+": "} className="text-xs" />
+                       <CustomText text={"₹"+item.price_table[0].value} bold className=""/>
                    </View>
-                   <View className="flex-row items-center">
-                       <CustomText text="Annually: " className="text-xs"/>
-                       <CustomText text={"₹"+item.average_price[2]} bold className=""/>
-                   </View>
+                   {
+                       item.price_table.length > 1 ?
+                           <View className="flex-row items-center">
+                               <CustomText text={item.price_table[item.price_table.length - 1].label+": "} className="text-xs"/>
+                               <CustomText text={"₹"+item.price_table[item.price_table.length - 1].value} bold className=""/>
+                           </View>
+                           : <></>
+                   }
                </View>
                <View className="mt-4">
                    <ServiceCardFooter contactNumbers={item.contact_numbers} onPress={() => {
