@@ -6,7 +6,6 @@ import {supabase} from "@/utils/supabase";
 import {GestureHandlerRootView, ScrollView} from "react-native-gesture-handler";
 import CustomText from "@/app/components/CustomText";
 import {AntDesign, FontAwesome6, SimpleLineIcons} from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
 import {calculateDistance, cn, handleCall, handleWhatsApp, isServiceOpen} from "@/utils/utilities";
 import {useLocationContext} from "@/app/contexts/LocationContext";
 import ServiceCardFooter from "@/app/components/ServiceCardFooter";
