@@ -1,4 +1,4 @@
-import {GestureHandlerRootView, ScrollView} from "react-native-gesture-handler";
+import {GestureHandlerRootView, ScrollView, TouchableWithoutFeedback} from "react-native-gesture-handler";
 import {StatusBar} from "expo-status-bar";
 import React, {useState} from "react";
 import {SafeAreaView} from "react-native-safe-area-context";
@@ -7,9 +7,12 @@ import {TextInput, View} from "react-native";
 import { Feather } from '@expo/vector-icons';
 import { supabase } from "@/utils/supabase";
 import CustomText from "@/app/components/CustomText";
+import Card from "@/app/components/Card";
+import {calculateDistance, isServiceOpen} from "@/utils/utilities";
+import {useLocationContext} from "@/app/contexts/LocationContext";
 
-const SearchPage = () => {
-
+const SearchPage = ({navigation}) => {
+    const { state, dispatch } = useLocationContext();
     const [searchResults, setSearchResults] = useState([]);
 
     const searchServices = async (searchText, searchType) => {
@@ -51,11 +54,41 @@ const SearchPage = () => {
                         <View>
                             {searchResults.length ? <View>
                                 {
-                                    searchResults.map(item => (
-                                        <View key={item.id}>
-                                            <CustomText text={item.name}/>
-                                        </View>
-                                    ))
+                                    searchResults.map(item => {
+
+                                        const isOpen = isServiceOpen(item.opening_hours);
+                                        const howFar = calculateDistance(state.currentLocation, item.location);
+
+                                        return (
+                                            <View
+                                                key={item.id}
+                                                className="border bg-white border-gray-200 border-b-0 pt-2 my-2  relative rounded-lg"
+                                                style={{
+                                                    elevation: 2,
+                                                }}
+                                            >
+                                                <View>
+                                                    <Card
+                                                        id={item.id}
+                                                        name={item.name}
+                                                        howFar={howFar}
+                                                        onPress={() => {
+                                                            navigation.navigate("service", {service: {...item, isOpen, howFar}});
+                                                        }}
+                                                        contactNumbers={item.contact_numbers}
+                                                        address={item.address}
+                                                        isOpen={isOpen}
+                                                        types={item.types}
+                                                        photos={item.photos}
+                                                        isGoogle={false}
+                                                        compact={true}
+                                                        desc={item.desc}
+                                                        service={item}
+                                                    />
+                                                </View>
+                                            </View>
+                                        )
+                                    })
                                 }
                             </View> : <></>}
                         </View>

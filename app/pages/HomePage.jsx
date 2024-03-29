@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 import MapsPage from "./MapsPage";
 import SearchPage from "@/app/pages/SearchPage";
+import SearchPageContainer from "@/app/Containers/SearchPageContainer";
 
 const Chats = () => {
   return (
@@ -40,7 +41,7 @@ const HomePage = () => {
         })}
       >
           <Tab.Screen name="Home" component={ServicesContainer}/>
-          <Tab.Screen name="Search" component={SearchPage}/>
+          <Tab.Screen name="Search" component={SearchPageContainer}/>
           <Tab.Screen name="Map" component={MapsPage}/>
           <Tab.Screen name="Chats" component={Chats}/>
       </Tab.Navigator>
