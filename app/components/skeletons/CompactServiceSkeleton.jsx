@@ -2,7 +2,16 @@ import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 import {View} from "react-native";
 import React from "react";
 
-const CompactServiceSkeleton = () => {
+const CompactServiceSkeleton = (count) => {
+    let skeletons = []
+    for(let i = 0; i < count; i ++){
+        skeletons.push(<Skeleton key={i} />)
+    }
+
+    return skeletons;
+}
+
+const Skeleton = () => {
     return (
         <View className="bg-white z-[100] border border-gray-200 my-1.5 rounded-lg border-b-0" style={{elevation: 2}}>
             <View className="pb-2.5 px-2">

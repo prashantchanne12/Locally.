@@ -98,9 +98,7 @@ const SearchPage = ({navigation}) => {
                                     })
                                 }
                             </View> : <View>
-                                <CompactServiceSkeleton />
-                                <CompactServiceSkeleton />
-                                <CompactServiceSkeleton />
+                                {CompactServiceSkeleton(1)}
                             </View>
                             }
                     </View>
