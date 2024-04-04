@@ -7,11 +7,10 @@ import {Text, TextInput, View} from "react-native";
 import { Feather } from '@expo/vector-icons';
 import { supabase } from "@/utils/supabase";
 import CustomText from "@/app/components/CustomText";
-import Card from "@/app/components/Card";
 import {calculateDistance, cn, isServiceOpen} from "@/utils/utilities";
 import {useLocationContext} from "@/app/contexts/LocationContext";
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import CompactServiceSkeleton from "@/app/components/skeletons/CompactServiceSkeleton";
+import ServiceCardCompact from "@/app/components/ServiceCardCompact";
 
 const SearchPage = ({navigation}) => {
     const { state, dispatch } = useLocationContext();
@@ -83,37 +82,27 @@ const SearchPage = ({navigation}) => {
 
                             {!loading ? <View>
                                 {
-                                    searchResults.map(item => {
+                                    searchResults.map(service => {
 
-                                        const isOpen = isServiceOpen(item.opening_hours);
-                                        const howFar = calculateDistance(state.currentLocation, item.location);
+                                        const isOpen = isServiceOpen(service.opening_hours);
+                                        const howFar = calculateDistance(state.currentLocation, service.location);
 
                                         return (
                                             <View
-                                                key={item.id}
+                                                key={service.id}
                                                 className="border bg-white border-gray-200 border-b-0 pt-2 my-2  relative rounded-lg"
                                                 style={{
                                                     elevation: 2,
                                                 }}
                                             >
                                                 <View>
-                                                    <Card
-                                                        id={item.id}
-                                                        name={item.name}
+                                                    <ServiceCardCompact
+                                                        service={service}
+                                                        isOpen={isOpen}
                                                         howFar={howFar}
                                                         onPress={() => {
-                                                            navigation.navigate("service", {service: {...item, isOpen, howFar}});
-                                                        }}
-                                                        contactNumbers={item.contact_numbers}
-                                                        address={item.address}
-                                                        isOpen={isOpen}
-                                                        types={item.types}
-                                                        photos={item.photos}
-                                                        isGoogle={false}
-                                                        compact={true}
-                                                        desc={item.desc}
-                                                        service={item}
-                                                    />
+                                                        navigation.navigate("service", {service: {...service, isOpen, howFar}});
+                                                    }} />
                                                 </View>
                                             </View>
                                         )

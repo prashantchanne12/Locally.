@@ -10,7 +10,6 @@ import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { supabase } from "@/utils/supabase";
 import { PRIMARY } from "@/utils/constants";
 import * as Location from "expo-location";
-import Card from "../components/Card";
 
 const { width, height } = Dimensions.get("window");
 const ASPECT_RATIO = width / 300;
@@ -142,17 +141,18 @@ const MapsPage = () => {
               <View>
                 {places.map((place) => {
                   return (
-                    <Card
-                      key={place.id}
-                      id={place.id}
-                      name={place.displayName.text}
-                      location={place.location}
-                      photos={place.photos}
-                      howFar="5.5 km"
-                      tags={["Cafe"]}
-                      isOpen={true}
-                      isGoogle={true}
-                    />
+                      <></>
+                    // <Card
+                    //   key={place.id}
+                    //   id={place.id}
+                    //   name={place.displayName.text}
+                    //   location={place.location}
+                    //   photos={place.photos}
+                    //   howFar="5.5 km"
+                    //   tags={["Cafe"]}
+                    //   isOpen={true}
+                    //   isGoogle={true}
+                    // />
                   );
                 })}
               </View>

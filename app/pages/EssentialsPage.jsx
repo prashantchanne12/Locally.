@@ -9,6 +9,7 @@ import {AntDesign, FontAwesome6, SimpleLineIcons} from '@expo/vector-icons';
 import {calculateDistance, cn, handleCall, handleWhatsApp, isServiceOpen} from "@/utils/utilities";
 import {useLocationContext} from "@/app/contexts/LocationContext";
 import ServiceCardFooter from "@/app/components/ServiceCardFooter";
+import CompactServiceSkeleton from "@/app/components/skeletons/CompactServiceSkeleton";
 
 const EssentialsPage = ({route, navigation}) => {
     const {title} = route.params;
@@ -38,7 +39,7 @@ const EssentialsPage = ({route, navigation}) => {
                                 essentials.map(essential => (
                                     <EssentialCard key={essential.id} item={essential} navigation={navigation}/>)) :
                                 <View>
-                                    <CustomText text="Loading..."/>
+                                    {CompactServiceSkeleton(2)}
                                 </View>
                         }
                     </View>

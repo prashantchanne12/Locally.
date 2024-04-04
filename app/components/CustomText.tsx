@@ -12,6 +12,7 @@ const CustomText = (props: any) => {
           : "font-['product']"
       } ${props.primary ? `text-[#2c3e50]` : ""}`}
       style={props.style}
+      numberOfLines={props.lines}
     >
       {props.text}
     </Text>

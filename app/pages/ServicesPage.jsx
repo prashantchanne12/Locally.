@@ -1,4 +1,4 @@
-import {Dimensions, Text, TouchableOpacity, View} from "react-native";
+import {Dimensions, TouchableOpacity, View} from "react-native";
 import React from "react";
 import { useState, useEffect } from "react";
 import {
@@ -7,7 +7,6 @@ import {
 } from "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { supabase } from "@/utils/supabase";
-import Card from "../components/Card";
 import CustomText from "../components/CustomText";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {FontAwesome, MaterialCommunityIcons} from "@expo/vector-icons";
@@ -15,8 +14,9 @@ import {calculateDistance, cn, getCurrentLocation, isServiceOpen} from "@/utils/
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from "@/app/components/Header";
 import { useLocationContext } from '@/app/contexts/LocationContext';
-import {set} from "react-hook-form";
 import CompactServiceSkeleton from "@/app/components/skeletons/CompactServiceSkeleton";
+import ServiceCard from "@/app/components/ServiceCard";
+import ServiceCardCompact from "@/app/components/ServiceCardCompact";
 
 const ServicesPage = ({ navigation }) => {
   const [services, setServices] = useState([]);
@@ -105,11 +105,14 @@ const Explore = ({ services = [], navigation, dispatch}) => {
 
             const isOpen = isServiceOpen(service.opening_hours);
             const howFar = calculateDistance(currentLocation, service.location);
+            const onPress = () => {
+              navigation.navigate("service", {service: {...service, isOpen, howFar}});
+            }
 
             return (
                 <TouchableWithoutFeedback
                     key={service.id}
-                    className="border bg-white border-gray-200 border-b-0 pt-2 my-2  relative rounded-lg"
+                    className="border bg-white border-gray-200 border-b-0  my-2  relative rounded-lg"
                     onPress={!compact ? () => {
                       navigation.navigate("service", {service: {...service, isOpen, howFar}});
                     } : null}
@@ -117,23 +120,9 @@ const Explore = ({ services = [], navigation, dispatch}) => {
                       elevation: 2,
                     }}
                 >
-                  <Card
-                      id={service.id}
-                      name={service.name}
-                      howFar={howFar}
-                      types={service.types}
-                      photos={service.photos}
-                      isGoogle={false}
-                      isOpen={isOpen}
-                      compact={compact}
-                      desc={service.desc}
-                      address={service.address}
-                      contactNumbers={service.contact_numbers}
-                      onPress={() => {
-                        navigation.navigate("service", {service: {...service, isOpen, howFar}});
-                      }}
-                      service={service}
-                  />
+                  {compact ?
+                      <ServiceCardCompact service={service} isOpen={isOpen} howFar={howFar} onPress={onPress} /> :
+                      <ServiceCard service={service} isOpen={isOpen} howFar={howFar}/>}
                 </TouchableWithoutFeedback>
             )
           })
