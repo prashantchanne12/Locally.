@@ -90,7 +90,7 @@ const SearchPage = ({navigation}) => {
                                         return (
                                             <View
                                                 key={service.id}
-                                                className="border bg-white border-gray-200 border-b-0 pt-2 my-2  relative rounded-lg"
+                                                className="border bg-white border-gray-200 border-b-0 my-2 relative rounded-lg"
                                                 style={{
                                                     elevation: 2,
                                                 }}
