@@ -2,11 +2,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
-import ServicesContainer from "./ServicesContainer";
+import ServicesContainer from "../Containers/ServicesContainer";
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 import MapsPage from "./MapsPage";
-import SearchPage from "@/app/pages/SearchPage";
 import SearchPageContainer from "@/app/Containers/SearchPageContainer";
 
 const Chats = () => {

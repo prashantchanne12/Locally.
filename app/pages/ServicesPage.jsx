@@ -15,20 +15,32 @@ import {calculateDistance, cn, getCurrentLocation, isServiceOpen} from "@/utils/
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from "@/app/components/Header";
 import { useLocationContext } from '@/app/contexts/LocationContext';
+import {set} from "react-hook-form";
+import CompactServiceSkeleton from "@/app/components/skeletons/CompactServiceSkeleton";
 
 const ServicesPage = ({ navigation }) => {
   const [services, setServices] = useState([]);
   const { state, dispatch } = useLocationContext();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fethData = async () => {
-      let { data: Services, error } = await supabase
-        .from("Services")
-        .select("*");
-      setServices(Services);
+    const fetchData = async () => {
+      setLoading(true);
+
+      try {
+        let {data: Services, error} = await supabase
+            .from("Services")
+            .select("*");
+        setServices(Services);
+        setLoading(false);
+      } catch (err) {
+        setLoading(false);
+        console.log("Error fetching services: ", err);
+      }
+
     };
 
-    fethData();
+    fetchData();
   }, []);
 
   return (
@@ -126,7 +138,7 @@ const Explore = ({ services = [], navigation, dispatch}) => {
             )
           })
         ) : (
-          <CustomText text="Loading..." />
+            <View>{CompactServiceSkeleton(4)}</View>
         )}
       </View>
     </View>
