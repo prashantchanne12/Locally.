@@ -8,7 +8,7 @@ import { Feather } from '@expo/vector-icons';
 import { supabase } from "@/utils/supabase";
 import CustomText from "@/app/components/CustomText";
 import Card from "@/app/components/Card";
-import {calculateDistance, isServiceOpen} from "@/utils/utilities";
+import {calculateDistance, cn, isServiceOpen} from "@/utils/utilities";
 import {useLocationContext} from "@/app/contexts/LocationContext";
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import CompactServiceSkeleton from "@/app/components/skeletons/CompactServiceSkeleton";
@@ -17,8 +17,11 @@ const SearchPage = ({navigation}) => {
     const { state, dispatch } = useLocationContext();
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [searchText, setSearchText] = useState("");
+    const [isCursorActive, setIsCursorActive] = useState(false);
 
     const searchServices = async (searchText, searchType) => {
+        setSearchText(searchText)
         if(searchText.length){
             setLoading(true);
             const searchTerm = `%${searchText}%`;
@@ -54,10 +57,29 @@ const SearchPage = ({navigation}) => {
                             className="border border-gray-500 p-1.5 pl-9 rounded"
                             placeholder="Search a service."
                             onChangeText={(e) => searchServices(e)}
+                            onFocus={() => setIsCursorActive(true)}
+                            onBlur={() => setIsCursorActive(false)}
                         />
                         <View className="absolute top-2.5 left-2">
                             <Feather name="search" size={22} color="#2d3436" />
                         </View>
+
+                        {
+                            !searchResults.length && !searchText.length ?
+                                <View className={cn("items-center justify-center", isCursorActive ? "h-[250px]" : "h-[450px]")}>
+                                    <CustomText text="Search something interesting...🫣" className="text-lg text-gray-400"
+                                                semibold/>
+                                </View>
+                                : <></>
+                        }
+
+                        {
+                            !searchResults.length && searchText.length && !loading ?
+                                <View className={cn("items-center justify-center", isCursorActive ? "h-[250px]" : "h-[450px]")}>
+                                    <CustomText text="Not Found 💀" className="text-lg text-gray-400" semibold />
+                                </View>
+                                : <></>
+                        }
 
                             {!loading ? <View>
                                 {
