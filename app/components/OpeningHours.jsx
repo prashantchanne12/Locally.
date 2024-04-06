@@ -5,7 +5,7 @@ import React from "react";
 
 const OpeningHours = ({item, isOpen}) => {
     return (
-        <View className="px-3.5 mt-3.5 mb-44">
+        <View className="px-3.5 mt-1 mb-44">
             <View>
                 <View className="flex-row items-center space-x-1">
                     <View className="h-5 w-1 bg-[#16a085]"></View>

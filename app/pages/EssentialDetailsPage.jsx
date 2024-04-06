@@ -25,14 +25,14 @@ const EssentialDetailsPage = ({route, navigation}) => {
             <SafeAreaView>
                 <Header small title={item.name} goBack={true} goBackOnClick={() => {navigation.goBack()}} />
                 <View>
-                    <ScrollView className="bg-white h-full relative px-0.5">
+                    <ScrollView className="bg-white h-fuall relative px-0.5">
                         <DetailsHeader item={item} isOpen={isOpen} />
 
                         <View className="px-3.5 mt-3">
                             <Tags item={item}/>
                         </View>
-
-                        <View className="px-3.5 mt-3.5">
+                        <View className="h-[1px] w-full mt-4 mb-3 bg-gray-300" />
+                        <View className="px-3.5 mt-0.5">
                            <View>
                                <View className="flex-row items-center space-x-1">
                                    <View className="h-5 w-1 bg-[#16a085]"></View>
@@ -41,11 +41,14 @@ const EssentialDetailsPage = ({route, navigation}) => {
                                <CustomText text="Average prices*" className="text-xs text-gray-500" />
                            </View>
 
+
                             <View className="mt-2.5 p-1">
                                 <PriceTable prices={item.price_table} />
                             </View>
 
                         </View>
+
+                        <View className="h-[1px] w-full mt-4 mb-3 bg-gray-300" />
 
                         <OpeningHours item={item} isOpen={isOpen}/>
                     </ScrollView>

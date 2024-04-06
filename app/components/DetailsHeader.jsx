@@ -5,6 +5,7 @@ import {cn} from "@/utils/utilities";
 import React from "react";
 import PagerView from "react-native-pager-view";
 import {Image} from "expo-image";
+import { Ionicons } from '@expo/vector-icons';
 
 const DetailsHeader = ({item, isOpen}) => {
     return (
@@ -14,14 +15,14 @@ const DetailsHeader = ({item, isOpen}) => {
                     <View>
                         <CustomText text={item.name} bold className="text-2xl text-[#14947b]"/>
                         <View className="flex-row items-center">
-                            <CustomText text={item.address[0]['address1'] + '.'} className="text-gray-500 text-[13px]"/>
+                            <CustomText text={item.address[0]['address1'] + '.'} className="text-[13px]"/>
                         </View>
                     </View>
-                    <View className={"mt-1"}>
-                        <View className={"mt-0"}>
+                    <View className="mt-1">
+                        <View className="mt-0">
                             <View>
-                                <CustomText text={"Home delivery"} semibold
-                                            className="text-gray-600 pt-0.5 text-right"/>
+                                <CustomText text="Home delivery" semibold
+                                            className="text-right"/>
                             </View>
                         </View>
                         <View className="items-end justify-end flex-row space-x-1 mt-[3px] ">
@@ -49,16 +50,16 @@ const DetailsHeader = ({item, isOpen}) => {
                 <PagerView style={styles.viewPager} initialPage={0}>
                     {
                         item.photos.map((image, index) => (
-                            <View key={index}>
+                            <View key={index} className="rounded bg-white z-[1000]" style={{elevation: 5}}>
                                 <Image
                                     source={image}
-                                    className="w-full h-full object-contain rounded-lg" />
+                                    className="w-full h-full object-contain rounded bg-white" />
                             </View>
                         ))
                     }
                 </PagerView>
             </View>
-            <View className="px-3.5 mt-3.5">
+            <View className="px-3.5 mt-2.5">
                 <CustomText text={item.desc} className="text-justify text-[15px]" />
             </View>
         </View>
