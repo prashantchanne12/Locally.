@@ -24,6 +24,7 @@ const ServiceDetailsPage = ({ route, navigation }) => {
                     <View className="px-3.5 mt-3">
                         <Tags item={service} />
                     </View>
+                    {service.price_tables ?  <View className="h-[1px] w-full mt-4 mb-3 bg-gray-300" /> : <></>}
                     {service.price_tables ?
                         <View className="px-3.5 mt-3.5">
                             <View>
@@ -40,6 +41,7 @@ const ServiceDetailsPage = ({ route, navigation }) => {
 
                         </View>
                     : <></>}
+                    <View className="h-[1px] w-full mt-4 mb-3 bg-gray-300" />
                     <OpeningHours item={service} isOpen={service.isOpen} />
                 </ScrollView>
                 <View className="absolute right-3.5 bottom-[180px] space-y-2.5">
