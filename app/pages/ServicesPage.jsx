@@ -144,7 +144,7 @@ const Essentials = ({navigation}) => {
         >
           <View className="flex-row gap-2.5 pl-2 py-1" >
             <TouchableOpacity
-                onPress={() => {navigation.push("essential", {title: "Doodhwala"})}}
+                onPress={() => {navigation.push("essential")}}
                 className="items-center justify-center p-3  rounded-lg w-[100px] h-[100px] bg-white"
                 style={{elevation: 2,}}>
               <MaterialIcons name="local-drink" size={48} color="#0984e3"/>

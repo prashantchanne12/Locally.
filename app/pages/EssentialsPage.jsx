@@ -59,7 +59,7 @@ const EssentialCard = ({item, navigation}) => {
            <View className="px-3.5 pb-3 pt-1.5 border rounded-lg border-gray-200 mb-0.5 bg-white relative" style={{elevation: 2}}>
                <View className="flex-row justify-between">
                    <TouchableOpacity onPress={() => {
-                       navigation.push("essentialDetails", {item: {...item, isOpen, howFar}})
+                       navigation.push("essentialDetails")
                    }}>
                        <CustomText text={item.name} bold className="text-xl"/>
                    </TouchableOpacity>
@@ -104,7 +104,7 @@ const EssentialCard = ({item, navigation}) => {
                </View>
                <View className="mt-4">
                    <ServiceCardFooter contactNumbers={item.contact_numbers} onPress={() => {
-                       navigation.push("essentialDetails", {item: {...item, isOpen, howFar}})
+                       navigation.push("essentialDetails")
                    }} />
                </View>
 

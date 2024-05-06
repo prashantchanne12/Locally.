@@ -56,7 +56,7 @@ const InitialLayout = () => {
         <Stack>
             <Stack.Screen name="index" options={{
                 headerShown: false,
-                statusBarStyle: "dark",
+                statusBarStyle: "inverted",
             }} />
             <Stack.Screen name="(tabs)" options={{
                 headerShown: false,

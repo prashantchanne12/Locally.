@@ -5,7 +5,7 @@ import React from "react";
 import {AntDesign, SimpleLineIcons} from "@expo/vector-icons";
 import {cn} from "@/utils/utilities";
 
-const ServiceCard = ({service, isOpen, howFar}) => {
+const ServiceCard = ({service}) => {
     const getAddress = () => {
         const addr = service.address
         let finalAddress = addr[0]['address1'] + '. ';
@@ -38,20 +38,20 @@ const ServiceCard = ({service, isOpen, howFar}) => {
                     <View className="items-start mt-2">
                         <View className="items-end flex-row space-x-1">
                             <View className="flex-row items-center space-x-1">
-                                {isOpen ? (
+                                {service.isOpen ? (
                                     <AntDesign name="checkcircle" size={12} color="#16a085"/>
                                 ) : (
                                     <AntDesign name="closecircle" size={12} color="#c0392b"/>
                                 )}
                                 <CustomText
-                                    text={isOpen ? "Open" : "Closed"}
+                                    text={service.isOpen ? "Open" : "Closed"}
                                     semibold
-                                    className={cn(isOpen ? "text-[#16a085]" : "text-[#c0392b]", "text-xs text-center")}
+                                    className={cn(service.isOpen ? "text-[#16a085]" : "text-[#c0392b]", "text-xs text-center")}
                                 />
                             </View>
                             <View className="flex-row items-center space-x-0.5">
                                 <SimpleLineIcons name="location-pin" size={15} color="gray"/>
-                                <CustomText text={howFar} className="text-xs text-gray-500"/>
+                                <CustomText text={service.howFar} className="text-xs text-gray-500"/>
                             </View>
                         </View>
                     </View>
