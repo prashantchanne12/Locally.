@@ -9,14 +9,12 @@ import {FontAwesome, MaterialCommunityIcons, MaterialIcons} from "@expo/vector-i
 import ServiceCardCompact from "@/app/components/ServiceCardCompact";
 import ServiceCard from "@/app/components/ServiceCard";
 import CompactServiceSkeleton from "@/app/components/skeletons/CompactServiceSkeleton";
-import {useLocationContext} from "@/app/contexts/LocationContext";
 import {supabase} from "@/utils/supabase";
 import locationStore from "@/app/strore/locationStore";
 
 const Home = () => {
 
     const [services, setServices] = useState([]);
-    const { state, dispatch } = useLocationContext();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -52,7 +50,7 @@ const Home = () => {
             <SafeAreaView>
                 <ScrollView className="bg-gray-50 h-full px-3 ">
                     <Essentials />
-                    <Explore services={services}  />
+                    <Explore services={services} loading={loading}  />
                 </ScrollView>
             </SafeAreaView>
         </GestureHandlerRootView>
@@ -61,7 +59,7 @@ const Home = () => {
 
 export default Home;
 
-const Explore = ({ services = []}) => {
+const Explore = ({ services = [], loading}) => {
 
     const [currentLocation, setCurrentLocation] = useState({});
     const [compact, setCompact] = useState(true);
@@ -104,45 +102,49 @@ const Explore = ({ services = []}) => {
             </View>
             <View className="">
                 {
-                    services.length ?
-                        <FlatList
-                            scrollEnabled={false}
-                            keyExtractor={(item) => item.id}
-                            data={services}
-                            renderItem={({item}) => {
-                                const isOpen = isServiceOpen(item.opening_hours);
-                                const howFar = calculateDistance(currentLocation, item.location);
-                                const nonJsonItem = {...item, isOpen, howFar}
-                                const newItem = JSON.stringify(nonJsonItem);
-                                const onCompactPress = () => {
-                                    router.push({
-                                        pathname: "/home/details",
-                                        params: {service: newItem},
-                                    });
-                                }
+                    !loading ?
+                        services.length ?
+                            <FlatList
+                                scrollEnabled={false}
+                                keyExtractor={(item) => item.id}
+                                data={services}
+                                renderItem={({item}) => {
+                                    const isOpen = isServiceOpen(item.opening_hours);
+                                    const howFar = calculateDistance(currentLocation, item.location);
+                                    const nonJsonItem = {...item, isOpen, howFar}
+                                    const newItem = JSON.stringify(nonJsonItem);
+                                    const onCompactPress = () => {
+                                        router.push({
+                                            pathname: "/home/details",
+                                            params: {service: newItem},
+                                        });
+                                    }
 
-                                return (
-                                    <TouchableWithoutFeedback
-                                        className=" mx-1 bg-white my-2 relative rounded-lg"
-                                        onPress={!compact ? onCompactPress : null}
-                                        style={{
-                                            elevation: 2,
-                                        }}
-                                    >
-                                        {
-                                            compact ?
-                                                <ServiceCardCompact
-                                                    service={nonJsonItem}
-                                                    onPress={onCompactPress}
-                                                />
-                                                : <ServiceCard
-                                                    service={nonJsonItem}
-                                                />
-                                        }
-                                    </TouchableWithoutFeedback>
+                                    return (
+                                        <TouchableWithoutFeedback
+                                            className="mx-1 bg-white my-2 relative rounded-lg"
+                                            onPress={!compact ? onCompactPress : null}
+                                            style={{
+                                                elevation: 2,
+                                            }}
+                                        >
+                                            {
+                                                compact ?
+                                                    <ServiceCardCompact
+                                                        service={nonJsonItem}
+                                                        onPress={onCompactPress}
+                                                    />
+                                                    : <ServiceCard
+                                                        service={nonJsonItem}
+                                                    />
+                                            }
+                                        </TouchableWithoutFeedback>
 
-                                )
-                            }}/> : <></>
+                                    )
+                                }}/> :
+                            <View>
+                                <CustomText text="Nearby services not available" bold className="text-base"/>
+                            </View> : CompactServiceSkeleton(3)
                 }
             </View>
         </View>
