@@ -5,7 +5,6 @@ import {cn} from "@/utils/utilities";
 import React from "react";
 import PagerView from "react-native-pager-view";
 import {Image} from "expo-image";
-import { Ionicons } from '@expo/vector-icons';
 
 const DetailsHeader = ({item, isOpen}) => {
     return (

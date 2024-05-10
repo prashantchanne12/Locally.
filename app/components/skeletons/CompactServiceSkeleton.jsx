@@ -13,7 +13,7 @@ const CompactServiceSkeleton = (count) => {
 
 const Skeleton = () => {
     return (
-        <View className="bg-white z-[100] border border-gray-200 my-1.5 rounded-lg border-b-0" style={{elevation: 2}}>
+        <View className="bg-white z-[100] my-1.5 mx-1 rounded-lg border-b-0" style={{elevation: 2}}>
             <View className="pb-2.5 px-2">
                 <SkeletonPlaceholder borderRadius={4}>
                     <View>
@@ -29,6 +29,7 @@ const Skeleton = () => {
                         </View>
                         <View style={{width: 300, height: 13, marginTop: 18}}></View>
                         <View style={{width: 80, height: 20, marginTop: 15}}></View>
+                        <View style={{width: 140, height: 14, marginTop: 15}}></View>
                     </View>
                 </SkeletonPlaceholder>
             </View>

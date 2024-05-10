@@ -8,12 +8,12 @@ import { Feather } from '@expo/vector-icons';
 import { supabase } from "@/utils/supabase";
 import CustomText from "@/app/components/CustomText";
 import {calculateDistance, cn, isServiceOpen} from "@/utils/utilities";
-import {useLocationContext} from "@/app/contexts/LocationContext";
+// import {useLocationContext} from "@/app/contexts/LocationContext";
 import CompactServiceSkeleton from "@/app/components/skeletons/CompactServiceSkeleton";
 import ServiceCardCompact from "@/app/components/ServiceCardCompact";
 
 const SearchPage = ({navigation}) => {
-    const { state, dispatch } = useLocationContext();
+    // const { state, dispatch } = useLocationContext();
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchText, setSearchText] = useState("");
@@ -85,8 +85,8 @@ const SearchPage = ({navigation}) => {
                                     searchResults.map(service => {
 
                                         const isOpen = isServiceOpen(service.opening_hours);
-                                        const howFar = calculateDistance(state.currentLocation, service.location);
-
+                                        // const howFar = calculateDistance(state.currentLocation, service.location);
+                                        const howFar = 200
                                         return (
                                             <View
                                                 key={service.id}
