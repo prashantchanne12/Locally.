@@ -26,6 +26,7 @@ const TabLayout = () => {
                     name="search"
                     options={{
                         title: "Search",
+                        headerShown: false,
                         tabBarIcon: ({size, color, focused}) => (
                             <Ionicons name={focused ? "search-sharp" : "search-outline"} size={size} color={color} />
                         )

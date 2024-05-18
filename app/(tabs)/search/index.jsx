@@ -1,23 +1,23 @@
-import {GestureHandlerRootView, ScrollView, TouchableWithoutFeedback} from "react-native-gesture-handler";
-import {StatusBar} from "expo-status-bar";
-import React, {useState} from "react";
-import {SafeAreaView} from "react-native-safe-area-context";
-import Header from "@/app/components/Header";
-import {Text, TextInput, View} from "react-native";
-import { Feather } from '@expo/vector-icons';
-import { supabase } from "@/utils/supabase";
 import CustomText from "@/app/components/CustomText";
+import {GestureHandlerRootView, ScrollView} from "react-native-gesture-handler";
+import {TextInput, View} from "react-native";
+import {Feather} from "@expo/vector-icons";
 import {calculateDistance, cn, isServiceOpen} from "@/utils/utilities";
-// import {useLocationContext} from "@/app/contexts/LocationContext";
-import CompactServiceSkeleton from "@/app/components/skeletons/CompactServiceSkeleton";
 import ServiceCardCompact from "@/app/components/ServiceCardCompact";
+import CompactServiceSkeleton from "@/app/components/skeletons/CompactServiceSkeleton";
+import {SafeAreaView} from "react-native-safe-area-context";
+import React, {useState} from "react";
+import {supabase} from "@/utils/supabase";
+import locationStore from "@/app/strore/locationStore";
+import {router} from "expo-router";
 
-const SearchPage = ({navigation}) => {
-    // const { state, dispatch } = useLocationContext();
+const Search = () => {
+
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchText, setSearchText] = useState("");
     const [isCursorActive, setIsCursorActive] = useState(false);
+    const globalCurrentLocation = locationStore((state) => state.globalCurrentLocation)
 
     const searchServices = async (searchText, searchType) => {
         setSearchText(searchText)
@@ -43,12 +43,9 @@ const SearchPage = ({navigation}) => {
         }
     };
 
-
     return (
         <GestureHandlerRootView>
-            <StatusBar style="light" backgroundColor="black" />
             <SafeAreaView>
-                {/*<Header title="Search." />*/}
                 <ScrollView className="bg-[#fcfcfc] h-full px-3 ">
                     <View className="mt-3 relative">
                         <TextInput
@@ -80,38 +77,39 @@ const SearchPage = ({navigation}) => {
                                 : <></>
                         }
 
-                            {!loading ? <View>
-                                {
-                                    searchResults.map(service => {
+                        {!loading ? <View>
+                            {
+                                searchResults.map(service => {
 
-                                        const isOpen = isServiceOpen(service.opening_hours);
-                                        // const howFar = calculateDistance(state.currentLocation, service.location);
-                                        const howFar = 200
-                                        return (
-                                            <View
-                                                key={service.id}
-                                                className="border bg-white border-gray-200 border-b-0 my-2 relative rounded-lg"
-                                                style={{
-                                                    elevation: 2,
-                                                }}
-                                            >
-                                                <View>
-                                                    <ServiceCardCompact
-                                                        service={service}
-                                                        isOpen={isOpen}
-                                                        howFar={howFar}
-                                                        onPress={() => {
-                                                        navigation.navigate("service", {service: {...service, isOpen, howFar}});
+                                    const isOpen = isServiceOpen(service.opening_hours);
+                                    const howFar = calculateDistance(globalCurrentLocation, service.location);
+                                    const newService = {...service, isOpen, howFar}
+                                    return (
+                                        <View
+                                            key={service.id}
+                                            className="border bg-white border-gray-200 border-b-0 my-2 relative rounded-lg"
+                                            style={{
+                                                elevation: 2,
+                                            }}
+                                        >
+                                            <View>
+                                                <ServiceCardCompact
+                                                    service={newService}
+                                                    onPress={() => {
+                                                        router.push({
+                                                            pathname: "/search/details",
+                                                            params: {service: JSON.stringify(newService)},
+                                                        });
                                                     }} />
-                                                </View>
                                             </View>
-                                        )
-                                    })
-                                }
-                            </View> : <View>
-                                {CompactServiceSkeleton(1)}
-                            </View>
+                                        </View>
+                                    )
+                                })
                             }
+                        </View> : <View>
+                            {CompactServiceSkeleton(1)}
+                        </View>
+                        }
                     </View>
                 </ScrollView>
             </SafeAreaView>
@@ -119,4 +117,4 @@ const SearchPage = ({navigation}) => {
     )
 }
 
-export default SearchPage;
+export default Search;

@@ -2,10 +2,9 @@ import "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useEffect } from "react";
-import {LocationProvider} from '@/app/contexts/LocationContext';
 import {router, Stack} from "expo-router";
 import React from "react";
-import {ToastAndroid, TouchableOpacity} from "react-native";
+import {ToastAndroid} from "react-native";
 import userStore from "@/app/strore/userStore";
 
 
@@ -30,7 +29,7 @@ const InitialLayout = () => {
         try {
             await GoogleSignin.signOut();
             deleteUser();
-            router.replace("");
+            router.replace("/");
         } catch (error) {
             console.error(error);
             ToastAndroid.show('Error logging out!',
@@ -42,7 +41,7 @@ const InitialLayout = () => {
         const isSignedIn = async () => {
             const isSignedIn = await GoogleSignin.isSignedIn();
             if (!isSignedIn){
-                router.replace("");
+                router.replace("/");
             }else{
                 router.replace("/(tabs)/home")
             }
