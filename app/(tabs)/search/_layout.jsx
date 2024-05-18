@@ -9,6 +9,7 @@ const SearchLayout = () => {
                     animation: "slide_from_right",
                     statusBarStyle: "dark",
                     title: "Search.",
+                    headerShadowVisible: false,
                     headerTitleStyle: {
                         fontFamily: "product-b",
                     }

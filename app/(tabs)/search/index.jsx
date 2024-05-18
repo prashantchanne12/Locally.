@@ -46,18 +46,23 @@ const Search = () => {
     return (
         <GestureHandlerRootView>
             <SafeAreaView>
-                <ScrollView className="bg-[#fcfcfc] h-full px-3 ">
-                    <View className="mt-3 relative">
-                        <TextInput
-                            selectionColor="black"
-                            className="border border-gray-500 p-1.5 pl-9 rounded"
-                            placeholder="Search a service."
-                            onChangeText={(e) => searchServices(e)}
-                            onFocus={() => setIsCursorActive(true)}
-                            onBlur={() => setIsCursorActive(false)}
-                        />
-                        <View className="absolute top-2.5 left-2">
-                            <Feather name="search" size={22} color="#2d3436" />
+                <ScrollView className="bg-[#fcfcfc] h-full">
+                    <View className="relative ">
+                        <View className="bg-white pb-2.5 px-5" style={{
+                            elevation: 2,
+                        }}>
+                            <TextInput
+                                selectionColor="black"
+                                className="border border-gray-200 py-1 pl-9 rounded-md "
+                                placeholder="Search a service."
+
+                                onChangeText={(e) => searchServices(e)}
+                                onFocus={() => setIsCursorActive(true)}
+                                onBlur={() => setIsCursorActive(false)}
+                            />
+                        </View>
+                        <View className="absolute top-[10px] left-[30px]">
+                            <Feather name="search" size={18} color="#ccc" />
                         </View>
 
                         {
@@ -77,7 +82,10 @@ const Search = () => {
                                 : <></>
                         }
 
-                        {!loading ? <View>
+                        <View className="px-3">
+
+                        </View>
+                        {!loading ? <View className="px-3.5">
                             {
                                 searchResults.map(service => {
 
@@ -106,7 +114,7 @@ const Search = () => {
                                     )
                                 })
                             }
-                        </View> : <View>
+                        </View> : <View className="px-3">
                             {CompactServiceSkeleton(1)}
                         </View>
                         }
